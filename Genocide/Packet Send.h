@@ -1,0 +1,1 @@
+bool STDCALL OnGamePacketSent(DWORD Length, DWORD _1, BYTE *Packet);

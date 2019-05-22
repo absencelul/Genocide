@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="[DllMain]">
+      <UniqueIdentifier>{34e04901-4e1a-4c07-b102-d68853a1b84f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[Drawing]">
+      <UniqueIdentifier>{5f289bfe-810d-4627-ba18-cdf5582a5f3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[Rescue]">
+      <UniqueIdentifier>{89e2cb79-9204-4e2b-908d-c3145418f8b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[Settings]">
+      <UniqueIdentifier>{43ea635f-0f0a-41c5-9d45-2cb4fbaf5c98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[Declarations]">
+      <UniqueIdentifier>{cad2dcb4-94db-4d65-9183-63302322eafd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[Packet]">
+      <UniqueIdentifier>{bc8d0247-7ac8-4249-b860-2a76799ee810}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[Patch]">
+      <UniqueIdentifier>{7139dbd7-eab8-44aa-b29b-7559e6324621}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[Handler]">
+      <UniqueIdentifier>{7054d7b0-b89f-4f75-90bb-7a0c2643d6b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[Helpers]">
+      <UniqueIdentifier>{61e6f119-6313-40ee-8c0d-9ca21cd7dbb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[KeyHooks]">
+      <UniqueIdentifier>{99bdcc54-b991-4487-a239-81126f7de54a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[TMC]">
+      <UniqueIdentifier>{dba0d263-3643-40a8-98ad-fbdc9e27437d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[Unit]">
+      <UniqueIdentifier>{d7ed8acd-e2c8-45a4-a4b2-95bfa1277e3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[Potion]">
+      <UniqueIdentifier>{9e86520d-bb4f-4543-bedf-fb90931e76e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[Packet]\[Send]">
+      <UniqueIdentifier>{3cc43900-ee3d-414d-a46d-f6a90a44048e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[Packet]\[Received]">
+      <UniqueIdentifier>{ab03c55a-00bd-4df5-8207-44e777285abd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[Packet]\[Functions]">
+      <UniqueIdentifier>{31840242-28ee-4c9d-8af9-bf77785f5b17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[Drawing]\[Screen]">
+      <UniqueIdentifier>{530a4d43-2f86-4c32-9847-063b04a73f45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[Drawing]\[Automap]">
+      <UniqueIdentifier>{2cc1bae3-6a61-423b-850a-d9d8a68a600f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[Math]">
+      <UniqueIdentifier>{ab59b2f7-b207-4767-8f05-09337c4576fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[Functions]">
+      <UniqueIdentifier>{6345dde4-db1d-44e7-807e-8f342857fbd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[Commands]">
+      <UniqueIdentifier>{def0b5f7-79a5-4e2e-91c2-95551ff71ef1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[Reveal]">
+      <UniqueIdentifier>{9d81b650-42c4-42e0-8d2e-e01a77fc0328}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[Reveal]\[Missiles]">
+      <UniqueIdentifier>{2d716d23-da07-41b2-b4f3-62ede79df691}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[Reveal]\[MapHack]">
+      <UniqueIdentifier>{345dbe89-610a-49cb-853b-820b39b0405d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[Aim]">
+      <UniqueIdentifier>{1a31adf0-09ce-4754-89c1-203ace2d08c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[Packet]\[EventMessage]">
+      <UniqueIdentifier>{23b1116a-4f5e-4a99-b17f-b709f0e89b80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[Diablo II]">
+      <UniqueIdentifier>{d3946018-17fa-45c4-a4aa-126f7e6dc9bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[Diablo II]\Patch">
+      <UniqueIdentifier>{51361841-d1b9-471a-a216-65d5a953c1f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[Potion]\[Vital]">
+      <UniqueIdentifier>{a9741eb8-b7ca-44c3-8a7d-ba7865bc7b11}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Potion.h">
+      <Filter>[Potion]</Filter>
+    </ClInclude>
+    <ClInclude Include="TMC.h">
+      <Filter>[TMC]</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit.h">
+      <Filter>[Unit]</Filter>
+    </ClInclude>
+    <ClInclude Include="Packet Send.h">
+      <Filter>[Packet]\[Send]</Filter>
+    </ClInclude>
+    <ClInclude Include="Packet Received.h">
+      <Filter>[Packet]\[Received]</Filter>
+    </ClInclude>
+    <ClInclude Include="Packet Functions.h">
+      <Filter>[Packet]\[Functions]</Filter>
+    </ClInclude>
+    <ClInclude Include="Variables.h">
+      <Filter>[Declarations]</Filter>
+    </ClInclude>
+    <ClInclude Include="Stubs.h">
+      <Filter>[Patch]</Filter>
+    </ClInclude>
+    <ClInclude Include="Screen Hooks.h">
+      <Filter>[Drawing]\[Screen]</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>[Math]</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyHooks.h">
+      <Filter>[KeyHooks]</Filter>
+    </ClInclude>
+    <ClInclude Include="Helpers.h">
+      <Filter>[Helpers]</Filter>
+    </ClInclude>
+    <ClInclude Include="Handler.h">
+      <Filter>[Handler]</Filter>
+    </ClInclude>
+    <ClInclude Include="Chicken.h">
+      <Filter>[Rescue]</Filter>
+    </ClInclude>
+    <ClInclude Include="Automap Hooks.h">
+      <Filter>[Drawing]\[Automap]</Filter>
+    </ClInclude>
+    <ClInclude Include="SyncObj.h">
+      <Filter>[Potion]\[Vital]</Filter>
+    </ClInclude>
+    <ClInclude Include="Functions.h">
+      <Filter>[Functions]</Filter>
+    </ClInclude>
+    <ClInclude Include="ArrayEx.h">
+      <Filter>[Potion]\[Vital]</Filter>
+    </ClInclude>
+    <ClInclude Include="Declarations.h">
+      <Filter>[Declarations]</Filter>
+    </ClInclude>
+    <ClInclude Include="Struct.h">
+      <Filter>[Potion]\[Vital]</Filter>
+    </ClInclude>
+    <ClInclude Include="Pointer.h">
+      <Filter>[Potion]\[Vital]</Filter>
+    </ClInclude>
+    <ClInclude Include="CSafeVector.h">
+      <Filter>[Potion]\[Vital]</Filter>
+    </ClInclude>
+    <ClInclude Include="CMatrix.h">
+      <Filter>[Potion]\[Vital]</Filter>
+    </ClInclude>
+    <ClInclude Include="Settings.h">
+      <Filter>[Settings]</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands.h">
+      <Filter>[Commands]</Filter>
+    </ClInclude>
+    <ClInclude Include="Reveal.h">
+      <Filter>[Reveal]\[MapHack]</Filter>
+    </ClInclude>
+    <ClInclude Include="Missiles.h">
+      <Filter>[Reveal]\[Missiles]</Filter>
+    </ClInclude>
+    <ClInclude Include="Aim.h">
+      <Filter>[Aim]</Filter>
+    </ClInclude>
+    <ClInclude Include="EventMessage.h">
+      <Filter>[Packet]\[EventMessage]</Filter>
+    </ClInclude>
+    <ClInclude Include="Hack.h">
+      <Filter>[DllMain]</Filter>
+    </ClInclude>
+    <ClInclude Include="Patch.h">
+      <Filter>[Diablo II]\Patch</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemPackets.h">
+      <Filter>[Diablo II]</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveItems.h">
+      <Filter>[Diablo II]</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Potion.cpp">
+      <Filter>[Potion]</Filter>
+    </ClCompile>
+    <ClCompile Include="TMC.cpp">
+      <Filter>[TMC]</Filter>
+    </ClCompile>
+    <ClCompile Include="Unit.cpp">
+      <Filter>[Unit]</Filter>
+    </ClCompile>
+    <ClCompile Include="Packet Send.cpp">
+      <Filter>[Packet]\[Send]</Filter>
+    </ClCompile>
+    <ClCompile Include="Packet Received.cpp">
+      <Filter>[Packet]\[Received]</Filter>
+    </ClCompile>
+    <ClCompile Include="Packet Functions.cpp">
+      <Filter>[Packet]\[Functions]</Filter>
+    </ClCompile>
+    <ClCompile Include="Screen Hooks.cpp">
+      <Filter>[Drawing]\[Screen]</Filter>
+    </ClCompile>
+    <ClCompile Include="Math.cpp">
+      <Filter>[Math]</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyHooks.cpp">
+      <Filter>[KeyHooks]</Filter>
+    </ClCompile>
+    <ClCompile Include="Helpers.cpp">
+      <Filter>[Helpers]</Filter>
+    </ClCompile>
+    <ClCompile Include="Handler.cpp">
+      <Filter>[Handler]</Filter>
+    </ClCompile>
+    <ClCompile Include="Chicken.cpp">
+      <Filter>[Rescue]</Filter>
+    </ClCompile>
+    <ClCompile Include="Automap Hooks.cpp">
+      <Filter>[Drawing]\[Automap]</Filter>
+    </ClCompile>
+    <ClCompile Include="Functions.cpp">
+      <Filter>[Functions]</Filter>
+    </ClCompile>
+    <ClCompile Include="Stubs.cpp">
+      <Filter>[Patch]</Filter>
+    </ClCompile>
+    <ClCompile Include="Settings.cpp">
+      <Filter>[Settings]</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands.cpp">
+      <Filter>[Commands]</Filter>
+    </ClCompile>
+    <ClCompile Include="Reveal.cpp">
+      <Filter>[Reveal]\[MapHack]</Filter>
+    </ClCompile>
+    <ClCompile Include="Missiles.cpp">
+      <Filter>[Reveal]\[Missiles]</Filter>
+    </ClCompile>
+    <ClCompile Include="Aim.cpp">
+      <Filter>[Aim]</Filter>
+    </ClCompile>
+    <ClCompile Include="EventMessage.cpp">
+      <Filter>[Packet]\[EventMessage]</Filter>
+    </ClCompile>
+    <ClCompile Include="Hack.cpp">
+      <Filter>[DllMain]</Filter>
+    </ClCompile>
+    <ClCompile Include="DllMain.cpp">
+      <Filter>[DllMain]</Filter>
+    </ClCompile>
+    <ClCompile Include="Patch.cpp">
+      <Filter>[Diablo II]\Patch</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemPackets.cpp">
+      <Filter>[Diablo II]</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveItems.cpp">
+      <Filter>[Diablo II]</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
