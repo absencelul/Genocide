@@ -375,7 +375,7 @@ void DrawOutConsole()
 	{
 		long xSize = 0;
 		for (unsigned int i = 0; i < ConsoleMessages.size(); i++)
-			xSize = GetTextSize(ConsoleMessages.at(i).str(), 13).x + 21;
+			xSize = GetTextSize(ConsoleMessages.at(i).c_str(), 13).x + 21;
 				//size = TextWidth((LPSTR)cMessages.at(b).c_str(), 4);
 		OnDrawBox(185, xSize, 520 - (12 * (TempConsole.size() - 1)), 20, Gold, BTFull);
 		DrawBoxA(185, 520 - (12 * (TempConsole.size() - 1)), 610, 540, 19, 0, 2);
