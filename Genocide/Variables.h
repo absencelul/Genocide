@@ -75,7 +75,7 @@ VAR(bool, HideCommands)
 
 //Console
 VECTOR(LPCONSOLEMESSAGE, ConsoleMessages)
-VAR(DWORD, ConsoleDelay)
+VAR(ULONGLONG, ConsoleDelay)
 
 //Inventory Viewer
 VAR(LPUNITANY, ViewingUnit)

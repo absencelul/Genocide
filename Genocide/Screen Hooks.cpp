@@ -149,7 +149,7 @@ void extraDraw()
 
 	if (p_D2CLIENT_UIMode[UI_INVENTORY]) // Draw text to INVENTORY
 	{
-		TextHook(505, 488, Tan, Center, 1, "Total Gold: %s", Funcs->AddCommas(GetUnitStat(Me, STAT_GOLD) + GetUnitStat(Me, STAT_GOLDBANK), 0));
+		TextHook(505, 488, Tan, Center, 1, "Total Gold: %s", Funcs->AddCommas((double)GetUnitStat(Me, STAT_GOLD) + (double)GetUnitStat(Me, STAT_GOLDBANK), 0));
 	}
 }
 
@@ -368,22 +368,27 @@ void DrawOutConsole()
 	std::vector<std::string> TempConsole;
 
 	for (unsigned int i = 0; i < ConsoleMessages.size() && i < 3; ++i)
-		if (GetTickCount64() - ConsoleMessages[ConsoleMessages.size() - (i + 1)]->dwTimer < ConsoleDelay)
+		if (GetTickCount64() - ConsoleMessages[ConsoleMessages.size() - (i + 1)]->Timer < ConsoleDelay)
 			TempConsole.push_back(ConsoleMessages[ConsoleMessages.size() - (i + 1)]->ConsoleString);
 
 	if (TempConsole.size())
 	{
 		long xSize = 0;
-		for (unsigned int i = 0; i < ConsoleMessages.size(); i++)
-			xSize = GetTextSize(ConsoleMessages.at(i).c_str(), 13).x + 21;
-				//size = TextWidth((LPSTR)cMessages.at(b).c_str(), 4);
-		OnDrawBox(185, xSize, 520 - (12 * (TempConsole.size() - 1)), 20, Gold, BTFull);
-		DrawBoxA(185, 520 - (12 * (TempConsole.size() - 1)), 610, 540, 19, 0, 2);
+		for (unsigned int i = 0; i < TempConsole.size(); i++)
+			xSize = GetTextSize(TempConsole[i].data(), 13).x + 21;
+
+		OnDrawBox(
+			xSize > 400 ?
+			185 - (((xSize + 10) - 400) / 2) : 185,
+			xSize > 400 ?
+			xSize + 10 : 385,
+			520 - (12 * (TempConsole.size() - 1)),
+			20 + (12 * (TempConsole.size() - 1)),
+			Black,
+			BTBlack);
 
 		for (unsigned int i = 0; i < TempConsole.size(); ++i)
-		{
-			TextHook(190, 537 - (i * 12), Grey, None, 13, (LPSTR)TempConsole[i].data());
-		}
+			TextHook(xSize > 400 ? 190 + 4 - (((xSize + 10) - 400) / 2) : 190 + 4, 523 - (i * 12), Grey, None, 13, TempConsole[i].data());
 	}
 }
 

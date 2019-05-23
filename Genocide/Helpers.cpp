@@ -33,7 +33,7 @@ void Helpers::InviteAction(BYTE button, DWORD dwPlayerId)
 	Packet[1] = button;
 	*(LPDWORD)&Packet[2] = dwPlayerId;
 	D2NET_SendPacket(6, 1, Packet);
-	Funcs->PrintConsole("ÿc8Auto-Invited IHPK Member");
+	Funcs->InputConsole("ÿc8Auto-Invited IHPK Member");
 	ButtonAction(LOOT_BUTTON, TOGGLE_ON, dwPlayerId);
 }
 

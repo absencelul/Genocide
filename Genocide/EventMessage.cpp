@@ -52,8 +52,8 @@ DWORD EventMessage::EventMessageHandler(LPBYTE Packet, DWORD Length)
 				return true;
 
 			Funcs->Print(0, 5, "[%s] You killed '%s' [Level %d %s].", Funcs->TimeStamp(), Unit->szName, Unit->wLevel, Units->PlayerClass(Unit->dwClassId, false));
-			Funcs->PrintConsole("You killed %s [Level %d %s]", Unit->szName, Unit->wLevel, Units->PlayerClass(Unit->dwClassId, false));
-			Funcs->PrintConsole("Total kill count: %d, kills this game: %d", ++killCount, ++killCountGame);
+			Funcs->InputConsole("You killed %s [Level %d %s]", Unit->szName, Unit->wLevel, Units->PlayerClass(Unit->dwClassId, false));
+			Funcs->InputConsole("Total kill count: %d, kills this game: %d", ++killCount, ++killCountGame);
 
 			if (UseAltScreen)
 				D2CLIENT_SetUIVar(UI_ALTDOWN, 0, 0);

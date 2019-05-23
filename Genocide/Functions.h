@@ -11,7 +11,7 @@ public:
 	char * Difficulty();
 	bool GetSkill(WORD wSkillId);
 	void Print(bool Bottom, int Color, char * Format, ...);
-	void PrintConsole(LPSTR lpMessage, ...);
+	void InputConsole(std::string msg, ...);
 	INT RemoveColorSpecs(LPWSTR lpwsz);
 	DWORD UseItemIds(INT nLoc);
 	void CastSpell(WORD x, WORD y, bool MySpot);

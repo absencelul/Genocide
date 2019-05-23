@@ -315,7 +315,7 @@ void __fastcall KeyHooks::OnGameKeyDown(byte Key, byte Repeat)
 	if (Key == Reload)
 	{
 		Settings::LoadConfig();
-		Funcs->PrintConsole("Configuration - [Reloaded]");
+		Funcs->InputConsole("Configuration - [Reloaded]");
 	}
 
 	if (Key == hammer[1])
@@ -327,15 +327,15 @@ void __fastcall KeyHooks::OnGameKeyDown(byte Key, byte Repeat)
 		switch (hammer[2])
 		{
 		case 0:
-			Funcs->PrintConsole("Smart Angle is Disabled.");
+			Funcs->InputConsole("Smart Angle is Disabled.");
 			break;
 
 		case 1:
-			Funcs->PrintConsole("Smart Angle is Enabled.");
+			Funcs->InputConsole("Smart Angle is Enabled.");
 			break;
 
 		case 2:
-			Funcs->PrintConsole("Smart Angle is angling at Mouse.");
+			Funcs->InputConsole("Smart Angle is angling at Mouse.");
 			break;
 		}
 	}
@@ -349,10 +349,10 @@ void __fastcall KeyHooks::OnGameKeyDown(byte Key, byte Repeat)
 		switch (AutoAim[3])
 		{
 		case 0:
-			Funcs->PrintConsole("Switching Aim type to [Nearest Target]");
+			Funcs->InputConsole("Switching Aim type to [Nearest Target]");
 			break;
 		case 1:
-			Funcs->PrintConsole("Switching Aim type to [Selected Target]");
+			Funcs->InputConsole("Switching Aim type to [Selected Target]");
 			break;
 		}
 	}
@@ -360,7 +360,7 @@ void __fastcall KeyHooks::OnGameKeyDown(byte Key, byte Repeat)
 	if (Key == AuraFlash)
 	{
 		Auras = !Auras;
-		Funcs->PrintConsole(Auras ? "Aura Shifting - [Enabled]." : "Aura Shifting - [Disabled].");
+		Funcs->InputConsole(Auras ? "Aura Shifting - [Enabled]." : "Aura Shifting - [Disabled].");
 	}
 }
 

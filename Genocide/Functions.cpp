@@ -221,33 +221,21 @@ void Functions::Print(bool Bottom, int Color, char * Format, ...)
 		D2CLIENT_PrintGameString(Buffer, Color);
 }
 
-//Prints text to console.
-void Functions::PrintConsole(LPSTR lpMessage, ...)
+void Functions::InputConsole(std::string msg, ...)
 {
-	if (!Me)
-		return;
-
-	CHAR szOutput[0x400] = "";
-	va_list Args;
-
-	va_start(Args, lpMessage);
-	vsprintf(szOutput + strlen(szOutput), lpMessage, Args);
-	va_end(Args);
-
-	ConsoleMessages.Lock();
-
-	if (ConsoleMessages.size() >= 20)
-	{
-		delete ConsoleMessages[0];
+	if ((int)ConsoleMessages.size() >= 3)
 		ConsoleMessages.erase(ConsoleMessages.begin());
-	}
+
+	char szBuffer[4096];
+	va_list arg;
+	va_start(arg, msg);
+	vsprintf_s(szBuffer, 4096, msg.c_str(), arg);
+	va_end(arg);
 
 	LPCONSOLEMESSAGE pConsoleMessage = new CONSOLEMESSAGE;
-	pConsoleMessage->dwTimer = GetTickCount();
-	pConsoleMessage->ConsoleString = szOutput;
+	pConsoleMessage->Timer = GetTickCount64();
+	pConsoleMessage->ConsoleString = szBuffer;
 	ConsoleMessages.push_back(pConsoleMessage);
-
-	ConsoleMessages.Unlock();
 }
 
 //remove yc within string

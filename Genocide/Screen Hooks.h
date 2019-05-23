@@ -1,6 +1,6 @@
 typedef struct ConsoleMessage_t {
 	std::string ConsoleString;
-	DWORD dwTimer;
+	ULONGLONG Timer;
 } CONSOLEMESSAGE, *LPCONSOLEMESSAGE;
 
 

@@ -9,76 +9,70 @@ Commands::~Commands()
 {
 }
 
+bool is_number(const std::string& s)
+{
+	return !s.empty() && std::find_if(s.begin(),
+		s.end(), [](char c) { return !std::isdigit(c); }) == s.end();
+}
+
 
 BOOL FASTCALL Commands::GameInput(WCHAR * Text)
 {
 	char szBuffer[255];
-	//char Message[255];
-	char * Argument[32];
+	char* Argument[32];
 
 	WideCharToMultiByte(CP_ACP, 0, Text, -1, szBuffer, sizeof(szBuffer), 0, 0);
-	//strcpy(Message, szBuffer);
 	StringTokenize(szBuffer + 1, ' ', Argument, 32);
 
-	if (szBuffer[0] == ';')
+	if (HideCommands && szBuffer[0] != ';' && _stricmp(Argument[0], "hc"))
+		return true;
+
+	switch (szBuffer[0])
 	{
-		/*Hides Commands -- ex: .p wont show anymore*/
+	case ';':
+		// Hide Commands
 		if (!_stricmp(Argument[0], "hc"))
 		{
 			HideCommands = !HideCommands;
-			Funcs->PrintConsole(HideCommands ? "Commands are Off!" : "Commands are On!", Name);
-			return NULL;
+			Funcs->InputConsole(HideCommands ? "Commands are Off!" : "Commands are On!");
+			return false;
 		}
-	}
-
-	if (HideCommands)
-		return true;
-
-	if (szBuffer[0] == '.')
-	{
-		/*Reload*/
+		break;
+	case '.':
+		// Reload Configuration
 		if (!_stricmp(Argument[0], "reload"))
 		{
 			Settings::LoadConfig();
-			Funcs->PrintConsole("Configuration was reloaded!");
-
-			return NULL;
-		}
-
-		// Kill Score
-		if (!_stricmp(Argument[0], "score"))
-		{
-			Speak("Current kill count: %d", killCount);
-			Speak("Kill count this game: %d", killCountGame);
-			return NULL;
-		}
-
-		/*Block Portal*/
-		if (!_stricmp(Argument[0], "btp"))
-		{
-			PortalStates[1] = !PortalStates[1];
-			Funcs->PrintConsole(0, 4, PortalStates ? "Privilegeÿc0: Blocking town portal interaction when towned by life/mana %%" : "Privilegeÿc0: ÿc1Not blocking town portal interaction when towned by life/mana %%");
+			Funcs->InputConsole("Config.ini was reloaded.");
 			return false;
 		}
 
-		/*Next Target*/
+		// Killing Score
+		if (!_stricmp(Argument[0], "score"))
+		{
+			Speak("Your total kill count since injection: %d", killCount);
+			Speak("Your total kill count this game: %d", killCountGame);
+			return false;
+		}
+
+		// Next target
 		if (!_stricmp(Argument[0], "next"))
 		{
 			AA->NextTar();
 			Input = GetTickCount64();
-			return NULL;
+			return false;
 		}
 
-		/*Last Target*/
-		if (!_stricmp(Argument[0], "last"))
+		// Previous target
+		if (!_stricmp(Argument[0], "prev"))
 		{
 			AA->PrevTar();
 			Input = GetTickCount64();
-			return NULL;
+			return false;
 		}
 
-		//Smart Angle
-		if (!_stricmp(Argument[0], "sa"))
+		// Hammer Angle
+		if (!_stricmp(Argument[0], "ha"))
 		{
 			if (hammer[2] < 2)
 				hammer[2]++;
@@ -87,98 +81,253 @@ BOOL FASTCALL Commands::GameInput(WCHAR * Text)
 			switch (hammer[2])
 			{
 			case 0:
-				Funcs->PrintConsole("Smart Angle is Disabled.");
+				Funcs->InputConsole("Hammer Angle is Disabled.");
 				break;
 
 			case 1:
-				Funcs->PrintConsole("Smart Angle is Enabled.");
+				Funcs->InputConsole("Hammer Angle is Enabled.");
 				break;
 
 			case 2:
-				Funcs->PrintConsole("Smart Angle is angling at Mouse.");
+				Funcs->InputConsole("Hammer Angle is angling at Mouse.");
 				break;
 			}
-			return NULL;
+			return false;
 		}
 
-		/*PING CHECK*/
+		// Print Ping
 		if (!_stricmp(Argument[0], "p"))
 		{
-			Speak("FPS: %d Skip: %d Ping: %d", FPS, Skip, Ping);
-			return NULL;
+			Speak("FPS: %d, Skip: %d, Ping: %d", *p_D2CLIENT_FPS, *p_D2CLIENT_Skip, *p_D2CLIENT_Ping);
+			return false;
 		}
 
-		//Aura Flash
 		if (!_stricmp(Argument[0], "as"))
 		{
 			Auras = !Auras;
-			Funcs->PrintConsole(Auras ? "Aura Shifting is now [Enabled]." : "Aura Shifting is now [Disabled].");
-			return NULL;
+			Funcs->InputConsole(Auras ? "Aura Swap is Enabled." : "Aura Swap is Disabled.");
+			return false;
 		}
 
-		/*Town Life*/
 		if (!_stricmp(Argument[0], "tl"))
 		{
-			if (Argument[1])
+			if (Argument[1] && is_number(Argument[1]))
 			{
 				Chickens[0] = atoi(Argument[1]);
 
 				if (Chickens[0] >= 0)
-					Funcs->PrintConsole("Escapeÿc0: ÿc4Escaping to town at ÿc1%s percent.", Argument[1]);
-				else
-					Funcs->PrintConsole("Escapeÿc0: Escaping to town at ÿc1life ÿc0is off");
-
-				return false;
+					Funcs->InputConsole("Escaping to town at %s", Argument[1]);
 			}
+			else if (Argument[1] && !_stricmp(Argument[1], "off"))
+			{
+				Chickens[0] = -1;
+				Funcs->InputConsole("Escaping to town is Disabled");
+			}
+			return false;
 		}
 
-		/*Town Mana*/
 		if (!_stricmp(Argument[0], "tm"))
 		{
-			if (Argument[1])
+			if (Argument[1] && is_number(Argument[1]))
 			{
 				Chickens[2] = atoi(Argument[1]);
 
-				if (Chickens[2] >= 0)
-					Funcs->PrintConsole("Escapeÿc0: ÿc4Escaping to town at ÿc3%s mana", Argument[1]);
-				else
-					Funcs->PrintConsole("Escapeÿc0: ÿc0Escaping to town at ÿc3mana ÿc0is off");
-
-				return false;
+				if (Chickens[0] >= 0)
+					Funcs->InputConsole("Escaping to town at %s", Argument[1]);
 			}
+			else if (Argument[1] && !_stricmp(Argument[1], "off"))
+			{
+				Chickens[2] = -1;
+				Funcs->InputConsole("Escaping to town is Disabled");
+			}
+			return false;
 		}
 
-		/*Exit Life*/
 		if (!_stricmp(Argument[0], "el"))
 		{
-			if (Argument[1])
+			if (Argument[1] && is_number(Argument[1]))
 			{
 				Chickens[1] = atoi(Argument[1]);
 
-				if (Chickens[1] >= 0)
-					Funcs->PrintConsole("Rescueÿc0: ÿc4Escaping out of game at ÿc1%s percent", Argument[1]);
-				else
-					Funcs->PrintConsole("Rescueÿc0: Escaping out of game at ÿc1life ÿc0is off");
-
-				return false;
+				if (Chickens[0] >= 0)
+					Funcs->InputConsole("Escaping out of game at %s", Argument[1]);
 			}
+			else if (Argument[1] && !_stricmp(Argument[1], "off"))
+			{
+				Chickens[1] = -1;
+				Funcs->InputConsole("Escaping out of game is Disabled");
+			}
+			return false;
 		}
 
-		/*Exit Mana*/
 		if (!_stricmp(Argument[0], "em"))
 		{
-			if (Argument[1])
+			if (Argument[1] && is_number(Argument[1]))
 			{
 				Chickens[3] = atoi(Argument[1]);
 
-				if (Chickens[3] >= 0)
-					Funcs->PrintConsole(0, 4, "Rescueÿc0: ÿc4Escaping out of game at ÿc3%s%% mana", Argument[1]);
-				else
-					Funcs->PrintConsole(0, 4, "Rescueÿc0: Escaping out of game at ÿc3mana ÿc0is off");
-
-				return false;
+				if (Chickens[0] >= 0)
+					Funcs->InputConsole("Escaping out of game at %s", Argument[1]);
 			}
+			else if (Argument[1] && !_stricmp(Argument[1], "off"))
+			{
+				Chickens[3] = -1;
+				Funcs->InputConsole("Escaping out of game is Disabled");
+			}
+			return false;
 		}
+
+		break;
+	}
+
+	/*if (HideCommands)
+		return true;*/
+
+	if (szBuffer[0] == '.')
+	{
+		///*Reload*/
+		//if (!_stricmp(Argument[0], "reload"))
+		//{
+		//	Settings::LoadConfig();
+		//	Funcs->InputConsole("Configuration was reloaded!");
+
+		//	return NULL;
+		//}
+
+		//// Kill Score
+		//if (!_stricmp(Argument[0], "score"))
+		//{
+		//	Speak("Current kill count: %d", killCount);
+		//	Speak("Kill count this game: %d", killCountGame);
+		//	return NULL;
+		//}
+
+		///*Block Portal*/
+		//if (!_stricmp(Argument[0], "btp"))
+		//{
+		//	PortalStates[1] = !PortalStates[1];
+		//	Funcs->InputConsole(0, 4, PortalStates ? "Privilegeÿc0: Blocking town portal interaction when towned by life/mana %%" : "Privilegeÿc0: ÿc1Not blocking town portal interaction when towned by life/mana %%");
+		//	return false;
+		//}
+
+		///*Next Target*/
+		//if (!_stricmp(Argument[0], "next"))
+		//{
+		//	AA->NextTar();
+		//	Input = GetTickCount64();
+		//	return NULL;
+		//}
+
+		///*Last Target*/
+		//if (!_stricmp(Argument[0], "last"))
+		//{
+		//	AA->PrevTar();
+		//	Input = GetTickCount64();
+		//	return NULL;
+		//}
+
+		////Smart Angle
+		//if (!_stricmp(Argument[0], "sa"))
+		//{
+		//	if (hammer[2] < 2)
+		//		hammer[2]++;
+		//	else hammer[2] = 0;
+
+		//	switch (hammer[2])
+		//	{
+		//	case 0:
+		//		Funcs->InputConsole("Smart Angle is Disabled.");
+		//		break;
+
+		//	case 1:
+		//		Funcs->InputConsole("Smart Angle is Enabled.");
+		//		break;
+
+		//	case 2:
+		//		Funcs->InputConsole("Smart Angle is angling at Mouse.");
+		//		break;
+		//	}
+		//	return NULL;
+		//}
+
+		///*PING CHECK*/
+		//if (!_stricmp(Argument[0], "p"))
+		//{
+		//	Speak("FPS: %d Skip: %d Ping: %d", FPS, Skip, Ping);
+		//	return NULL;
+		//}
+
+		////Aura Flash
+		//if (!_stricmp(Argument[0], "as"))
+		//{
+		//	Auras = !Auras;
+		//	Funcs->InputConsole(Auras ? "Aura Shifting is now [Enabled]." : "Aura Shifting is now [Disabled].");
+		//	return NULL;
+		//}
+
+		///*Town Life*/
+		//if (!_stricmp(Argument[0], "tl"))
+		//{
+		//	if (Argument[1])
+		//	{
+		//		Chickens[0] = atoi(Argument[1]);
+
+		//		if (Chickens[0] >= 0)
+		//			Funcs->InputConsole("Escapeÿc0: ÿc4Escaping to town at ÿc1%s percent.", Argument[1]);
+		//		else
+		//			Funcs->InputConsole("Escapeÿc0: Escaping to town at ÿc1life ÿc0is off");
+
+		//		return false;
+		//	}
+		//}
+
+		///*Town Mana*/
+		//if (!_stricmp(Argument[0], "tm"))
+		//{
+		//	if (Argument[1])
+		//	{
+		//		Chickens[2] = atoi(Argument[1]);
+
+		//		if (Chickens[2] >= 0)
+		//			Funcs->InputConsole("Escapeÿc0: ÿc4Escaping to town at ÿc3%s mana", Argument[1]);
+		//		else
+		//			Funcs->InputConsole("Escapeÿc0: ÿc0Escaping to town at ÿc3mana ÿc0is off");
+
+		//		return false;
+		//	}
+		//}
+
+		///*Exit Life*/
+		//if (!_stricmp(Argument[0], "el"))
+		//{
+		//	if (Argument[1])
+		//	{
+		//		Chickens[1] = atoi(Argument[1]);
+
+		//		if (Chickens[1] >= 0)
+		//			Funcs->InputConsole("Rescueÿc0: ÿc4Escaping out of game at ÿc1%s percent", Argument[1]);
+		//		else
+		//			Funcs->InputConsole("Rescueÿc0: Escaping out of game at ÿc1life ÿc0is off");
+
+		//		return false;
+		//	}
+		//}
+
+		///*Exit Mana*/
+		//if (!_stricmp(Argument[0], "em"))
+		//{
+		//	if (Argument[1])
+		//	{
+		//		Chickens[3] = atoi(Argument[1]);
+
+		//		if (Chickens[3] >= 0)
+		//			Funcs->InputConsole(0, 4, "Rescueÿc0: ÿc4Escaping out of game at ÿc3%s%% mana", Argument[1]);
+		//		else
+		//			Funcs->InputConsole(0, 4, "Rescueÿc0: Escaping out of game at ÿc3mana ÿc0is off");
+
+		//		return false;
+		//	}
+		//}
 
 		if (!_stricmp(Argument[0], "hp"))
 		{
@@ -187,9 +336,9 @@ BOOL FASTCALL Commands::GameInput(WCHAR * Text)
 				Potions[0] = atoi(Argument[1]);
 
 				if (Potions[0] >= 0)
-					Funcs->PrintConsole("AutoPotÿc0: ÿc4Drinking health potions at ÿc1%s life", Argument[1]);
+					Funcs->InputConsole("AutoPotÿc0: ÿc4Drinking health potions at ÿc1%s life", Argument[1]);
 				else
-					Funcs->PrintConsole("AutoPotÿc0: Drinking health potions at ÿc1life ÿc0is off");
+					Funcs->InputConsole("AutoPotÿc0: Drinking health potions at ÿc1life ÿc0is off");
 
 				return false;
 			}
@@ -202,9 +351,9 @@ BOOL FASTCALL Commands::GameInput(WCHAR * Text)
 				Potions[2] = atoi(Argument[1]);
 
 				if (Potions[2] >= 0)
-					Funcs->PrintConsole("AutoPotÿc0: ÿc4Drinking mana potions at ÿc3%s mana", Argument[1]);
+					Funcs->InputConsole("AutoPotÿc0: ÿc4Drinking mana potions at ÿc3%s mana", Argument[1]);
 				else
-					Funcs->PrintConsole("AutoPotÿc0: Drinking mana potions at ÿc3mana %% ÿc0is off");
+					Funcs->InputConsole("AutoPotÿc0: Drinking mana potions at ÿc3mana %% ÿc0is off");
 
 				return false;
 			}
@@ -217,9 +366,9 @@ BOOL FASTCALL Commands::GameInput(WCHAR * Text)
 				Potions[1] = atoi(Argument[1]);
 
 				if (Potions[1] >= 0)
-					Funcs->PrintConsole("Potionÿc0: ÿc4Drinking rejuvenation potions at ÿc1%s life", Argument[1]);
+					Funcs->InputConsole("Potionÿc0: ÿc4Drinking rejuvenation potions at ÿc1%s life", Argument[1]);
 				else
-					Funcs->PrintConsole("Potionÿc0: Drinking rejuvenation potions at ÿc1life %% ÿc0is off");
+					Funcs->InputConsole("Potionÿc0: Drinking rejuvenation potions at ÿc1life %% ÿc0is off");
 
 				return false;
 			}
@@ -232,9 +381,9 @@ BOOL FASTCALL Commands::GameInput(WCHAR * Text)
 				Potions[3] = atoi(Argument[1]);
 
 				if (Potions[3] >= 0)
-					Funcs->PrintConsole("Potionÿc0: ÿc4Drinking rejuvenation potions at ÿc3%s mana", Argument[1]);
+					Funcs->InputConsole("Potionÿc0: ÿc4Drinking rejuvenation potions at ÿc3%s mana", Argument[1]);
 				else
-					Funcs->PrintConsole("Potionÿc0: Drinking rejuvenation potions at ÿc3mana ÿc0is off");
+					Funcs->InputConsole("Potionÿc0: Drinking rejuvenation potions at ÿc3mana ÿc0is off");
 
 				return false;
 			}

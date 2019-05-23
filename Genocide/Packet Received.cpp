@@ -169,7 +169,7 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 					{
 						Town = true;
 
-						Funcs->PrintConsole("RESCUE: Towned due to Mercenary Death!");
+						Funcs->InputConsole("RESCUE: Towned due to Mercenary Death!");
 					}
 
 		break;
@@ -199,7 +199,7 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 			if (dwFlags & PVP_HOSTILED_BY_YOU || dwFlags & PVP_HOSTILED_YOU)
 				if (TP->Portal())
 				{
-					Funcs->PrintConsole("RESCUE: Towned due to [%s] attacking you", pRoster->szName);
+					Funcs->InputConsole("RESCUE: Towned due to [%s] attacking you", pRoster->szName);
 					Town = true;
 				}
 		}*/
@@ -266,7 +266,7 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 			{
 				if (Packet[7] == AFFECT_AMPLIFYDAMAGE)
 					if (TP->Portal())
-						Funcs->PrintConsole("RESCUE: Towned due to [Amplify Damage]");
+						Funcs->InputConsole("RESCUE: Towned due to [Amplify Damage]");
 						Town = true;
 			}
 
@@ -274,7 +274,7 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 			{
 				if (Packet[7] == AFFECT_DIMVISION)
 					if (TP->Portal())
-						Funcs->PrintConsole("RESCUE: Towned due to [Dim Vision]");
+						Funcs->InputConsole("RESCUE: Towned due to [Dim Vision]");
 						Town = true;
 			}
 
@@ -282,7 +282,7 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 			{
 				if (Packet[7] == AFFECT_WEAKEN)
 					if (TP->Portal())
-						Funcs->PrintConsole("RESCUE: Towned due to [Weaken]");
+						Funcs->InputConsole("RESCUE: Towned due to [Weaken]");
 						Town = true;
 			}
 
@@ -290,7 +290,7 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 			{
 				if (Packet[7] == AFFECT_IRONMAIDEN)
 					if (TP->Portal())
-						Funcs->PrintConsole("RESCUE: Towned due to [Iron Maiden]");
+						Funcs->InputConsole("RESCUE: Towned due to [Iron Maiden]");
 						Town = true;
 			}
 
@@ -298,7 +298,7 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 			{
 				if (Packet[7] == AFFECT_TERROR)
 					if (TP->Portal())
-						Funcs->PrintConsole("RESCUE: Towned due to [Terror]");
+						Funcs->InputConsole("RESCUE: Towned due to [Terror]");
 						Town = true;
 			}
 
@@ -306,7 +306,7 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 			{
 				if (Packet[7] == AFFECT_CONFUSE)
 					if (TP->Portal())
-						Funcs->PrintConsole("RESCUE: Towned due to [Confuse]");
+						Funcs->InputConsole("RESCUE: Towned due to [Confuse]");
 						Town = true;
 			}
 
@@ -314,7 +314,7 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 			{
 				if (Packet[7] == AFFECT_LIFETAP)
 					if (TP->Portal())
-						Funcs->PrintConsole("RESCUE: Towned due to [Life Tap]");
+						Funcs->InputConsole("RESCUE: Towned due to [Life Tap]");
 						Town = true;
 			}
 
@@ -322,7 +322,7 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 			{
 				if (Packet[7] == AFFECT_ATTRACT)
 					if (TP->Portal())
-						Funcs->PrintConsole("RESCUE: Towned due to [Attract]");
+						Funcs->InputConsole("RESCUE: Towned due to [Attract]");
 						Town = true;
 			}
 
@@ -330,7 +330,7 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 			{
 				if (Packet[7] == AFFECT_DECREPIFY)
 					if (TP->Portal())
-						Funcs->PrintConsole("RESCUE: Towned due to [Decrepify]");
+						Funcs->InputConsole("RESCUE: Towned due to [Decrepify]");
 						Town = true;
 			}
 
@@ -338,7 +338,7 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 			{
 				if (Packet[7] == AFFECT_LOWERRESIST)
 					if (TP->Portal())
-						Funcs->PrintConsole("RESCUE: Towned due to [Lower Resist]");
+						Funcs->InputConsole("RESCUE: Towned due to [Lower Resist]");
 						Town = true;
 			}
 		}
@@ -352,7 +352,7 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 			{
 				if (Packet[6] == AFFECT_BATTLEORDERS)
 					if (TP->Portal())
-						Funcs->PrintConsole("RESCUE: Towned due to [Battle Order] running out.");
+						Funcs->InputConsole("RESCUE: Towned due to [Battle Order] running out.");
 						Town = true;
 			}
 
@@ -360,7 +360,7 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 			{
 				if (Packet[6] == AFFECT_BATTLECOMMAND)
 					if (TP->Portal())
-						Funcs->PrintConsole("RESCUE: Towned due to [Battle Command] running out.");
+						Funcs->InputConsole("RESCUE: Towned due to [Battle Command] running out.");
 						Town = true;
 			}
 
@@ -368,7 +368,7 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 			{
 				if (Packet[6] == AFFECT_SHOUT)
 					if (TP->Portal())
-						Funcs->PrintConsole("RESCUE: Towned due to [Shout] running out.");
+						Funcs->InputConsole("RESCUE: Towned due to [Shout] running out.");
 						Town = true;
 			}
 
@@ -376,7 +376,7 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 			{
 				if (Packet[6] == AFFECT_BONEARMOR)
 					if (TP->Portal())
-						Funcs->PrintConsole("RESCUE: Towned due to [Bone Armor] running out.");
+						Funcs->InputConsole("RESCUE: Towned due to [Bone Armor] running out.");
 						Town = true;
 			}
 
@@ -384,7 +384,7 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 			{
 				if (Packet[6] == AFFECT_CYCLONEARMOR)
 					if (TP->Portal())
-						Funcs->PrintConsole("RESCUE: Towned due to [Cyclone Armor] running out.");
+						Funcs->InputConsole("RESCUE: Towned due to [Cyclone Armor] running out.");
 						Town = true;
 			}
 
@@ -392,7 +392,7 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 			{
 				if (Packet[6] == AFFECT_FADE)
 					if (TP->Portal())
-						Funcs->PrintConsole("RESCUE: Towned due to [Fade] running out.");
+						Funcs->InputConsole("RESCUE: Towned due to [Fade] running out.");
 						Town = true;
 			}
 
@@ -400,7 +400,7 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 			{
 				if (Packet[6] == AFFECT_HOLYSHIELD)
 					if (TP->Portal())
-						Funcs->PrintConsole("RESCUE: Towned due to [Holy Shield] running out.");
+						Funcs->InputConsole("RESCUE: Towned due to [Holy Shield] running out.");
 						Town = true;
 			}
 
@@ -408,7 +408,7 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 			{
 				if (Packet[6] == AFFECT_OAKSAGE)
 					if (TP->Portal())
-						Funcs->PrintConsole("RESCUE: Towned due to [Oak Sage] running out.");
+						Funcs->InputConsole("RESCUE: Towned due to [Oak Sage] running out.");
 						Town = true;
 			}
 
@@ -416,7 +416,7 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 			{
 				if (Packet[6] == AFFECT_CHILLINGARMOR)
 					if (TP->Portal())
-						Funcs->PrintConsole("RESCUE: Towned due to [Chilling Armor] running out.");
+						Funcs->InputConsole("RESCUE: Towned due to [Chilling Armor] running out.");
 						Town = true;
 			}
 
@@ -424,7 +424,7 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 			{
 				if (Packet[6] == AFFECT_FROZENARMOR)
 					if (TP->Portal())
-						Funcs->PrintConsole("RESCUE: Towned due to [Frozen Armor] running out.");
+						Funcs->InputConsole("RESCUE: Towned due to [Frozen Armor] running out.");
 						Town = true;
 			}
 
@@ -432,7 +432,7 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 			{
 				if (Packet[6] == AFFECT_ENERGYSHIELD)
 					if (TP->Portal())
-						Funcs->PrintConsole("RESCUE: Towned due to [Energy Shield] running out.");
+						Funcs->InputConsole("RESCUE: Towned due to [Energy Shield] running out.");
 						Town = true;
 			}
 
@@ -440,7 +440,7 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 			{
 				if (Packet[6] == AFFECT_ENCHANT)
 					if (TP->Portal())
-						Funcs->PrintConsole("RESCUE: Towned due to [Enchant] running out.");
+						Funcs->InputConsole("RESCUE: Towned due to [Enchant] running out.");
 						Town = true;
 			}
 		}
@@ -455,7 +455,7 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 				if (TP->Portal())
 				{
 					LPROSTERUNIT Unit = Units->FindPartyById(*(LPDWORD)&Packet[5]);
-					Funcs->PrintConsole("RESCUE: Towned due to [%s] hostiling you!", Unit->szName);
+					Funcs->InputConsole("RESCUE: Towned due to [%s] hostiling you!", Unit->szName);
 					Town = true;
 				}
 			}
