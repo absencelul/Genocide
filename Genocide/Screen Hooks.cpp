@@ -388,7 +388,7 @@ void DrawOutConsole()
 			BTBlack);
 
 		for (unsigned int i = 0; i < TempConsole.size(); ++i)
-			TextHook(xSize > 400 ? 190 + 4 - (((xSize + 10) - 400) / 2) : 190 + 4, 523 - (i * 12), Grey, None, 13, TempConsole[i].data());
+			TextHook(xSize > 400 ? 190 + 4 - (((xSize + 10) - 400) / 2) : 190 + 4, 523 - (i * 12), Gold, None, 13, TempConsole[i].data());
 	}
 }
 
