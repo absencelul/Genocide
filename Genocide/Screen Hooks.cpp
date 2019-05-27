@@ -9,12 +9,12 @@ void DrawScreen()
 	if (showStatScreen) extraDraw();
 
 	TimerBo();
-	TargetList();
+	//TargetList();
 
 	/* Re-do the Battle Orders Timer*/
 	//TextHook(15, 12, -1, 0, 12, 9, BoTimer >= 1 ? "BO: %d" : "", BoTimer);
 
-	if (ScreenShot && TakeScreen && (GetTickCount64() - SStime) >= SSDelay)
+	/*if (ScreenShot && TakeScreen && (GetTickCount64() - SStime) >= SSDelay)
 	{
 		TextHook(30, 585, White, None, 4, "ÿc1%s ÿc;%s", Potions[0] >= 1 ? Settings::to_string(Potions[0]).c_str() : "Off", Potions[1] >= 1 ? Settings::to_string(Potions[1]).c_str() : "Off");
 		TextHook(30, 598, White, None, 4, "ÿc8%s ÿc7%s", Chickens[0] >= 1 ? Settings::to_string(Chickens[0]).c_str() : "Off", Chickens[1] >= 1 ? Settings::to_string(Chickens[1]).c_str() : "Off");
@@ -27,20 +27,17 @@ void DrawScreen()
 
 		if (UseAltScreen)
 			D2CLIENT_SetUIVar(UI_ALTDOWN, 1, 0);
-	}
+	}*/
 
 	if (FcTele)
 	{
-		//if (Funcs->GetCurrentSkill(false) != D2S_TELEPORT)
-		if (!Funcs->GetCurSkill(true, D2S_TELEPORT))
-			SetSkill(D2S_TELEPORT, true);
-		if (!Funcs->GetCurSkill(false, D2S_HOLYFREEZE))
-			SetSkill(D2S_HOLYFREEZE, false);
+		if (!Funcs->GetCurSkill(false, D2S_TELEPORT))
+			SetSkill(D2S_TELEPORT, false);
 
 		AttackStruct Attack;
-		//Attack.dwAttackType = 0x46;
-		Attack.dwAttackType = 0xE5; //shift+left
-		bool SelectedSkill = Funcs->GetCurSkill(true, D2S_TELEPORT);
+		Attack.dwAttackType = 0x46;
+		//Attack.dwAttackType = 0xE5; //shift+left
+		bool SelectedSkill = Funcs->GetCurSkill(false, D2S_TELEPORT);
 		POINT Target = { (long)(Attack.dwTargetX=0), (long)(Attack.dwTargetY=0) };
 
 		if (!KeyDown(4)) {

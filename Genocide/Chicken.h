@@ -5,6 +5,6 @@ public:
 	virtual ~Chicken();
 	void Rescue();
 	bool IsTown(UnitAny* pUnit);
-	INT LifeMana(bool Life);
+	int LifeMana(bool Life);
 	bool Portal();
 };

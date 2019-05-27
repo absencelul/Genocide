@@ -11,34 +11,22 @@ void DrawAutomap()
 
 void GameInfo()
 {
+	int y = 0;
 	std::list<std::string> GameInfoList;
-	int y = 24;
 
 	AddStringToList(GameInfoList, "FPS: %d, Skip: %d, Ping: %d", FPS, Skip, Ping);
 	if (strlen(D2CLIENT_GetGameInfo()->szGameName) > 0)
-		AddStringToList(GameInfoList, strlen(D2CLIENT_GetGameInfo()->szGameName) > 0 ? "Game: %s" : "%s", D2CLIENT_GetGameInfo()->szGameName);
+		AddStringToList(GameInfoList, "Game: %s", D2CLIENT_GetGameInfo()->szGameName);
 	if (strlen(D2CLIENT_GetGameInfo()->szGamePassword) > 0)
-		AddStringToList(GameInfoList, strlen(D2CLIENT_GetGameInfo()->szGamePassword) > 0 ? "Password: %s" : "%s", D2CLIENT_GetGameInfo()->szGamePassword);
-	AddStringToList(GameInfoList, "Difficulty: %s", Funcs->Difficulty());
+		AddStringToList(GameInfoList, "Password: %s", D2CLIENT_GetGameInfo()->szGamePassword);
+	if (strcmp(Funcs->Difficulty().c_str(), "Normal") != 0)
+		AddStringToList(GameInfoList, "Difficulty: %s", Funcs->Difficulty().c_str());
 	if (strlen(D2CLIENT_GetGameInfo()->szGameServerIp) > 0)
 		AddStringToList(GameInfoList, "%s", D2CLIENT_GetGameInfo()->szGameServerIp);
-	AddStringToList(GameInfoList, "%s", LevelNameInfo());
+	AddStringToList(GameInfoList, "%s", UnicodeToAnsi(D2CLIENT_GetLevelName_I(D2CLIENT_GetPlayerUnit()->pPath->pRoom1->pRoom2->pLevel->dwLevelNo)));
 
-	for (auto& it : GameInfoList) {
-		TextHook(780, y, Gold, Center, 0, "%s", it.c_str());
-		y += 16;
-	}
-}
-
-char* LevelNameInfo()
-{
-	wchar_t* pLocalText;
-	static char LevelName[0x40];
-
-	pLocalText = D2CLIENT_GetLevelName_I(Me->pPath->pRoom1->pRoom2->pLevel->dwLevelNo);
-	WideCharToMultiByte(CP_ACP, 0, pLocalText, -1, LevelName, (int)sizeof(LevelName), 0, 0);
-
-	return LevelName;
+	for (auto& it : GameInfoList)
+		TextHook(790, y += 16, Gold, Right, 0, "%s", it.c_str());
 }
 
 void xVector()
@@ -180,14 +168,13 @@ void FCPointer()
 	}
 }
 
-void AddStringToList(std::list<std::string> & StringList, LPSTR lpFormat, ...)
+void AddStringToList(std::list<std::string> &StringList, std::string lpFormat, ...)
 {
-	static char szOutput[0x400] = { 0 };
-	va_list Args;
+	char szBuffer[4096];
+	va_list arg;
+	va_start(arg, lpFormat);
+	vsprintf(szBuffer, lpFormat.c_str(), arg);
+	va_end(arg);
 
-	va_start(Args, lpFormat);
-	vsprintf(szOutput, lpFormat, Args);
-	va_end(Args);
-
-	StringList.push_back(szOutput);
+	StringList.push_back(szBuffer);
 }

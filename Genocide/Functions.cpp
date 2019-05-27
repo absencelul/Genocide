@@ -171,7 +171,7 @@ void Functions::CastSpell(WORD x, WORD y, bool MySpot)
 	Stubs::D2CLIENT_Attack(&Attack, false);
 }
 
-char * Functions::Difficulty()
+std::string Functions::Difficulty()
 {
 	switch (D2CLIENT_GetDifficulty())
 	{
@@ -202,23 +202,19 @@ bool Functions::GetSkill(WORD wSkillId)
 }
 
 //Prints text to screen.
-void Functions::Print(bool Bottom, int Color, char * Format, ...)
+void Functions::Print(bool bottom, int color, std::string text, ...)
 {
-	if (strlen(Format) <= NULL)
+	if (strlen(text.c_str()) <= 0)
 		return;
 
-	char szString[152] = { 0 };
+	char szString[152];
 	va_list vaArgs;
-	va_start(vaArgs, Format);
-	vsprintf_s(szString, 152, Format, vaArgs);
+	va_start(vaArgs, text);
+	vsprintf_s(szString, 152, text.c_str(), vaArgs);
 	va_end(vaArgs);
-	wchar_t Buffer[0x130];
-	MultiByteToWideChar(0, 1, szString, 152, Buffer, 304);
+	auto wBuffer = AnsiToUnicode(szString);
 
-	if (Bottom)
-		D2CLIENT_PrintPartyString(Buffer, Color);
-	else
-		D2CLIENT_PrintGameString(Buffer, Color);
+	bottom ? D2CLIENT_PrintPartyString(wBuffer, color) : D2CLIENT_PrintGameString(wBuffer, color);
 }
 
 void Functions::InputConsole(std::string msg, ...)

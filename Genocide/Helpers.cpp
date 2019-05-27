@@ -62,6 +62,15 @@ wchar_t* AnsiToUnicode(const char* str)
 	return buf;
 }
 
+char* UnicodeToAnsi(const wchar_t* str)
+{
+	char* buf = NULL;
+	int len = WideCharToMultiByte(CP_ACP, 0, str, -1, buf, 0, "?", NULL);
+	buf = new char[len];
+	WideCharToMultiByte(CP_ACP, 0, str, -1, buf, len, "?", NULL);
+	return buf;
+}
+
 bool Spam(string Msg, string pName)
 {
 

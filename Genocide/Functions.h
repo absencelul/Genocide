@@ -8,9 +8,9 @@ public:
 	int GetItemLocation(LPUNITANY pItem);
 	bool GetCurSkill(bool left, WORD wSkillId);
 	WORD GetCurrentSkill(bool Left);
-	char * Difficulty();
+	std::string Difficulty();
 	bool GetSkill(WORD wSkillId);
-	void Print(bool Bottom, int Color, char * Format, ...);
+	void Print(bool bottom, int color, std::string text, ...);
 	void InputConsole(std::string msg, ...);
 	INT RemoveColorSpecs(LPWSTR lpwsz);
 	DWORD UseItemIds(INT nLoc);

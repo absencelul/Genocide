@@ -16,7 +16,7 @@ void Chicken::Rescue()
 	if (!Units->CheckReady(true, false))
 		return;
 
-	int Life = LifeMana(true), Mana = LifeMana(false);
+	auto Life = LifeMana(true), Mana = LifeMana(false);
 
 	if (Life <= Chickens[1] && Chickens[1] > -1 || Mana <= Chickens[3] && Chickens[3] > -1)
 		D2CLIENT_ExitGame();
@@ -45,11 +45,10 @@ bool Chicken::IsTown(UnitAny* pUnit)
 }
 
 //Grabs Life or Mana.
-INT Chicken::LifeMana(bool Life)
+int Chicken::LifeMana(bool Life)
 {
-	INT LifePercent = Math::CalcPercent((GetUnitStat(D2CLIENT_GetPlayerUnit(), STAT_HP) >> 8), (GetUnitStat(D2CLIENT_GetPlayerUnit(), STAT_MAXHP) >> 8));
-
-	INT ManaPercent = Math::CalcPercent((GetUnitStat(D2CLIENT_GetPlayerUnit(), STAT_MANA) >> 8), (GetUnitStat(D2CLIENT_GetPlayerUnit(), STAT_MAXMANA) >> 8));
+	int LifePercent = Math::CalcPercent((GetUnitStat(D2CLIENT_GetPlayerUnit(), STAT_HP) >> 8), (GetUnitStat(D2CLIENT_GetPlayerUnit(), STAT_MAXHP) >> 8));
+	int ManaPercent = Math::CalcPercent((GetUnitStat(D2CLIENT_GetPlayerUnit(), STAT_MANA) >> 8), (GetUnitStat(D2CLIENT_GetPlayerUnit(), STAT_MAXMANA) >> 8));
 
 	return Life ? LifePercent : ManaPercent;
 }

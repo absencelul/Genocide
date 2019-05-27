@@ -13,6 +13,7 @@ public:
 };
 
 wchar_t* AnsiToUnicode(const char* str);
+char* UnicodeToAnsi(const wchar_t* str);
 bool Spam(string Msg, string pName);
 void ReadConfig(string szFile, vector<string>* nVector);
 void PushConfig(string szFile, string szLine);

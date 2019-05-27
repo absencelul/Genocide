@@ -597,12 +597,10 @@ void Settings::SetKeyValues(LPSTR Value, INT Variable[])
 
 bool Settings::CheckString(LPSTR Value)
 {
-
 	for (int i = 0; i < 255; i++)
 	{
 		if (!_stricmp(Value, to_string(i).c_str()))
 			return true;
-
 	}
 
 	return false;

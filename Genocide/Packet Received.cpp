@@ -91,7 +91,7 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 	case 0x0D:
 	{
 		if (!Players.IsEmpty())
-			for (INT i = 0; i < Players.GetSize(); i++)
+			for (auto i = 0; i < Players.GetSize(); i++)
 				if (*(LPDWORD)&Packet[2] == Players[i]->UnitId)
 				{
 					if (Packet[12] > 100)

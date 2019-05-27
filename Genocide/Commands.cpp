@@ -276,29 +276,29 @@ int Commands::StringTokenize(char * input, char separator, char ** tokenbuf, int
 	return ++i;
 }
 
-void Commands::StringFix(char* szString)
-{
-	char szBuffer[1024] = { 0 };
+//void Commands::StringFix(char* szString)
+//{
+//	char szBuffer[1024] = { 0 };
+//
+//	for (unsigned int i = 0; i < strlen(szString); ++i)
+//	{
+//		if (szString[i] == '	' || szString[i] == '/n' || szString[i] == '/r')
+//			continue;
+//
+//		szBuffer[i] = szString[i];
+//	}
+//
+//	strcpy(szString, szBuffer);
+//}
 
-	for (unsigned int i = 0; i < strlen(szString); ++i)
-	{
-		if (szString[i] == '	' || szString[i] == '/n' || szString[i] == '/r')
-			continue;
-
-		szBuffer[i] = szString[i];
-	}
-
-	strcpy(szString, szBuffer);
-}
-
-void Commands::ReplaceString(std::string & String, std::string Find, std::string Replace)
-{
-	for (auto i = String.find(Find); i != std::string::npos; i = String.find(Find))
-	{
-		String.erase(i, Find.size());
-		String.insert(i, Replace);
-	}
-}
+//void Commands::ReplaceString(std::string & String, std::string Find, std::string Replace)
+//{
+//	for (auto i = String.find(Find); i != std::string::npos; i = String.find(Find))
+//	{
+//		String.erase(i, Find.size());
+//		String.insert(i, Replace);
+//	}
+//}
 
 bool Commands::Speak(LPSTR lpMessage, ...)
 {
