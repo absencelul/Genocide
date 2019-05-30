@@ -45,27 +45,24 @@ LPUNITANY Unit::FindMercUnit(LPUNITANY pOwner)
 UnitAny* Unit::FindUnit()
 {
 	UnitAny* pMe = D2CLIENT_GetPlayerUnit();
-	if (!pMe)
-		return false;
-
-	int nDist = 50;
 	UnitAny* pRet = 0;
+	int nDist = 50;
+
+	if (!pMe) return false;
+
 	for (RosterUnit* pRoster = *p_D2CLIENT_PlayerUnitList; pRoster; pRoster = pRoster->pNext)
 	{
-		if (pRoster->dwUnitId == pMe->dwUnitId)
-			continue;
+		if (pRoster->dwUnitId == pMe->dwUnitId) continue;
+
 		UnitAny* pTarget = D2CLIENT_FindServerSideUnit(pRoster->dwUnitId, UNIT_TYPE_PLAYER);
-		if (!pTarget)
-			continue;
 
-		if (GetRelation(pTarget) != 4)
-			continue;
+		if (!pTarget) continue;
 
-		if (pTarget->dwMode == PLAYER_MODE_DEAD || pTarget->dwMode == PLAYER_MODE_DEATH)
-			continue;
+		if (GetRelation(pTarget) != PVP_HOSTILED_YOU) continue;
 
-		if (TP->IsTown(pTarget))
-			continue;
+		if (pTarget->dwMode == PLAYER_MODE_DEAD || pTarget->dwMode == PLAYER_MODE_DEATH) continue;
+
+		if (TP->IsTown(pTarget)) continue;
 
 		int tDist = D2MATH_GetDistance(pMe, pTarget->pPath->xPos, pTarget->pPath->yPos);
 
@@ -75,79 +72,35 @@ UnitAny* Unit::FindUnit()
 			pRet = pTarget;
 		}
 	}
-
 	return pRet;
 }
 
-//Finds nearest hostile unit
-POINT Unit::FindUnitHammer()
+//FindUnitHammer()
+POINT Unit::GetUnitLocation(bool bHammer)
 {
-	POINT Target = { NULL };
-	int Dist = 70;
+	POINT target = { NULL };
+	auto dist = bHammer ? 70 : 50;
+
 	for (int i = 0; i < Players.GetSize(); i++)
 	{
-		//LPUNITANY Unit = (LPUNITANY)GetUnit(Players[i]->UnitId, UNIT_TYPE_PLAYER);
-		UnitAny* Unit = D2CLIENT_FindServerSideUnit(Players[i]->UnitId, UNIT_TYPE_PLAYER);
+		UnitAny * pTarget = D2CLIENT_FindServerSideUnit(Players[i]->UnitId, UNIT_TYPE_PLAYER);
 
-		if (!Unit)
-			continue;
+		if (!pTarget) continue;
 
-		if (TP->IsTown(Unit))
-			continue;
+		if (pTarget->dwMode == PLAYER_MODE_DEAD || pTarget->dwMode == PLAYER_MODE_DEATH) continue;
 
-		if (Unit->dwMode == PLAYER_MODE_WALK_OUTTOWN || Unit->dwMode == PLAYER_MODE_RUN)
-			AA->SetBlind(Unit->pPath->xTarget, Unit->pPath->yTarget, Unit->pPath->xTarget, Unit->pPath->yTarget, Unit->dwUnitId);
+		if (pTarget->dwMode == PLAYER_MODE_WALK_OUTTOWN || pTarget->dwMode == PLAYER_MODE_RUN)
+			AA->SetBlind(pTarget->pPath->xTarget, pTarget->pPath->yTarget, pTarget->pPath->xTarget, pTarget->pPath->yTarget, pTarget->dwUnitId);
 
-		if (Unit->dwMode == PLAYER_MODE_DEAD || Unit->dwMode == PLAYER_MODE_DEATH)
-			continue;
+		if (D2MATH_GetDistance(D2CLIENT_GetPlayerUnit(), pTarget->pPath->xPos, pTarget->pPath->yPos) >= dist) continue;
 
-		if (Math::CalculateDistance(Me->pPath->xPos, Me->pPath->yPos, Unit->pPath->xPos, Unit->pPath->yPos) >= Dist)
-			continue;
-
-		if (GetRelation(Unit) & PVP_HOSTILED_YOU || GetRelation(Unit) & PVP_HOSTILED_BY_YOU)
+		if (GetRelation(pTarget) & PVP_HOSTILED_YOU || GetRelation(pTarget) & PVP_HOSTILED_BY_YOU)
 		{
-			Target.x = Players[i]->HammerX;
-			Target.y = Players[i]->HammerY;
-
-			//Dist = Math::CalcDist(Me, Unit, false);
-			Dist = Math::CalculateDistance(Me->pPath->xPos, Me->pPath->yPos, Unit->pPath->xPos, Unit->pPath->yPos);
+			target.x = bHammer ? Players[i]->HammerX : Players[i]->X;
+			target.y = bHammer ? Players[i]->HammerY : Players[i]->Y;
 		}
 	}
-
-	return Target;
-}
-
-POINT Unit::FindUnitBS()
-{
-	POINT ptTarget = { NULL };
-	int Dist = 50;
-	for (int i = 0; i < Players.GetSize(); i++)
-	{
-		UnitAny* pUnit = (UnitAny*)GetUnit(Players[i]->UnitId, UNIT_TYPE_PLAYER);
-
-		if (!pUnit)
-			continue;
-
-		if (TP->IsTown(pUnit))
-			continue;
-
-		if (pUnit->dwMode == PLAYER_MODE_DEAD || pUnit->dwMode == PLAYER_MODE_DEATH)
-			continue;
-
-		if (D2MATH_GetDistance(Me, pUnit->pPath->xPos, pUnit->pPath->yPos) >= Dist)
-			continue;
-
-		if (GetRelation(pUnit) & PVP_HOSTILED_YOU || GetRelation(pUnit) & PVP_HOSTILED_BY_YOU)
-		{
-			ptTarget.x = Players[i]->X;
-			ptTarget.y = Players[i]->Y;
-
-			//Dist = Math::CalcDist(Me, Unit, false);
-			Dist = D2MATH_GetDistance(Me, pUnit->pPath->xPos, pUnit->pPath->yPos);
-		}
-	}
-
-	return ptTarget;
+	return target;
 }
 
 //Finds Unit by id.

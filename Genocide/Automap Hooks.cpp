@@ -45,8 +45,8 @@ void xVector()
 		if (Unit)
 		{
 			Funcs->ScreenToAutomap(&Position, Unit->pPath->xPos, Unit->pPath->yPos);
-			D2GFX_DrawLine(Player.x, Player.y, Position.x, Position.y, 10, -1);
-			DrawPlayerBlob(Position.x, Position.y, 10);
+			D2GFX_DrawLine(Player.x, Player.y, Position.x, Position.y, DarkGreen, -1);
+			DrawPlayerBlob(Position.x, Position.y, DarkGreen);
 		}
 	}
 
@@ -69,7 +69,7 @@ void PlayerInfo()
 
 		if (Merc) {
 			TextHook(Merc->pPath->xPos - 1, Merc->pPath->yPos - 6, Gold, None, 6, "Merc");
-			DrawCross(Merc->pPath->xPos, Merc->pPath->yPos, 10, 1);
+			DrawCross(Merc->pPath->xPos, Merc->pPath->yPos, DarkGreen, 1);
 		}
 	}
 
@@ -132,10 +132,10 @@ void DrawCross(INT X, INT Y, DWORD Color, BOOL Automap)
 	}
 
 	CHAR Lines[][2] = { 0, -2, 4, -4, 8, -2, 4, 0, 8, 2, 4, 4, 0, 2, -4, 4, -8, 2, -4, 0, -8, -2, -4, -4, 0, -2 };
-	for (auto& i : Lines)
-		D2GFX_DrawLine(Position.x + i[0], Position.y + i[1], Position.x + (i+1)[0], Position.y + (i+1)[1], Color, -1);
-	//for (INT i = 0; i < ArraySize(Lines) - 1; i++)
-		//D2GFX_DrawLine(Position.x + Lines[i][0], Position.y + Lines[i][1], Position.x + Lines[i + 1][0], Position.y + Lines[i + 1][1], Color, -1);
+	//for (auto& i : Lines)
+		//D2GFX_DrawLine(Position.x + i[0], Position.y + i[1], Position.x + (i+1)[0], Position.y + (i+1)[1], Color, -1);
+	for (INT i = 0; i < ArraySize(Lines) - 1; i++)
+		D2GFX_DrawLine(Position.x + Lines[i][0], Position.y + Lines[i][1], Position.x + Lines[i + 1][0], Position.y + Lines[i + 1][1], Color, -1);
 }
 
 void FCPointer()

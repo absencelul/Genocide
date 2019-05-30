@@ -18,21 +18,21 @@ void Chicken::Rescue()
 
 	auto Life = LifeMana(true), Mana = LifeMana(false);
 
-	if (Life <= Chickens[1] && Chickens[1] > -1 || Mana <= Chickens[3] && Chickens[3] > -1)
+	if (Life <= (DWORD)Chickens[1] && Chickens[1] > -1 || Mana <= (DWORD)Chickens[3] && Chickens[3] > -1)
 		D2CLIENT_ExitGame();
 
-	if (Life <= Chickens[0] && Chickens[0] > -1 || Mana <= Chickens[2] && Chickens[2] > -1)
+	if (Life <= (DWORD)Chickens[0] && Chickens[0] > -1 || Mana <= (DWORD)Chickens[2] && Chickens[2] > -1)
 		if ((GetTickCount64() - LastTP) >= 1000)
 			if (Portal())
 				Town = true;
 
-	if (Life <= Potions[1] && Potions[1] > -1 || Mana <= Potions[3] && Potions[3] > -1)
+	if (Life <= (DWORD)Potions[1] && Potions[1] > -1 || Mana <= (DWORD)Potions[3] && Potions[3] > -1)
 		Potion::UsePot(2);
 
-	if (Life <= Potions[0] && Potions[0] > -1)
+	if (Life <= (DWORD)Potions[0] && Potions[0] > -1)
 		Potion::UsePot(0);
 
-	if (Mana <= Potions[2] && Potions[2] > -1)
+	if (Mana <= (DWORD)Potions[2] && Potions[2] > -1)
 		Potion::UsePot(1);
 }
 
@@ -45,10 +45,10 @@ bool Chicken::IsTown(UnitAny* pUnit)
 }
 
 //Grabs Life or Mana.
-int Chicken::LifeMana(bool Life)
+DWORD Chicken::LifeMana(bool Life)
 {
-	int LifePercent = Math::CalcPercent((GetUnitStat(D2CLIENT_GetPlayerUnit(), STAT_HP) >> 8), (GetUnitStat(D2CLIENT_GetPlayerUnit(), STAT_MAXHP) >> 8));
-	int ManaPercent = Math::CalcPercent((GetUnitStat(D2CLIENT_GetPlayerUnit(), STAT_MANA) >> 8), (GetUnitStat(D2CLIENT_GetPlayerUnit(), STAT_MAXMANA) >> 8));
+	DWORD LifePercent = Math::CalcPercent((GetUnitStat(D2CLIENT_GetPlayerUnit(), STAT_HP) >> 8), (GetUnitStat(D2CLIENT_GetPlayerUnit(), STAT_MAXHP) >> 8));
+	DWORD ManaPercent = Math::CalcPercent((GetUnitStat(D2CLIENT_GetPlayerUnit(), STAT_MANA) >> 8), (GetUnitStat(D2CLIENT_GetPlayerUnit(), STAT_MAXMANA) >> 8));
 
 	return Life ? LifePercent : ManaPercent;
 }

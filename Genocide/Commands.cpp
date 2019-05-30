@@ -263,6 +263,8 @@ BOOL FASTCALL Commands::GameInput(WCHAR * Text)
 	return true;
 }
 
+
+
 int Commands::StringTokenize(char * input, char separator, char ** tokenbuf, int maxtokens)
 {
 	char * p = input;

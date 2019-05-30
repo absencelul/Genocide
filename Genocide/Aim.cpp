@@ -181,21 +181,24 @@ void Aim::TestKey()
 	if (!Units->CheckReady(false, true))
 		return;
 
-	POINT ptDist = Units->FindUnitBS();
+	POINT ptDist = Units->GetUnitLocation(false);
 
-	if (D2MATH_GetDistance(Me, (WORD)ptDist.x, (WORD)ptDist.y) == 0)
+	if (D2MATH_GetDistance(Me, (WORD)ptDist.x, (WORD)ptDist.y) > 0)
+	{
+		if (Funcs->GetCurrentSkill(false) != D2S_TELEPORT)
+			SetSkill(D2S_TELEPORT, false);
+
+		AttackNearest(false);
+	}
+	else
 	{
 		if (Funcs->GetCurrentSkill(true) != D2S_BLESSEDHAMMER)
 			SetSkill(D2S_BLESSEDHAMMER, true);
+
 		if (Funcs->GetCurrentSkill(false) != D2S_CONCENTRATION)
 			SetSkill(D2S_CONCENTRATION, false);
 
 		Funcs->CastSpell(-3, 0, true);
-	}
-	else {
-		if (Funcs->GetCurrentSkill(true) != D2S_TELEPORT)
-			SetSkill(D2S_TELEPORT, true);
-		AttackNearest(true);
 	}
 }
 
@@ -208,8 +211,8 @@ void Aim::SetBlind(WORD x, WORD y, WORD xHammer, WORD yHammer, DWORD UnitId)
 
 		Players[i]->X = x + Blinds[0].at(Blindz[0]);
 		Players[i]->Y = y + Blinds[1].at(Blindz[0]);
-		Players[i]->HammerX = x;
-		Players[i]->HammerY = y;
+		Players[i]->HammerX = xHammer;
+		Players[i]->HammerY = yHammer;
 	}
 }
 

@@ -11,9 +11,10 @@ EventMessage::~EventMessage()
 
 DWORD EventMessage::EventMessageHandler(LPBYTE Packet, DWORD Length)
 {
-	switch (Packet[1]) {
+	switch (Packet[1])
+	{
 
-		// Player dropped from game
+	// Player dropped from game
 	case 0x00:
 	{
 		LPROSTERUNIT Unit = Units->FindPartyByName((LPSTR)&Packet[8]);
@@ -23,7 +24,7 @@ DWORD EventMessage::EventMessageHandler(LPBYTE Packet, DWORD Length)
 	}
 		break;
 
-		// Player joined game
+	// Player joined game
 	case 0x02:
 	{
 		LPROSTERUNIT Unit = Units->FindPartyByName((LPSTR)&Packet[8]);
@@ -51,15 +52,14 @@ DWORD EventMessage::EventMessageHandler(LPBYTE Packet, DWORD Length)
 			if (!Unit)
 				return true;
 
-			Funcs->Print(0, 5, "[%s] You killed '%s' [Level %d %s].", Funcs->TimeStamp(), Unit->szName, Unit->wLevel, Units->PlayerClass(Unit->dwClassId, false));
-			Funcs->InputConsole("You killed %s [Level %d %s]", Unit->szName, Unit->wLevel, Units->PlayerClass(Unit->dwClassId, false));
-			Funcs->InputConsole("Total kill count: %d, kills this game: %d", ++killCount, ++killCountGame);
+			Funcs->Print(0, Red, "[%s] You killed '%s' a level %d %s.", Funcs->TimeStamp(), Unit->szName, Unit->wLevel, Units->PlayerClass(Unit->dwClassId, false));
+			Funcs->InputConsole("You killed %s [Level %d %s] total kills: %d, this game: %d", Unit->szName, Unit->wLevel, Units->PlayerClass(Unit->dwClassId, false), ++killCount, ++killCountGame);
 
 			if (UseAltScreen)
 				D2CLIENT_SetUIVar(UI_ALTDOWN, 0, 0);
 
 			TakeScreen = true;
-			SStime = GetTickCount();
+			SStime = GetTickCount64();
 			return false;
 		}
 		return true;

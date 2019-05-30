@@ -11,7 +11,7 @@ public:
 	char * PlayerClass(DWORD ClassId, bool Short);
 	UnitAny* FindUnit();
 	LPROSTERUNIT FindPartyByName(LPSTR szName);
-	POINT FindUnitHammer();
+	POINT GetUnitLocation(bool bHammer);
 	POINT FindUnitBS();
 	LPLEVEL GetUnitLevel(LPUNITANY pUnit);
 	//LPPRESETUNIT FindPresetUnit(DWORD dwClassId, DWORD dwType, LPROOM2 *pRoom);

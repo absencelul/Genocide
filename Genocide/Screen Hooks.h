@@ -26,6 +26,6 @@ void DrawOutConsole();
 void DrawPlayerBlob(int xpos, int ypos, int col);
 VOID MapToScreenCoords(POINT& rMapPosition);
 VOID ScreenToAutomapRelative(POINT* pos, INT x, INT y);
-unsigned int GetOrbColor(unsigned int nMax);
+int GetOrbColor(DWORD nMax);
 void TimerBo();
 void TargetList();

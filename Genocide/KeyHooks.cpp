@@ -88,7 +88,7 @@ void KeyHooks::KeyHook()
 		if (Funcs->GetCurrentSkill(true) != D2S_BLESSEDHAMMER)
 			SetSkill(D2S_BLESSEDHAMMER, true);
 
-		WORD x = (WORD)Units->FindUnitHammer().x, y = (WORD)Units->FindUnitHammer().y;
+		WORD x = (WORD)Units->GetUnitLocation(true).x, y = (WORD)Units->GetUnitLocation(true).y;
 		POINT Position = { (long)*p_D2CLIENT_MouseX, (long)*p_D2CLIENT_MouseY };
 
 		Funcs->ScreenToAutoMap(&Position);

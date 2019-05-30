@@ -3,17 +3,18 @@
 bool Portal(LPBYTE Packet, DWORD Length)
 {
 	if (Packet[0] == 0x60)
+	{
 		if (Town && !TP->IsTown(Me))
 		{
-			LPUNITANY Unit = (LPUNITANY)GetUnit(*(LPDWORD)&Packet[3], UNIT_TYPE_OBJECT);
+			LPUNITANY Unit = (LPUNITANY)GetUnit(*(LPDWORD)& Packet[3], UNIT_TYPE_OBJECT);
 
-			if (!_stricmp(Me->pPlayerData->szName, Unit->pObjectData->szOwner))
+			if (!_stricmp(Unit->pObjectData->szOwner, Me->pPlayerData->szName))
 			{
-				Interact(UNIT_TYPE_OBJECT, *(LPDWORD)&Packet[3]);
+				Interact(UNIT_TYPE_OBJECT, *(LPDWORD)& Packet[3]);
 				Town = false;
 			}
 		}
-
+	}
 	return true;
 }
 

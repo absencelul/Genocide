@@ -85,7 +85,7 @@
     <Filter Include="[Diablo II]\Patch">
       <UniqueIdentifier>{51361841-d1b9-471a-a216-65d5a953c1f4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="[Potion]\[Vital]">
+    <Filter Include="[Vital]">
       <UniqueIdentifier>{a9741eb8-b7ca-44c3-8a7d-ba7865bc7b11}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -136,28 +136,28 @@
       <Filter>[Drawing]\[Automap]</Filter>
     </ClInclude>
     <ClInclude Include="SyncObj.h">
-      <Filter>[Potion]\[Vital]</Filter>
+      <Filter>[Vital]</Filter>
     </ClInclude>
     <ClInclude Include="Functions.h">
       <Filter>[Functions]</Filter>
     </ClInclude>
     <ClInclude Include="ArrayEx.h">
-      <Filter>[Potion]\[Vital]</Filter>
+      <Filter>[Vital]</Filter>
     </ClInclude>
     <ClInclude Include="Declarations.h">
       <Filter>[Declarations]</Filter>
     </ClInclude>
     <ClInclude Include="Struct.h">
-      <Filter>[Potion]\[Vital]</Filter>
+      <Filter>[Vital]</Filter>
     </ClInclude>
     <ClInclude Include="Pointer.h">
-      <Filter>[Potion]\[Vital]</Filter>
+      <Filter>[Vital]</Filter>
     </ClInclude>
     <ClInclude Include="CSafeVector.h">
-      <Filter>[Potion]\[Vital]</Filter>
+      <Filter>[Vital]</Filter>
     </ClInclude>
     <ClInclude Include="CMatrix.h">
-      <Filter>[Potion]\[Vital]</Filter>
+      <Filter>[Vital]</Filter>
     </ClInclude>
     <ClInclude Include="Settings.h">
       <Filter>[Settings]</Filter>
