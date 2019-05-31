@@ -202,27 +202,25 @@ void AuraSwap()
 	if (!Auras)
 		return;
 
-	else {
-		if (AllowSwap)
-		{
-			AllowSwap = false;
-
-			PrecastSkills swap[] = {
+	PrecastSkills swap[] = {
 				{ D2S_BLESSEDAIM, Funcs->GetSkill(D2S_BLESSEDAIM) },
 				{ D2S_MIGHT, Funcs->GetSkill(D2S_MIGHT) },
 				{ D2S_FANATICISM, Funcs->GetSkill(D2S_FANATICISM) },
 				{ D2S_CONCENTRATION, Funcs->GetSkill(D2S_CONCENTRATION) },
-			};
+	};
 
-			for (int i = 0; i < ArraySize(swap); i++)
-				if (swap[i].GetSkill)
-					SetSkill(swap[i].Skill, false);
+	if (AllowSwap)
+	{
+		AllowSwap = false;
 
-			if (TeleSwap)
-				SetSkill(D2S_TELEPORT, false);
+		for (auto const& auras : swap)
+			if (auras.GetSkill)
+				SetSkill(auras.Skill, false);
 
-			TeleSwap = false;
-		}
+		if (TeleSwap)
+			SetSkill(D2S_TELEPORT, false);
+
+		TeleSwap = false;
 	}
 }
 
@@ -238,13 +236,13 @@ void DrawBoxA(int x1, int y1, int x2, int y2, int nLineColor, int nBackGroundCol
 // Draws Text with a box that adjusts depending on the text size.
 void OnDrawTextBox(int x, int y, DWORD dwBGColor, BoxTrans trans, TextColor color, unsigned int font, std::string text, ...)
 {
-	vector<char> buf(4096);
+	char buf[4096];
 	va_list args;
 	va_start(args, text);
-	vsnprintf_s(&buf[0], buf.size(), _TRUNCATE, text.c_str(), args);
+	vsprintf_s(buf, 4096, text.c_str(), args);
 	va_end(args);
 	auto wStr = AnsiToUnicode(&buf[0]);
-	auto xSize = GetTextSize(text, font).x, ySize = GetTextSize(text, font).y + 5;
+	auto xSize = GetTextSize(std::string(buf), font).x + 15, ySize = GetTextSize(std::string(buf), font).y + 5;
 	auto size = D2WIN_SetTextSize(font);
 	int height[] = { 10,11,18,24,10,13,7,13,10,12,8,8,7,12 };
 

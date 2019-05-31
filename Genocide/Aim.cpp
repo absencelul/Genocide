@@ -171,9 +171,14 @@ void Aim::AttackNearest(bool Left)
 		if (Funcs->GetCurSkill(Left, Atk.SkillID))
 			return Attack(NULL, NULL, Left, Atk.Shift, true, pTarget);
 
-	for (INT i = 0; i < Players.GetSize(); i++)
+	if (Funcs->GetCurSkill(Left, D2S_TELEPORT))
+		return Attack(pTarget->pPath->xPos + Blinds[0].at(Blindz[0]), pTarget->pPath->yPos + Blinds[1].at(Blindz[0]), Left, false, false, NULL);
+	else
+		return Attack(pTarget->pPath->xPos, pTarget->pPath->yPos, Left, false, false, NULL);
+
+	/*for (INT i = 0; i < Players.GetSize(); i++)
 		if (Players[i]->UnitId == pTarget->dwUnitId)
-			return Attack(Players[i]->X, Players[i]->Y, Left, false, false, NULL);
+			return Attack(Players[i]->X, Players[i]->Y, Left, false, false, NULL);*/
 }
 
 void Aim::TestKey()
