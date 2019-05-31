@@ -152,21 +152,21 @@ void extraDraw()
 }
 
 //Draws Target List
-void TargetList()
-{
-	if (!ClientReady)
-		return;
-
-	if (!p_D2CLIENT_UIMode[UI_CUBE])
-	{
-		for (int i = 0; i < Players.GetSize(); i++)
-		{
-			CHAR PlayerInfo[100];
-			sprintf_s(PlayerInfo, "%s %s %d", Players[i]->PlayerName, Units->PlayerClass(Players[i]->ClassId, true), Players[i]->Life);
-			DrawTextX(5, 375 + (i * 15), i == CurrentTarget ? 5 : 4, 3, TP->IsTown(Me) ? -1 : 1, "%s", PlayerInfo);
-		}
-	}
-}
+//void TargetList()
+//{
+//	if (!ClientReady)
+//		return;
+//
+//	if (!p_D2CLIENT_UIMode[UI_CUBE])
+//	{
+//		for (int i = 0; i < Players.GetSize(); i++)
+//		{
+//			CHAR PlayerInfo[100];
+//			sprintf_s(PlayerInfo, "%s %s %d", Players[i]->PlayerName, Units->PlayerClass(Players[i]->ClassId, true), Players[i]->Life);
+//			DrawTextX(5, 375 + (i * 15), i == CurrentTarget ? 5 : 4, 3, TP->IsTown(Me) ? -1 : 1, "%s", PlayerInfo);
+//		}
+//	}
+//}
 
 //BO Timer
 void TimerBo()
@@ -192,15 +192,8 @@ int GetOrbColor(DWORD nMax)
 //Draws Orbs
 void DrawOutOrbs()
 {
-	//DrawBoxA(52, 528, 91, 545, 19, 0, 5);
-	//DrawBoxA(717, 528, 756, 545, 0x04, 0, 5);
-	int xSize[2];
-	xSize[0] = GetTextSize(std::to_string(TP->LifeMana(true)), 0).x + 21;
-	xSize[1] = GetTextSize(std::to_string(TP->LifeMana(false)), 0).x + 21;
-	OnDrawBox(52, xSize[0], 528, 15, 0, BTFull);
-	OnDrawBox(717, xSize[1], 528, 15, 0, BTFull);
-	TextHook(52 + 4, 528 + 3, White, None, 8, "ÿc%d%d%%", GetOrbColor(TP->LifeMana(true)), TP->LifeMana(true));
-	TextHook(717 + 4, 528 + 3, White, None, 8, "ÿc%d%d%%", GetOrbColor(TP->LifeMana(false)), TP->LifeMana(false));
+	OnDrawTextBox(43, 528, 0, BTFull, White, 8, "ÿc%d%d%%", GetOrbColor(TP->LifeMana(true)), TP->LifeMana(true));
+	OnDrawTextBox(705, 528, 0, BTFull, White, 8, "ÿc%d%d%%", GetOrbColor(TP->LifeMana(false)), TP->LifeMana(false));
 }
 
 //Aura Flash
@@ -242,13 +235,35 @@ void DrawBoxA(int x1, int y1, int x2, int y2, int nLineColor, int nBackGroundCol
 	D2GFX_DrawLine(x1, y2, x2, y2, nLineColor, -1);
 }
 
-void OnDrawBox(long x, long xSize, long y, long ySize, DWORD dwColor, BoxTrans trans)
+// Draws Text with a box that adjusts depending on the text size.
+void OnDrawTextBox(int x, int y, DWORD dwBGColor, BoxTrans trans, TextColor color, unsigned int font, std::string text, ...)
+{
+	vector<char> buf(4096);
+	va_list args;
+	va_start(args, text);
+	vsnprintf_s(&buf[0], buf.size(), _TRUNCATE, text.c_str(), args);
+	va_end(args);
+	auto wStr = AnsiToUnicode(&buf[0]);
+	auto xSize = GetTextSize(text, font).x, ySize = GetTextSize(text, font).y + 5;
+	auto size = D2WIN_SetTextSize(font);
+	int height[] = { 10,11,18,24,10,13,7,13,10,12,8,8,7,12 };
+
+	OnDrawBox(x, xSize, y, ySize, dwBGColor, trans);
+	D2WIN_DrawText(wStr, x + 8, y + height[font] + 3, color, 0);
+	D2WIN_SetTextSize(size);
+
+	delete[] wStr;
+}
+
+// Draws a blank box with a border
+void OnDrawBox(int x, int xSize, int y, int ySize, DWORD dwColor, BoxTrans trans)
 {
 	RECT pRect = { x, y, x + xSize, y + ySize };
 	D2GFX_DrawRectangle(x, y, x + xSize, y + ySize, dwColor, trans);
 	Stubs::DrawRectStub(&pRect);
 }
 
+// Gets the size of text, depending on font..
 POINT GetTextSize(string text, unsigned int font)
 {
 	unsigned int height[] = { 10,11,18,24,10,13,7,13,10,12,8,8,7,12 };
@@ -267,7 +282,7 @@ void BoxHook(unsigned int x, unsigned int y, unsigned int xSize, unsigned int yS
 	return D2GFX_DrawRectangle(x, y, x + xSize, y + ySize, dwColor, Trans);
 }
 
-//Draws text to screen
+// Draws text to screen
 void TextHook(int x, int y, TextColor color, Alignment align, unsigned int font, std::string text, ...)
 {
 	char szBuffer[4096];
@@ -299,94 +314,108 @@ void TextHook(int x, int y, TextColor color, Alignment align, unsigned int font,
 	delete[] wString;
 }
 
-void DrawTextX(int X, int Y, int Color, int Cent, int TransLvl, char* Msg, ...)
-{
-	va_list arguments;
-	va_start(arguments, Msg);
+//void DrawTextX(int X, int Y, int Color, int Cent, int TransLvl, char* Msg, ...)
+//{
+//	va_list arguments;
+//	va_start(arguments, Msg);
+//
+//	int len = _vscprintf(Msg, arguments) + 1;
+//	char * text = new char[len];
+//	vsprintf_s(text, len, Msg, arguments);
+//	va_end(arguments);
+//
+//	wchar_t* wtext = new wchar_t[len];
+//	CharToWide(text, len, wtext, len);
+//
+//	D2WIN_DrawTextEx(wtext, X, Y, Color, Cent, TransLvl);
+//
+//	delete[] text;
+//	delete[] wtext;
+//}
+//
+//void CharToWide(char* lpMultiByteStr, int cbMultiByte, wchar_t* lpWideCharStr, int cchWideChar)
+//{
+//	MultiByteToWideChar(0, 1, lpMultiByteStr, cbMultiByte, lpWideCharStr, cchWideChar);
+//	for (DWORD i = 0; i < wcslen(lpWideCharStr); i++)
+//	{
+//		if (lpWideCharStr[i] >= 0xFF && lpWideCharStr[i + 1] == L'c')
+//		{
+//			if (lpWideCharStr[i + 2] >= L'0' && lpWideCharStr[i + 2] <= L'9')
+//			{
+//				lpWideCharStr[i] = 0xFF;
+//			}
+//		}
+//
+//	}
+//}
 
-	int len = _vscprintf(Msg, arguments) + 1;
-	char * text = new char[len];
-	vsprintf_s(text, len, Msg, arguments);
-	va_end(arguments);
+//void MyMultiByteToWideChar(UINT CodePage, DWORD dwFlags, LPCSTR lpMultiByteStr, INT cbMultiByte, LPWSTR lpWideCharStr, INT cchWideChar)
+//{
+//	MultiByteToWideChar(CodePage, dwFlags, lpMultiByteStr, cbMultiByte, lpWideCharStr, cchWideChar);
+//
+//	for (DWORD i = 0; i < wcslen(lpWideCharStr); i++)
+//	{
+//		if (lpWideCharStr[i] >= 0xFF && lpWideCharStr[i + 1] == L'c')
+//		{
+//			if (lpWideCharStr[i + 2] >= L'0' && lpWideCharStr[i + 2] <= L'9')
+//			{
+//				lpWideCharStr[i] = 0xFF;
+//			}
+//		}
+//	}
+//}
 
-	wchar_t* wtext = new wchar_t[len];
-	CharToWide(text, len, wtext, len);
+//INT TextWidth(LPSTR szText)
+//{
+//	WCHAR wText[66666] = { 0 };
+//
+//	MyMultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, szText, (INT)strlen(szText), wText, (INT)strlen(szText));
+//
+//	Funcs->RemoveColorSpecs(wText);
+//
+//	return D2WIN_GetTextWidth(wText);
+//}
 
-	D2WIN_DrawTextEx(wtext, X, Y, Color, Cent, TransLvl);
-
-	delete[] text;
-	delete[] wtext;
-}
-
-void CharToWide(char* lpMultiByteStr, int cbMultiByte, wchar_t* lpWideCharStr, int cchWideChar)
-{
-	MultiByteToWideChar(0, 1, lpMultiByteStr, cbMultiByte, lpWideCharStr, cchWideChar);
-	for (DWORD i = 0; i < wcslen(lpWideCharStr); i++)
-	{
-		if (lpWideCharStr[i] >= 0xFF && lpWideCharStr[i + 1] == L'c')
-		{
-			if (lpWideCharStr[i + 2] >= L'0' && lpWideCharStr[i + 2] <= L'9')
-			{
-				lpWideCharStr[i] = 0xFF;
-			}
-		}
-
-	}
-}
-
-void MyMultiByteToWideChar(UINT CodePage, DWORD dwFlags, LPCSTR lpMultiByteStr, INT cbMultiByte, LPWSTR lpWideCharStr, INT cchWideChar)
-{
-	MultiByteToWideChar(CodePage, dwFlags, lpMultiByteStr, cbMultiByte, lpWideCharStr, cchWideChar);
-
-	for (DWORD i = 0; i < wcslen(lpWideCharStr); i++)
-	{
-		if (lpWideCharStr[i] >= 0xFF && lpWideCharStr[i + 1] == L'c')
-		{
-			if (lpWideCharStr[i + 2] >= L'0' && lpWideCharStr[i + 2] <= L'9')
-			{
-				lpWideCharStr[i] = 0xFF;
-			}
-		}
-	}
-}
-
-INT TextWidth(LPSTR szText)
-{
-	WCHAR wText[66666] = { 0 };
-
-	MyMultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, szText, (INT)strlen(szText), wText, (INT)strlen(szText));
-
-	Funcs->RemoveColorSpecs(wText);
-
-	return D2WIN_GetTextWidth(wText);
-}
-
+// Draws Console and resizes on msg length
 void DrawOutConsole()
 {
+	// declaring a temp vector of strings
 	std::vector<std::string> TempConsole;
 
+	// Pushing the msgs from consolemessage to a temp vector
 	for (unsigned int i = 0; i < ConsoleMessages.size() && i < 3; ++i)
 		if (GetTickCount64() - ConsoleMessages[ConsoleMessages.size() - (i + 1)]->Timer < ConsoleDelay)
 			TempConsole.push_back(ConsoleMessages[ConsoleMessages.size() - (i + 1)]->ConsoleString);
 
 	if (TempConsole.size())
 	{
-		long xSize = 0;
-		for (unsigned int i = 0; i < TempConsole.size(); i++)
-			xSize = GetTextSize(TempConsole[i].data(), 13).x + 21;
+		int xSize = 0;
+
+		// Set xSize to largest msg in vector
+		for (auto const& i : TempConsole)
+			// checking if text size is greater than xSize
+			if (GetTextSize(i.data(), 13).x + 21 > xSize)
+				// Setting xSize based on text size
+				xSize = GetTextSize(i.data(), 13).x + 21;
 
 		OnDrawBox(
-			xSize > 400 ?
-			185 - (((xSize + 10) - 400) / 2) : 185,
-			xSize > 400 ?
-			xSize + 10 : 385,
-			520 - (12 * (TempConsole.size() - 1)),
-			20 + (12 * (TempConsole.size() - 1)),
-			Black,
-			BTBlack);
+			xSize > 390 ? 203 - (((xSize + 10) - 400) / 2) : 203, // x
+			xSize > 390 ? xSize : 385, // xSize
+			520 - (12 * (TempConsole.size() - 1)), // y
+			20 + (12 * (TempConsole.size() - 1)), // ySize
+			Black, // Box Color
+			BTBlack); // Transparency
 
-		for (unsigned int i = 0; i < TempConsole.size(); ++i)
-			TextHook(xSize > 400 ? 190 + 4 - (((xSize + 10) - 400) / 2) : 190 + 4, 523 - (i * 12), Gold, None, 13, TempConsole[i].data());
+		for (unsigned int i = 0; i < TempConsole.size(); i++)
+		{
+			// Convert multibyte to widechar
+			auto wString = AnsiToUnicode(TempConsole[i].data());
+			unsigned int height[] = { 10,11,18,24,10,13,7,13,10,12,8,8,7,12 };
+			auto size = D2WIN_SetTextSize(13);
+			D2WIN_DrawText(wString, xSize > 400 ? 208 + 6 - (((xSize + 10) - 400) / 2) : 208 + 6, 523 - (i * 12) + height[13], Gold, 0);
+			D2WIN_SetTextSize(size);
+			//TextHook(xSize > 400 ? 208 + 6 - (((xSize + 10) - 400) / 2) : 208 + 6, 523 - (i * 12), Gold, None, 13, TempConsole[i].data());
+		}
 	}
 }
 

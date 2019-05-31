@@ -38,6 +38,20 @@ BOOL FASTCALL Commands::GameInput(WCHAR * Text)
 			Funcs->InputConsole(HideCommands ? "Commands are Off!" : "Commands are On!");
 			return false;
 		}
+
+		if (!_stricmp(Argument[0], "aa"))
+		{
+			//HideCommands = !HideCommands;
+			Funcs->InputConsole("this is a freaking test brew, wassup bor.. yo hey brew. brew");
+			return false;
+		}
+
+		if (!_stricmp(Argument[0], "ab"))
+		{
+			//HideCommands = !HideCommands;
+			Funcs->InputConsole("this is a freaking test brew, wassup bor.");
+			return false;
+		}
 	}
 		break;
 	case '.':
@@ -121,12 +135,12 @@ BOOL FASTCALL Commands::GameInput(WCHAR * Text)
 				Chickens[0] = atoi(Argument[1]);
 
 				if (Chickens[0] >= 0)
-					Funcs->InputConsole("Rescueÿc0: ÿc4Escaping to town at ÿc1%s percent.", Argument[1]);
+					Funcs->InputConsole("Rescueÿc0: ÿc4Escaping to town if health drops below ÿc1%s%%.", Argument[1]);
 			}
 			else if (Argument[1] && !_stricmp(Argument[1], "off"))
 			{
 				Chickens[0] = -1;
-				Funcs->InputConsole("Rescueÿc0: ÿc4Escaping to town is Disabled");
+				Funcs->InputConsole("Rescueÿc0: ÿc4Escaping to town for health is Disabled");
 			}
 			return false;
 		}
@@ -139,12 +153,12 @@ BOOL FASTCALL Commands::GameInput(WCHAR * Text)
 				Chickens[2] = atoi(Argument[1]);
 
 				if (Chickens[2] >= 0)
-					Funcs->InputConsole("Rescueÿc0: ÿc4Escaping to town at ÿc3%s mana", Argument[1]);
+					Funcs->InputConsole("Rescueÿc0: ÿc4Escaping to town if mana drops below ÿc3%s%%.", Argument[1]);
 			}
 			else if (Argument[1] && !_stricmp(Argument[1], "off"))
 			{
 				Chickens[2] = -1;
-				Funcs->InputConsole("Rescueÿc0: ÿc4Escaping to town is Disabled");
+				Funcs->InputConsole("Rescueÿc0: ÿc4Escaping to town for mana is Disabled");
 			}
 			return false;
 		}
@@ -157,12 +171,12 @@ BOOL FASTCALL Commands::GameInput(WCHAR * Text)
 				Chickens[1] = atoi(Argument[1]);
 
 				if (Chickens[1] >= 0)
-					Funcs->InputConsole("Rescueÿc0: ÿc4Escaping out of game at ÿc1%s percent", Argument[1]);
+					Funcs->InputConsole("Rescueÿc0: ÿc4Escaping out of game if health drops below ÿc1%s%%.", Argument[1]);
 			}
 			else if (Argument[1] && !_stricmp(Argument[1], "off"))
 			{
 				Chickens[1] = -1;
-				Funcs->InputConsole("Rescueÿc0: ÿc4Escaping out of game is Disabled");
+				Funcs->InputConsole("Rescueÿc0: ÿc4Escaping out of game for health is Disabled");
 			}
 			return false;
 		}
@@ -175,12 +189,12 @@ BOOL FASTCALL Commands::GameInput(WCHAR * Text)
 				Chickens[3] = atoi(Argument[1]);
 
 				if (Chickens[3] >= 0)
-					Funcs->InputConsole("Rescueÿc0: ÿc4Escaping out of game at ÿc3%s%% mana", Argument[1]);
+					Funcs->InputConsole("Rescueÿc0: ÿc4Escaping out of game if mana drops below ÿc3%s%%.", Argument[1]);
 			}
 			else if (Argument[1] && !_stricmp(Argument[1], "off"))
 			{
 				Chickens[3] = -1;
-				Funcs->InputConsole("Rescueÿc0: ÿc4Escaping out of game is Disabled");
+				Funcs->InputConsole("Rescueÿc0: ÿc4Escaping out of game for mana Disabled");
 			}
 			return false;
 		}
@@ -193,7 +207,7 @@ BOOL FASTCALL Commands::GameInput(WCHAR * Text)
 				Potions[0] = atoi(Argument[1]);
 
 				if (Potions[0] >= 0)
-					Funcs->InputConsole("AutoPotÿc0: ÿc4Drinking health potions at ÿc1%s", Argument[1]);
+					Funcs->InputConsole("AutoPotÿc0: ÿc4Drinking a health potion if health drops below ÿc1%s%%.", Argument[1]);
 			}
 			else if (Argument[1] && !_stricmp(Argument[1], "off"))
 			{
@@ -211,7 +225,7 @@ BOOL FASTCALL Commands::GameInput(WCHAR * Text)
 				Potions[2] = atoi(Argument[1]);
 
 				if (Potions[2] >= 0)
-					Funcs->InputConsole("AutoPotÿc0: ÿc4Drinking mana potions at ÿc3%s mana", Argument[1]);
+					Funcs->InputConsole("AutoPotÿc0: ÿc4Drinking a mana potion if mana drops below ÿc3%s%%.", Argument[1]);
 			}
 			else if (Argument[1] && !_stricmp(Argument[1], "off"))
 			{
@@ -229,7 +243,7 @@ BOOL FASTCALL Commands::GameInput(WCHAR * Text)
 				Potions[1] = atoi(Argument[1]);
 
 				if (Potions[1] >= 0)
-					Funcs->InputConsole("AutoPotÿc0: ÿc4Drinking rejuvenation potions at ÿc1%s life.", Argument[1]);
+					Funcs->InputConsole("AutoPotÿc0: ÿc4Drinking a rejuvenation potion if health drops below ÿc1%s%%.", Argument[1]);
 			}
 			else if (Argument[1] && !_stricmp(Argument[1], "off"))
 			{
@@ -247,7 +261,7 @@ BOOL FASTCALL Commands::GameInput(WCHAR * Text)
 				Potions[3] = atoi(Argument[1]);
 
 				if (Potions[3] >= 0)
-					Funcs->InputConsole("AutoPotÿc0: ÿc4Drinking rejuvenation potions at ÿc3%s mana", Argument[1]);
+					Funcs->InputConsole("AutoPotÿc0: ÿc4Drinking a rejuvenation potion if mana drops below ÿc3%s%%.", Argument[1]);
 				else if (Argument[1] && !_stricmp(Argument[1], "off"))
 				{
 					Potions[3] = -1;
