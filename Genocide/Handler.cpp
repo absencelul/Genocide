@@ -5,7 +5,7 @@ void OnGameLoop()
 	if (!ClientReady)
 		GameStart();
 
-	AA->EnumeratePlayers();
+	EnumeratePlayers();
 
 	if (!p_D2CLIENT_UIMode[UI_INVENTORY] || p_D2CLIENT_UIMode[UI_TRADE])
 	{

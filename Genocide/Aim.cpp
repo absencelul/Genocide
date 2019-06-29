@@ -32,16 +32,7 @@ PACKETATTACK Attacks[] =
 	{ D2S_VOLCANO,false }
 };
 
-Aim::Aim()
-{
-}
-
-
-Aim::~Aim()
-{
-}
-
-void Aim::EnumeratePlayers()
+void EnumeratePlayers()
 {
 	CArrayEx<PTARGETINFO, PTARGETINFO> TempInfo;
 	INT nNewTarget = 0;
@@ -114,10 +105,9 @@ void Aim::EnumeratePlayers()
 
 	CurrentTarget = nNewTarget;
 	Players.Unlock();
-
 }
 
-void Aim::Attack(DWORD x, DWORD y, bool Left, bool Shift, bool attackUnit, LPUNITANY Unit)
+void Attack(DWORD x, DWORD y, bool Left, bool Shift, bool attackUnit, LPUNITANY Unit)
 {
 	if (!Units->CheckReady(false, true))
 		return;
@@ -139,7 +129,7 @@ void Aim::Attack(DWORD x, DWORD y, bool Left, bool Shift, bool attackUnit, LPUNI
 	Stubs::D2CLIENT_Attack(&Attack, attackUnit);
 }
 
-void Aim::AttackTarget(bool Left)
+void AttackTarget(bool Left)
 {
 	if (!Units->CheckReady(true, true))
 		return;
@@ -157,7 +147,7 @@ void Aim::AttackTarget(bool Left)
 			return Attack(Players[i]->X, Players[i]->Y, Left, false, false, NULL);
 }
 
-void Aim::AttackNearest(bool Left)
+void AttackNearest(bool Left)
 {
 	if (!Units->CheckReady(false, true))
 		return;
@@ -171,17 +161,12 @@ void Aim::AttackNearest(bool Left)
 		if (Funcs->GetCurSkill(Left, Atk.SkillID))
 			return Attack(NULL, NULL, Left, Atk.Shift, true, pTarget);
 
-	if (Funcs->GetCurSkill(Left, D2S_TELEPORT))
-		return Attack(pTarget->pPath->xPos + Blinds[0].at(Blindz[0]), pTarget->pPath->yPos + Blinds[1].at(Blindz[0]), Left, false, false, NULL);
-	else
-		return Attack(pTarget->pPath->xPos, pTarget->pPath->yPos, Left, false, false, NULL);
-
-	/*for (INT i = 0; i < Players.GetSize(); i++)
+	for (auto i = 0; i < Players.GetSize(); i++)
 		if (Players[i]->UnitId == pTarget->dwUnitId)
-			return Attack(Players[i]->X, Players[i]->Y, Left, false, false, NULL);*/
+			return Attack(Players[i]->X, Players[i]->Y, Left, false, false, NULL);
 }
 
-void Aim::TestKey()
+void TestKey()
 {
 	if (!Units->CheckReady(false, true))
 		return;
@@ -207,7 +192,7 @@ void Aim::TestKey()
 	}
 }
 
-void Aim::SetBlind(WORD x, WORD y, WORD xHammer, WORD yHammer, DWORD UnitId)
+void SetBlind(WORD x, WORD y, WORD xHammer, WORD yHammer, DWORD UnitId)
 {
 	for (int i = 0; i < Players.GetSize(); i++)
 	{
@@ -221,7 +206,7 @@ void Aim::SetBlind(WORD x, WORD y, WORD xHammer, WORD yHammer, DWORD UnitId)
 	}
 }
 
-void Aim::PrevTar()
+void PrevTar()
 {
 	if (Players.IsEmpty())
 		return;
@@ -232,7 +217,7 @@ void Aim::PrevTar()
 		CurrentTarget--;
 }
 
-void Aim::NextTar()
+void NextTar()
 {
 	if (Players.IsEmpty())
 		return;

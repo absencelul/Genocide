@@ -4,7 +4,6 @@ Unit::Unit()
 {
 }
 
-
 Unit::~Unit()
 {
 }
@@ -13,7 +12,7 @@ Unit::~Unit()
 bool Unit::CheckReady(bool TownCheck, bool CheckCasting)
 {
 	if (TownCheck)
-		if (TP->IsTown(Me))
+		if (IsTown(Me))
 			return false;
 
 	if (!ClientReady)
@@ -62,7 +61,7 @@ UnitAny* Unit::FindUnit()
 
 		if (pTarget->dwMode == PLAYER_MODE_DEAD || pTarget->dwMode == PLAYER_MODE_DEATH) continue;
 
-		if (TP->IsTown(pTarget)) continue;
+		if (IsTown(pTarget)) continue;
 
 		int tDist = D2MATH_GetDistance(pMe, pTarget->pPath->xPos, pTarget->pPath->yPos);
 
@@ -83,14 +82,14 @@ POINT Unit::GetUnitLocation(bool bHammer)
 
 	for (int i = 0; i < Players.GetSize(); i++)
 	{
-		UnitAny * pTarget = D2CLIENT_FindServerSideUnit(Players[i]->UnitId, UNIT_TYPE_PLAYER);
+		UnitAny* pTarget = D2CLIENT_FindServerSideUnit(Players[i]->UnitId, UNIT_TYPE_PLAYER);
 
 		if (!pTarget) continue;
 
 		if (pTarget->dwMode == PLAYER_MODE_DEAD || pTarget->dwMode == PLAYER_MODE_DEATH) continue;
 
 		if (pTarget->dwMode == PLAYER_MODE_WALK_OUTTOWN || pTarget->dwMode == PLAYER_MODE_RUN)
-			AA->SetBlind(pTarget->pPath->xTarget, pTarget->pPath->yTarget, pTarget->pPath->xTarget, pTarget->pPath->yTarget, pTarget->dwUnitId);
+			SetBlind(pTarget->pPath->xTarget, pTarget->pPath->yTarget, pTarget->pPath->xTarget, pTarget->pPath->yTarget, pTarget->dwUnitId);
 
 		if (D2MATH_GetDistance(D2CLIENT_GetPlayerUnit(), pTarget->pPath->xPos, pTarget->pPath->yPos) >= dist) continue;
 
@@ -116,7 +115,6 @@ LPROSTERUNIT Unit::FindPartyById(DWORD dwUnitId)
 //Finds Unit by name.
 LPROSTERUNIT Unit::FindPartyByName(LPSTR szName)
 {
-
 	for (LPROSTERUNIT pUnit = *p_D2CLIENT_PlayerUnitList; pUnit; pUnit = pUnit->pNext)
 		if (!_stricmp(szName, pUnit->szName))
 			return pUnit;
@@ -173,7 +171,7 @@ int Unit::GetRelation(UnitAny* unit)
 }
 
 //Gets Player class based upon id short class or long class
-char * Unit::PlayerClass(DWORD ClassId, bool Short)
+char* Unit::PlayerClass(DWORD ClassId, bool Short)
 {
 	switch (ClassId)
 	{

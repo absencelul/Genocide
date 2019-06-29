@@ -22,11 +22,9 @@ VAR(CHAR, LocalTime[100])
 VAR(int, colorText)
 VAR(bool, showStatScreen)
 //Classes
-VAR(Unit *, Units)
-VAR(Aim *, AA)
-VAR(Functions *, Funcs)
-VAR(Chicken *, TP)
-VAR(EventMessage *, eMSG)
+VAR(Unit*, Units)
+VAR(Functions*, Funcs)
+VAR(EventMessage*, eMSG)
 //VAR(MoveItems *, Items)
 
 VAR(CRITICAL_SECTION, EX_CRITSECT)
@@ -47,9 +45,9 @@ VAR(int, OneKey)
 
 //AuraSwap
 VAR(INT, AuraFlash)
-VAR(bool,Auras)
-VAR(bool,AllowSwap)
-VAR(bool,TeleSwap)
+VAR(bool, Auras)
+VAR(bool, AllowSwap)
+VAR(bool, TeleSwap)
 
 //Blinds
 VAR(vector<DWORD>, Blinds[2])
@@ -57,13 +55,13 @@ VAR(INT, Blindz[2])
 
 //Chicken and Potion Settings
 /*tl=0,el=1,tm=2,em=3*/
-VAR(int,Chickens[4])
+VAR(int, Chickens[4])
 /*pl=0,rl=1,pm=2,rm=3*/
-VAR(int,Potions[4])
-VAR(ULONGLONG,LastTP)
-VAR(bool,Town)
-VAR(DWORD,BoTimer)
-VAR(ULONGLONG,BoTime)
+VAR(int, Potions[4])
+VAR(ULONGLONG, LastTP)
+VAR(bool, Town)
+VAR(DWORD, BoTimer)
+VAR(ULONGLONG, BoTime)
 //VAR(DWORD, PORTALID)
 //RESCUE
 VAR(bool, RescueWhen[6])
@@ -81,7 +79,7 @@ VAR(ULONGLONG, ConsoleDelay)
 VAR(LPUNITANY, ViewingUnit)
 
 //MapHack
-VAR(Reveal *, Revealz)
+VAR(Reveal*, Revealz)
 VAR(BOOL, AutoRevealAutomap)
 VAR(BOOL, ShrineImages)
 VAR(BOOL, MiniShrine)
@@ -102,19 +100,19 @@ VAR(INT, EnemyMissile)
 
 //MISC
 /*Open TP/FastTown*/
-VAR(int,TownKeys[2])
+VAR(int, TownKeys[2])
 /*RemoveTPDelay/BlockPortal/RemoveAnim*/
-VAR(bool,PortalStates[3])
+VAR(bool, PortalStates[3])
 KEY(Prebuff)
 KEY(ViewPlayerGear)
 KEY(TeleWalkHostile)
 KEY(TeleWalk)
-VAR(bool,UseAltScreen)
+VAR(bool, UseAltScreen)
 VAR(bool, ScreenShot)
 VAR(bool, TakeScreen)
 VAR(DWORD, SSDelay)
 VAR(ULONGLONG, SStime)
-VAR(int,Reload)
+VAR(int, Reload)
 VAR(int, StashCube[2])
 VAR(int, killCount)
 VAR(int, killCountGame)

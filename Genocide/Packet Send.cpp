@@ -38,8 +38,8 @@ bool STDCALL OnGamePacketSent(DWORD Length, DWORD _1, BYTE *Packet)
 	{
 		LPUNITANY Unit = (LPUNITANY)GetUnit(*(LPDWORD)&Packet[5], UNIT_TYPE_OBJECT);
 
-		if (PortalStates[1] && Unit && Unit->dwTxtFileNo == 0x3B && TP->IsTown(Me))
-			if (TP->LifeMana(true) > 0 && TP->LifeMana(true) <= Chickens[0])
+		if (PortalStates[1] && Unit && Unit->dwTxtFileNo == 0x3B && IsTown(Me))
+			if (LifeMana(true) > 0 && LifeMana(true) <= Chickens[0])
 				return FALSE;
 	}
 	break;

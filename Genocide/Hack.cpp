@@ -3,7 +3,7 @@
 #include "Hack.h"
 #include "Pointer.h"
 #define LeftClickAllSkills    0xEB
-Patch* patches[] = {
+Patch * patches[] = {
 	new Patch(Call, 0x96DED, (int)Stubs::ChickenSTUB, 5),
 	new Patch(Jmp, 0x5ADB3, (int)Stubs::DrawAutomapSTUB, 5),
 	new Patch(Jmp, 0x572D8, (int)Stubs::DrawInterfaceSTUB, 6),
@@ -88,9 +88,7 @@ void Inject::InitializeClass(int Initialize)
 	case 0:
 		Revealz = new Reveal;
 		Units = new Unit;
-		AA = new Aim;
 		Funcs = new Functions;
-		TP = new Chicken;
 		eMSG = new EventMessage;
 		//Items = new MoveItems;
 		break;
@@ -98,9 +96,7 @@ void Inject::InitializeClass(int Initialize)
 	case 1:
 		delete Revealz;
 		delete Units;
-		delete AA;
 		delete Funcs;
-		delete TP;
 		delete eMSG;
 		//delete Items;
 		break;

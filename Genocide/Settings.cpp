@@ -4,7 +4,6 @@ Settings::Settings()
 {
 }
 
-
 Settings::~Settings()
 {
 }
@@ -37,7 +36,7 @@ void Settings::LoadConfig()
 		{ "POTION", "Potions", INTEGER, &Potions },
 
 		{ "MISC", "Reload", INTEGER, &Reload },
-		{ "MISC", "Open Storage", INTEGER, &StashCube },
+		{ "MISC", "OpenBuffers", INTEGER, &StashCube },
 		{ "MISC", "Portal States", BOOLEAN, &PortalStates },
 		{ "MISC", "Town Hotkeys", INTEGER, &TownKeys },
 		{ "MISC", "Prebuff", INTEGER, &Prebuff },
@@ -54,15 +53,13 @@ void Settings::LoadConfig()
 
 		{ "REVEAL", "MapHack", BOOLEAN, &AutoRevealAutomap },
 		{ "REVEAL", "Shrine Images", BOOLEAN, &ShrineImages },
-		
+
 		{ "REVEAL", "Show Missiles", BOOLEAN, &ShowMissiles },
 		{ "REVEAL", "My Missile Color", INTEGER, &MyMissile },
 		{ "REVEAL", "Neutral Missile Color", INTEGER, &NeutralMissile },
 		{ "REVEAL", "Friend Missile Color", INTEGER, &FriendMissile },
 		{ "REVEAL", "Enemy Missile Color", INTEGER, &EnemyMissile }
-
 	};
-
 
 	for (INT i = 0; i < ArraySize(C); i++)
 	{
@@ -97,7 +94,6 @@ void Settings::Config()
 		{ "AUTO-AIM", "Blinds", BLIND, NULL },
 	};
 
-
 	for (INT i = 0; i < ArraySize(C); i++)
 	{
 		GetPrivateProfileStringA(C[i].Section, C[i].Name, NULL, Returned, sizeof(Returned), File);
@@ -115,7 +111,6 @@ void Settings::Config()
 
 void Settings::GetModuleDirectory()
 {
-
 	GetModuleFileNameA(_dll, FilePath, MAX_PATH);
 
 	PathRemoveFileSpecA(FilePath);

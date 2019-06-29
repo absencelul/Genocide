@@ -163,7 +163,7 @@ void extraDraw()
 //		{
 //			CHAR PlayerInfo[100];
 //			sprintf_s(PlayerInfo, "%s %s %d", Players[i]->PlayerName, Units->PlayerClass(Players[i]->ClassId, true), Players[i]->Life);
-//			DrawTextX(5, 375 + (i * 15), i == CurrentTarget ? 5 : 4, 3, TP->IsTown(Me) ? -1 : 1, "%s", PlayerInfo);
+//			DrawTextX(5, 375 + (i * 15), i == CurrentTarget ? 5 : 4, 3, IsTown(Me) ? -1 : 1, "%s", PlayerInfo);
 //		}
 //	}
 //}
@@ -192,8 +192,8 @@ int GetOrbColor(DWORD nMax)
 //Draws Orbs
 void DrawOutOrbs()
 {
-	OnDrawTextBox(43, 528, 0, BTFull, White, 8, "ÿc%d%d%%", GetOrbColor(TP->LifeMana(true)), TP->LifeMana(true));
-	OnDrawTextBox(705, 528, 0, BTFull, White, 8, "ÿc%d%d%%", GetOrbColor(TP->LifeMana(false)), TP->LifeMana(false));
+	OnDrawTextBox(43, 528, 0, BTFull, White, 8, "ÿc%d%d%%", GetOrbColor(LifeMana(true)), LifeMana(true));
+	OnDrawTextBox(705, 528, 0, BTFull, White, 8, "ÿc%d%d%%", GetOrbColor(LifeMana(false)), LifeMana(false));
 }
 
 //Aura Flash

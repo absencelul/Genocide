@@ -4,7 +4,6 @@ Commands::Commands()
 {
 }
 
-
 Commands::~Commands()
 {
 }
@@ -15,8 +14,7 @@ bool is_number(const std::string& s)
 		s.end(), [](char c) { return !std::isdigit(c); }) == s.end();
 }
 
-
-BOOL FASTCALL Commands::GameInput(WCHAR * Text)
+BOOL FASTCALL Commands::GameInput(WCHAR* Text)
 {
 	char szBuffer[255];
 	char* Argument[32];
@@ -53,7 +51,7 @@ BOOL FASTCALL Commands::GameInput(WCHAR * Text)
 			return false;
 		}
 	}
-		break;
+	break;
 	case '.':
 	{
 		// Reload Configuration
@@ -75,7 +73,7 @@ BOOL FASTCALL Commands::GameInput(WCHAR * Text)
 		// Next target
 		if (!_stricmp(Argument[0], "next"))
 		{
-			AA->NextTar();
+			NextTar();
 			Input = GetTickCount64();
 			return false;
 		}
@@ -83,7 +81,7 @@ BOOL FASTCALL Commands::GameInput(WCHAR * Text)
 		// Previous target
 		if (!_stricmp(Argument[0], "prev"))
 		{
-			AA->PrevTar();
+			PrevTar();
 			Input = GetTickCount64();
 			return false;
 		}
@@ -271,23 +269,21 @@ BOOL FASTCALL Commands::GameInput(WCHAR * Text)
 			}
 		}
 	}
-		break;
+	break;
 	}
 
 	return true;
 }
 
-
-
-int Commands::StringTokenize(char * input, char separator, char ** tokenbuf, int maxtokens)
+int Commands::StringTokenize(char* input, char separator, char** tokenbuf, int maxtokens)
 {
-	char * p = input;
+	char* p = input;
 	int i = 0;
 	do {
 		tokenbuf[i] = p;
 		p = strchr(p, separator);
 		if (p)
-			*(p++) = 0;
+			* (p++) = 0;
 	} while (p && ++i < maxtokens);
 	return ++i;
 }
@@ -334,7 +330,7 @@ bool Commands::Speak(LPSTR lpMessage, ...)
 		memset(Packet, 0, (int)strlen(szBuffer) + 6);
 
 		Packet[0] = 0x15;
-		*(LPWORD)&Packet[1] = 1;
+		*(LPWORD)& Packet[1] = 1;
 		memcpy(Packet + 3, szBuffer, (int)strlen(szBuffer));
 
 		D2NET_SendPacket((int)strlen(szBuffer) + 6, 1, Packet);

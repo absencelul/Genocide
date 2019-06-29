@@ -5,7 +5,6 @@ KeyHooks::KeyHooks()
 {
 }
 
-
 KeyHooks::~KeyHooks()
 {
 }
@@ -46,7 +45,6 @@ DWORD WINAPI KeyHooks::PrecastThread(LPVOID Parameter)
 
 			SleepEx(150, true);
 
-
 			AttackStruct Attack;
 
 			Attack.dwAttackType = 0x66;
@@ -79,7 +77,6 @@ DWORD WINAPI KeyHooks::PrecastThread(LPVOID Parameter)
 
 void KeyHooks::KeyHook()
 {
-
 	if (KeyDown(hammer[0]))
 	{
 		if (Funcs->GetCurrentSkill(false) != D2S_CONCENTRATION)
@@ -89,13 +86,12 @@ void KeyHooks::KeyHook()
 			SetSkill(D2S_BLESSEDHAMMER, true);
 
 		WORD x = (WORD)Units->GetUnitLocation(true).x, y = (WORD)Units->GetUnitLocation(true).y;
-		POINT Position = { (long)*p_D2CLIENT_MouseX, (long)*p_D2CLIENT_MouseY };
+		POINT Position = { (long)* p_D2CLIENT_MouseX, (long)* p_D2CLIENT_MouseY };
 
 		Funcs->ScreenToAutoMap(&Position);
 
 		switch (hammer[2])
 		{
-
 		case 0:
 			if (x != 0 && x - Me->pPath->xPos < 40 && y != 0 && y - Me->pPath->yPos < 40)
 				return Funcs->CastSpell(x, y, false);
@@ -125,12 +121,12 @@ void KeyHooks::KeyHook()
 		switch (AutoAim[3])
 		{
 		case 0:
-				return AA->AttackNearest(false);
+			return AttackNearest(false);
 			break;
 
 		case 1:
 			if (Units->FindUnit())
-				return AA->AttackTarget(false);
+				return AttackTarget(false);
 			break;
 		}
 	}
@@ -140,19 +136,19 @@ void KeyHooks::KeyHook()
 		switch (AutoAim[3])
 		{
 		case 0:
-				return AA->AttackNearest(true);
+			return AttackNearest(true);
 			break;
 
 		case 1:
 			if (Units->FindUnit())
-				return AA->AttackTarget(true);
+				return AttackTarget(true);
 			break;
 		}
 	}
 
 	if (KeyDown(OneKey))
 	{
-		AA->TestKey();
+		TestKey();
 	}
 }
 
@@ -169,7 +165,8 @@ void __fastcall KeyHooks::OnGameKeyDown(byte Key, byte Repeat)
 		else
 			Blindz[0] = 0;
 
-		Funcs->Print(0, 4, "Setting Blindspot - (ÿc0%dÿc4) [ÿc0%dÿc4,ÿc0%dÿc4]", Blindz[0], Blinds[0].at(Blindz[0]), Blinds[1].at(Blindz[0]));
+		Funcs->InputConsole("Setting Blindspot - (ÿc0%dÿc4) [ÿc0%dÿc4,ÿc0%dÿc4]", Blindz[0], Blinds[0].at(Blindz[0]), Blinds[1].at(Blindz[0]));
+		//Funcs->Print(0, 4, "Setting Blindspot - (ÿc0%dÿc4) [ÿc0%dÿc4,ÿc0%dÿc4]", Blindz[0], Blinds[0].at(Blindz[0]), Blinds[1].at(Blindz[0]));
 		//Items->MoveBufferToBuffer(STORAGE_STASH, STORAGE_INVENTORY);
 	}
 
@@ -212,18 +209,18 @@ void __fastcall KeyHooks::OnGameKeyDown(byte Key, byte Repeat)
 	//town
 	if (Key == TownKeys[1])
 	{
-		if (TP->Portal())
+		if (Portal())
 			Town = true;
 	}
 	//opentp
 	if (Key == TownKeys[0])
 	{
-		TP->Portal();
+		Portal();
 	}
 
 	if (Key == TeleWalk)
 	{
-		POINT Position = { (long)*p_D2CLIENT_MouseX, (long)*p_D2CLIENT_MouseY };
+		POINT Position = { (long)* p_D2CLIENT_MouseX, (long)* p_D2CLIENT_MouseY };
 
 		Funcs->ScreenToAutoMap(&Position);
 
@@ -250,7 +247,7 @@ void __fastcall KeyHooks::OnGameKeyDown(byte Key, byte Repeat)
 			if (!pTarget)
 				continue;
 
-			if (TP->IsTown(pMe))
+			if (IsTown(pMe))
 				if (Units->GetRelation(pTarget) != 4)
 					HostilePlayer(pTarget->dwUnitId);
 		}
@@ -259,8 +256,7 @@ void __fastcall KeyHooks::OnGameKeyDown(byte Key, byte Repeat)
 
 		if (Players.GetSize() != NULL && Target)
 		{
-
-			if (TP->IsTown(Me) && Target)
+			if (IsTown(Me) && Target)
 			{
 				HostilePlayer(Players[CurrentTarget]->UnitId);
 				Teleportz(Target->pPath->xPos + Blinds[0].at(Blindz[0]), Target->pPath->yPos + Blinds[1].at(Blindz[0]));
@@ -304,12 +300,12 @@ void __fastcall KeyHooks::OnGameKeyDown(byte Key, byte Repeat)
 
 	if (Key == TargetKeys[1])
 	{
-		AA->NextTar();
+		NextTar();
 	}
 
 	if (Key == TargetKeys[0])
 	{
-		AA->PrevTar();
+		PrevTar();
 	}
 
 	if (Key == Reload)
@@ -380,17 +376,17 @@ LONG __stdcall KeyHooks::WindowProc(HWND HWnd, UINT MSG, WPARAM WParam, LPARAM L
 		SendMessageA(D2GFX_GetHwnd(), WM_RBUTTONUP, NULL, LOWORD((*p_D2CLIENT_MouseX)) | HIWORD((*p_D2CLIENT_MouseY)));
 		break;
 
-	/*case WM_RBUTTONDOWN:
-		if (Funcs->GetCurSkill(true, D2S_TELEPORT) && !TP->IsTown(Me))
-		{
-			SwapMouseButton(true);
-			keybd_event(VK_SHIFT, 0, 0, 0);
-		}
-		break;
+		/*case WM_RBUTTONDOWN:
+			if (Funcs->GetCurSkill(true, D2S_TELEPORT) && !IsTown(Me))
+			{
+				SwapMouseButton(true);
+				keybd_event(VK_SHIFT, 0, 0, 0);
+			}
+			break;
 
-	case WM_RBUTTONUP:
-		SwapMouseButton(false);
-		keybd_event(VK_SHIFT, 0, KEYEVENTF_KEYUP, 0);*/
+		case WM_RBUTTONUP:
+			SwapMouseButton(false);
+			keybd_event(VK_SHIFT, 0, KEYEVENTF_KEYUP, 0);*/
 	}
 
 	return (LONG)CallWindowProcA(OldWndProc, HWnd, MSG, WParam, LParam);

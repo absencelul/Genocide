@@ -2,7 +2,7 @@ typedef struct PacketedAttack_t
 {
 	WORD SkillID;
 	bool Shift;
-} PACKETATTACK, *PPACKETATTACK;
+} PACKETATTACK, * PPACKETATTACK;
 
 typedef struct TargetInfo_t
 {
@@ -16,20 +16,13 @@ typedef struct TargetInfo_t
 	DWORD HammerX;
 	DWORD HammerY;
 	DWORD Resists[6];
-} TARGETINFO, *PTARGETINFO;
+} TARGETINFO, * PTARGETINFO;
 
-class Aim
-{
-public:
-	Aim();
-	virtual ~Aim();
-	void EnumeratePlayers();
-	void Attack(DWORD x, DWORD y, bool Left, bool Shift, bool attackUnit, LPUNITANY Unit);
-	void AttackTarget(bool Left);
-	void AttackNearest(bool Left);
-	void TestKey();
-	void SetBlind(WORD x, WORD y, WORD xHammer, WORD yHammer, DWORD UnitId);
-	void PrevTar();
-	void NextTar();
-};
-
+void EnumeratePlayers();
+void Attack(DWORD x, DWORD y, bool Left, bool Shift, bool attackUnit, LPUNITANY Unit);
+void AttackTarget(bool Left);
+void AttackNearest(bool Left);
+void TestKey();
+void SetBlind(WORD x, WORD y, WORD xHammer, WORD yHammer, DWORD UnitId);
+void PrevTar();
+void NextTar();

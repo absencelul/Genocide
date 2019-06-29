@@ -1,18 +1,8 @@
 #include "Hack.h"
 
-Chicken::Chicken()
-{
-}
-
-
-Chicken::~Chicken()
-{
-}
-
 //Checks Life // Mana and reacts accordingly.
-void Chicken::Rescue()
+void Rescue()
 {
-
 	if (!Units->CheckReady(true, false))
 		return;
 
@@ -37,7 +27,7 @@ void Chicken::Rescue()
 }
 
 //Checks if player is in town.
-bool Chicken::IsTown(UnitAny* pUnit)
+bool IsTown(UnitAny* pUnit)
 {
 	if (!pUnit) return false;
 	if (D2COMMON_GetTownLevel(pUnit->dwAct) == D2COMMON_GetLevelNoByRoom(pUnit->pPath->pRoom1)) return true;
@@ -45,7 +35,7 @@ bool Chicken::IsTown(UnitAny* pUnit)
 }
 
 //Grabs Life or Mana.
-DWORD Chicken::LifeMana(bool Life)
+DWORD LifeMana(bool Life)
 {
 	DWORD LifePercent = Math::CalcPercent((GetUnitStat(D2CLIENT_GetPlayerUnit(), STAT_HP) >> 8), (GetUnitStat(D2CLIENT_GetPlayerUnit(), STAT_MAXHP) >> 8));
 	DWORD ManaPercent = Math::CalcPercent((GetUnitStat(D2CLIENT_GetPlayerUnit(), STAT_MANA) >> 8), (GetUnitStat(D2CLIENT_GetPlayerUnit(), STAT_MAXMANA) >> 8));
@@ -54,7 +44,7 @@ DWORD Chicken::LifeMana(bool Life)
 }
 
 //Checks for portal book.
-bool Chicken::Portal()
+bool Portal()
 {
 	if (IsTown(D2CLIENT_GetPlayerUnit())) return false;
 
@@ -69,7 +59,6 @@ bool Chicken::Portal()
 
 	if (!_Book || GetUnitStat(_Book, STAT_AMMOQUANTITY) == 0)
 		_Book = Funcs->FindItem(518, STORAGE_INVENTORY);
-
 
 	if (_Book)
 		UseItem(_Book);

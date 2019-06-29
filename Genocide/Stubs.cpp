@@ -24,9 +24,9 @@ void __declspec(naked) Stubs::OnGameLoopSTUB()
 
 DWORD __stdcall Stubs::ChickenSTUB(UnitAny* pUnit, DWORD dwStat, DWORD dwStat2)
 {
-	//Print(0, 4, "%d ms, Life: %d%% - Mana: %d%%", (GetTickCount() - TestDelay), TP->LifeMana(true), TP->LifeMana(false));
+	//Print(0, 4, "%d ms, Life: %d%% - Mana: %d%%", (GetTickCount() - TestDelay), LifeMana(true), LifeMana(false));
 	//TestDelay = GetTickCount();
-	TP->Rescue();
+	Rescue();
 	return D2COMMON_GetUnitStat(pUnit, dwStat, dwStat2);
 }
 

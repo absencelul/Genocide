@@ -49,14 +49,11 @@ void xVector()
 			DrawPlayerBlob(Position.x, Position.y, DarkGreen);
 		}
 	}
-
 }
 
 void PlayerInfo()
 {
-
 	for (int i = 0; i < Players.GetSize(); i++) {
-
 		LPUNITANY Unit = (LPUNITANY)GetUnit(Players[i]->UnitId, UNIT_TYPE_PLAYER);
 
 		if (!Unit)
@@ -74,7 +71,6 @@ void PlayerInfo()
 	}
 
 	for (int i = 0; i < Players.GetSize(); i++) {
-
 		LPUNITANY Unit = (LPUNITANY)GetUnit(Players[i]->UnitId, UNIT_TYPE_PLAYER);
 
 		if (!Unit)
@@ -90,12 +86,11 @@ void PlayerInfo()
 			Color = Orange;
 
 		if (Unit && Players[i]->Life >= 1)
-		TextHook(Position.x + 4, Position.y - 5, Color, None, 6, "<%d%%>", Players[i]->Life);
+			TextHook(Position.x + 4, Position.y - 5, Color, None, 6, "<%d%%>", Players[i]->Life);
 		if (Unit && !GetUnitState(Unit, AFFECT_BATTLEORDERS))
 			TextHook(Position.x + 11, Position.y + 4, Orange, None, 6, "NO BO");
 		else if (Unit && GetUnitState(Unit, AFFECT_BATTLEORDERS) && GetUnitState(Unit, AFFECT_SHOUT))
 			TextHook(Position.x + 11, Position.y + 4, Orange, None, 6, "BARB BO");
-
 	}
 
 	for (LPROOM1 pRoom1 = Me->pAct->pRoom1; pRoom1; pRoom1 = pRoom1->pRoomNext)
@@ -110,13 +105,9 @@ void PlayerInfo()
 						TextHook(pUnit->pObjectPath->dwPosX + 6, pUnit->pObjectPath->dwPosY + 9, Green, Center, 6, "%d%%", Players[i]->Life);
 					}
 				}
-
 			}
-
 		}
-
 	}
-
 }
 
 void DrawCross(INT X, INT Y, DWORD Color, BOOL Automap)
@@ -140,7 +131,7 @@ void DrawCross(INT X, INT Y, DWORD Color, BOOL Automap)
 
 void FCPointer()
 {
-	POINT Mouse = { *(long*)&p_D2CLIENT_MouseX, *(long*)&p_D2CLIENT_MouseY };
+	POINT Mouse = { *(long*)& p_D2CLIENT_MouseX, *(long*)& p_D2CLIENT_MouseY };
 	Funcs->ScreenToAutoMap(&Mouse);
 
 	POINT Player = { Me->pPath->xPos, Me->pPath->yPos };
@@ -168,7 +159,7 @@ void FCPointer()
 	}
 }
 
-void AddStringToList(std::list<std::string> &StringList, std::string lpFormat, ...)
+void AddStringToList(std::list<std::string>& StringList, std::string lpFormat, ...)
 {
 	char szBuffer[4096];
 	va_list arg;
