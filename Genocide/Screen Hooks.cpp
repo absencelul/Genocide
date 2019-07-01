@@ -45,7 +45,7 @@ void DrawScreen()
 			FcTele = false;
 		}
 
-		if (Units->CheckReady(true, true) && SelectedSkill)
+		if (CheckReady(true, true) && SelectedSkill)
 		{
 
 			POINT Farcast = Math::PickFarcastLocation(Target);
@@ -59,7 +59,7 @@ void DrawScreen()
 
 	AuraSwap();
 
-	if (!GetUnitState(Units->FindMercUnit(Me), AFFECT_ENCHANT) && FindItem(214, STORAGE_EQUIP))
+	if (!GetUnitState(FindMercUnit(Me), AFFECT_ENCHANT) && FindItem(214, STORAGE_EQUIP))
 		if (!EN)
 			EN = (HANDLE)CreateThread(0, 0, EnchThread, 0, 0, 0);
 }
@@ -68,14 +68,14 @@ DWORD WINAPI EnchThread(LPVOID Param)
 {
 	WORD tmpSkill = GetCurrentSkill(false);
 
-	if (Units->FindMercUnit(Me) && !GetUnitState(Units->FindMercUnit(Me), AFFECT_ENCHANT) && FindItem(214, STORAGE_EQUIP))
+	if (FindMercUnit(Me) && !GetUnitState(FindMercUnit(Me), AFFECT_ENCHANT) && FindItem(214, STORAGE_EQUIP))
 	{
 		if (GetCurrentSkill(false) != D2S_ENCHANT)
 			SetChargedSkill(D2S_ENCHANT, false, Me->pInventory->dwLeftItemUid);
 
 		SleepEx(150, true);
 
-		UseSkillOnUnit(Units->FindMercUnit(Me), D2S_ENCHANT, false, false, true);
+		UseSkillOnUnit(FindMercUnit(Me), D2S_ENCHANT, false, false, true);
 
 		SleepEx(150, true);
 
@@ -162,7 +162,7 @@ void extraDraw()
 //		for (int i = 0; i < Players.GetSize(); i++)
 //		{
 //			CHAR PlayerInfo[100];
-//			sprintf_s(PlayerInfo, "%s %s %d", Players[i]->PlayerName, Units->PlayerClass(Players[i]->ClassId, true), Players[i]->Life);
+//			sprintf_s(PlayerInfo, "%s %s %d", Players[i]->PlayerName, PlayerClass(Players[i]->ClassId, true), Players[i]->Life);
 //			DrawTextX(5, 375 + (i * 15), i == CurrentTarget ? 5 : 4, 3, IsTown(Me) ? -1 : 1, "%s", PlayerInfo);
 //		}
 //	}

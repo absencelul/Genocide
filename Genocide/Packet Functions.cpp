@@ -176,7 +176,7 @@ void UseItem(LPUNITANY Unit)
 //Uses skill on a unit
 void UseSkillOnUnit(LPUNITANY Unit, WORD Skill, bool Left, bool Shift, bool Animation)
 {
-	if (!Units->CheckReady(false, true))
+	if (!CheckReady(false, true))
 		return;
 
 	if (!GetSkill(Skill))

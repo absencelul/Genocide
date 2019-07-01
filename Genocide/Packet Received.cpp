@@ -163,7 +163,7 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 	case 0x69:
 
 		if (RescueWhen[3])
-			if (Units->FindMercUnit(D2CLIENT_GetPlayerUnit()) && Units->FindMercUnit(D2CLIENT_GetPlayerUnit())->dwUnitId == *(LPDWORD)& Packet[1])
+			if (FindMercUnit(D2CLIENT_GetPlayerUnit()) && FindMercUnit(D2CLIENT_GetPlayerUnit())->dwUnitId == *(LPDWORD)& Packet[1])
 				if (*(LPBYTE)& Packet[5] == 0x09 || *(LPBYTE)& Packet[5] == 0x08)
 					if (Portal())
 					{
@@ -191,8 +191,8 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 			if (*(LPDWORD)& Packet[10] == Me->dwUnitId)
 				SetBlind(Unit->pPath->xPos, Unit->pPath->yPos, Unit->pPath->xPos, Unit->pPath->xPos, Unit->dwUnitId);
 
-		/*LPROSTERUNIT pRoster = Units->FindPartyById(Unit->dwUnitId);
-		DWORD dwFlags = Units->GetPvPFlags(pRoster->dwUnitId);
+		/*LPROSTERUNIT pRoster = FindPartyById(Unit->dwUnitId);
+		DWORD dwFlags = GetPvPFlags(pRoster->dwUnitId);
 
 		if (RescueWhen[2])
 		{
@@ -226,17 +226,17 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 	}
 	break;
 
-	case 0x5a: return eMSG->EventMessageHandler(Packet, Length); break;
+	case 0x5a: return EventMessageHandler(Packet, Length); break;
 
 	case 0x5c:
 	{
-		LPROSTERUNIT Roster = Units->FindPartyById(*(LPDWORD)& Packet[1]);
+		LPROSTERUNIT Roster = FindPartyById(*(LPDWORD)& Packet[1]);
 
 		if (!Roster)
 			return true;
 
-		sprintf(ChatClass, "%s", Units->PlayerClass(Roster->dwClassId, false));
-		sprintf(ChatClassShort, "%s", Units->PlayerClass(Roster->dwClassId, true));
+		sprintf(ChatClass, "%s", PlayerClass(Roster->dwClassId, false));
+		sprintf(ChatClassShort, "%s", PlayerClass(Roster->dwClassId, true));
 		sprintf(ChatName, "%s", Roster->szName);
 		sprintf(ChatAccount, "%s", Roster->szName2);
 		sprintf(ChatLevel, "%d", Roster->wLevel);
@@ -453,7 +453,7 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 			{
 				if (Portal())
 				{
-					LPROSTERUNIT Unit = Units->FindPartyById(*(LPDWORD)& Packet[5]);
+					LPROSTERUNIT Unit = FindPartyById(*(LPDWORD)& Packet[5]);
 					InputConsole("RESCUE: Towned due to [%s] hostiling you!", Unit->szName);
 					Town = true;
 				}

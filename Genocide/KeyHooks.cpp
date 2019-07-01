@@ -85,7 +85,7 @@ void KeyHooks::KeyHook()
 		if (GetCurrentSkill(true) != D2S_BLESSEDHAMMER)
 			SetSkill(D2S_BLESSEDHAMMER, true);
 
-		WORD x = (WORD)Units->GetUnitLocation(true).x, y = (WORD)Units->GetUnitLocation(true).y;
+		WORD x = (WORD)GetUnitLocation(true).x, y = (WORD)GetUnitLocation(true).y;
 		POINT Position = { (long)* p_D2CLIENT_MouseX, (long)* p_D2CLIENT_MouseY };
 
 		ScreenToAutoMap(&Position);
@@ -125,7 +125,7 @@ void KeyHooks::KeyHook()
 			break;
 
 		case 1:
-			if (Units->FindUnit())
+			if (FindUnit())
 				return AttackTarget(false);
 			break;
 		}
@@ -140,7 +140,7 @@ void KeyHooks::KeyHook()
 			break;
 
 		case 1:
-			if (Units->FindUnit())
+			if (FindUnit())
 				return AttackTarget(true);
 			break;
 		}
@@ -248,7 +248,7 @@ void __fastcall KeyHooks::OnGameKeyDown(byte Key, byte Repeat)
 				continue;
 
 			if (IsTown(pMe))
-				if (Units->GetRelation(pTarget) != 4)
+				if (GetRelation(pTarget) != 4)
 					HostilePlayer(pTarget->dwUnitId);
 		}
 

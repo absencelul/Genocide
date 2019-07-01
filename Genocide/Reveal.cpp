@@ -455,7 +455,7 @@ LPAUTOMAPLAYER2 Reveal::InitAutomapLayer(DWORD levelno)
 
 BOOL Reveal::CreateCollisionMap()
 {
-	if (Units->GetUnitLevel(Me)->dwLevelNo == m_LastLevel)
+	if (GetUnitLevel(Me)->dwLevelNo == m_LastLevel)
 		return TRUE;
 
 	if (!Me)
@@ -735,13 +735,13 @@ BOOL Reveal::GetLevelExits(LPLEVELEXIT *lpLevel, INT nMaxExits)
 		ptCenters[i].y = nYCenter ? nYCenter : ptExitPoints[i][0].y;
 	}
 
-	for (LPROOM2 pRoom = Units->GetUnitLevel(Me)->pRoom2First; pRoom; pRoom = pRoom->pRoom2Next)
+	for (LPROOM2 pRoom = GetUnitLevel(Me)->pRoom2First; pRoom; pRoom = pRoom->pRoom2Next)
 	{
 		LPROOM2 * pNear = pRoom->pRoom2Near;
 
 		for (DWORD i = 0; i < pRoom->dwRoomsNear; i++)
 		{
-			if (pNear[i]->pLevel->dwLevelNo != Units->GetUnitLevel(Me)->dwLevelNo)
+			if (pNear[i]->pLevel->dwLevelNo != GetUnitLevel(Me)->dwLevelNo)
 			{
 				INT nRoomX = pRoom->dwPosX * 5;
 				INT nRoomY = pRoom->dwPosY * 5;

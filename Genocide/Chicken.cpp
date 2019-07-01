@@ -3,7 +3,7 @@
 //Checks Life // Mana and reacts accordingly.
 void Rescue()
 {
-	if (!Units->CheckReady(true, false))
+	if (!CheckReady(true, false))
 		return;
 
 	auto Life = LifeMana(true), Mana = LifeMana(false);

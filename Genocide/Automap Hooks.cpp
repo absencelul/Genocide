@@ -59,7 +59,7 @@ void PlayerInfo()
 		if (!Unit)
 			continue;
 
-		LPUNITANY Merc = Units->FindMercUnit(Unit);
+		LPUNITANY Merc = FindMercUnit(Unit);
 
 		if (!Merc)
 			continue;

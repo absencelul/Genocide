@@ -87,15 +87,11 @@ void Inject::InitializeClass(int Initialize)
 	{
 	case 0:
 		Revealz = new Reveal;
-		Units = new Unit;
-		eMSG = new EventMessage;
 		//Items = new MoveItems;
 		break;
 
 	case 1:
 		delete Revealz;
-		delete Units;
-		delete eMSG;
 		//delete Items;
 		break;
 	}

@@ -1,9 +1,3 @@
 #pragma once
-class EventMessage
-{
-public:
-	EventMessage();
-	~EventMessage();
-	DWORD EventMessageHandler(LPBYTE Packet, DWORD Length);
-};
 
+DWORD EventMessageHandler(LPBYTE Packet, DWORD Length);

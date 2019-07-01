@@ -109,7 +109,7 @@ void EnumeratePlayers()
 
 void Attack(DWORD x, DWORD y, bool Left, bool Shift, bool attackUnit, LPUNITANY Unit)
 {
-	if (!Units->CheckReady(false, true))
+	if (!CheckReady(false, true))
 		return;
 
 	if (attackUnit && !Unit)
@@ -131,7 +131,7 @@ void Attack(DWORD x, DWORD y, bool Left, bool Shift, bool attackUnit, LPUNITANY 
 
 void AttackTarget(bool Left)
 {
-	if (!Units->CheckReady(true, true))
+	if (!CheckReady(true, true))
 		return;
 
 	UnitAny* pTarget = D2CLIENT_FindServerSideUnit(CurrentTarget, UNIT_TYPE_PLAYER);
@@ -149,10 +149,10 @@ void AttackTarget(bool Left)
 
 void AttackNearest(bool Left)
 {
-	if (!Units->CheckReady(false, true))
+	if (!CheckReady(false, true))
 		return;
 
-	UnitAny* pTarget = Units->FindUnit();
+	UnitAny* pTarget = FindUnit();
 
 	if (!pTarget)
 		return;
@@ -168,10 +168,10 @@ void AttackNearest(bool Left)
 
 void TestKey()
 {
-	if (!Units->CheckReady(false, true))
+	if (!CheckReady(false, true))
 		return;
 
-	POINT ptDist = Units->GetUnitLocation(false);
+	POINT ptDist = GetUnitLocation(false);
 
 	if (D2MATH_GetDistance(Me, (WORD)ptDist.x, (WORD)ptDist.y) > 0)
 	{

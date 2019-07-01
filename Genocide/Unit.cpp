@@ -1,15 +1,7 @@
 #include "Hack.h"
 
-Unit::Unit()
-{
-}
-
-Unit::~Unit()
-{
-}
-
 //Basic checks for functions.
-bool Unit::CheckReady(bool TownCheck, bool CheckCasting)
+bool CheckReady(bool TownCheck, bool CheckCasting)
 {
 	if (TownCheck)
 		if (IsTown(Me))
@@ -27,7 +19,7 @@ bool Unit::CheckReady(bool TownCheck, bool CheckCasting)
 }
 
 //Finds if player has merc
-LPUNITANY Unit::FindMercUnit(LPUNITANY pOwner)
+LPUNITANY FindMercUnit(LPUNITANY pOwner)
 {
 	const MercID _MercIds[4] = { MERC_A1, MERC_A2, MERC_A3, MERC_A5 };
 
@@ -41,7 +33,7 @@ LPUNITANY Unit::FindMercUnit(LPUNITANY pOwner)
 }
 
 //Finds nearest unit
-UnitAny* Unit::FindUnit()
+UnitAny* FindUnit()
 {
 	UnitAny* pMe = D2CLIENT_GetPlayerUnit();
 	UnitAny* pRet = 0;
@@ -75,7 +67,7 @@ UnitAny* Unit::FindUnit()
 }
 
 //FindUnitHammer()
-POINT Unit::GetUnitLocation(bool bHammer)
+POINT GetUnitLocation(bool bHammer)
 {
 	POINT target = { NULL };
 	auto dist = bHammer ? 70 : 50;
@@ -103,7 +95,7 @@ POINT Unit::GetUnitLocation(bool bHammer)
 }
 
 //Finds Unit by id.
-LPROSTERUNIT Unit::FindPartyById(DWORD dwUnitId)
+LPROSTERUNIT FindPartyById(DWORD dwUnitId)
 {
 	for (RosterUnit* pUnit = *p_D2CLIENT_PlayerUnitList; pUnit; pUnit = pUnit->pNext)
 		if (pUnit->dwUnitId == dwUnitId)
@@ -113,7 +105,7 @@ LPROSTERUNIT Unit::FindPartyById(DWORD dwUnitId)
 }
 
 //Finds Unit by name.
-LPROSTERUNIT Unit::FindPartyByName(LPSTR szName)
+LPROSTERUNIT FindPartyByName(LPSTR szName)
 {
 	for (LPROSTERUNIT pUnit = *p_D2CLIENT_PlayerUnitList; pUnit; pUnit = pUnit->pNext)
 		if (!_stricmp(szName, pUnit->szName))
@@ -122,7 +114,7 @@ LPROSTERUNIT Unit::FindPartyByName(LPSTR szName)
 	return NULL;
 }
 
-int Unit::GetRelation(UnitAny* unit)
+int GetRelation(UnitAny* unit)
 {
 	UnitAny* player = D2CLIENT_GetPlayerUnit();
 	RosterUnit* roster;
@@ -171,7 +163,7 @@ int Unit::GetRelation(UnitAny* unit)
 }
 
 //Gets Player class based upon id short class or long class
-char* Unit::PlayerClass(DWORD ClassId, bool Short)
+char* PlayerClass(DWORD ClassId, bool Short)
 {
 	switch (ClassId)
 	{
@@ -242,7 +234,7 @@ char* Unit::PlayerClass(DWORD ClassId, bool Short)
 	return "null";
 }
 
-LPLEVEL Unit::GetUnitLevel(LPUNITANY pUnit)
+LPLEVEL GetUnitLevel(LPUNITANY pUnit)
 {
 	if (pUnit)
 		if (pUnit->pPath)
@@ -253,7 +245,7 @@ LPLEVEL Unit::GetUnitLevel(LPUNITANY pUnit)
 	return FALSE;
 }
 
-/*LPPRESETUNIT Unit::FindPresetUnit(DWORD dwClassId, DWORD dwType, LPROOM2 *pRoom)
+/*LPPRESETUNIT FindPresetUnit(DWORD dwClassId, DWORD dwType, LPROOM2 *pRoom)
 {
 	for (LPROOM2 pRoom2 = GetUnitLevel(Me)->pRoom2First; pRoom2; pRoom2 = pRoom2->pRoom2Next)
 	{

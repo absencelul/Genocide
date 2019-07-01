@@ -1,59 +1,49 @@
 #include "Hack.h"
 
-EventMessage::EventMessage()
-{
-}
-
-
-EventMessage::~EventMessage()
-{
-}
-
-DWORD EventMessage::EventMessageHandler(LPBYTE Packet, DWORD Length)
+DWORD EventMessageHandler(LPBYTE Packet, DWORD Length)
 {
 	switch (Packet[1])
 	{
-
-	// Player dropped from game
+		// Player dropped from game
 	case 0x00:
 	{
-		LPROSTERUNIT Unit = Units->FindPartyByName((LPSTR)&Packet[8]);
+		LPROSTERUNIT Unit = FindPartyByName((LPSTR)& Packet[8]);
 
-		Print(0, 4, "[%s] %s(%s) [Level %d %s] dropped due to timeout.", TimeStamp(), Unit->szName, (LPSTR)&Packet[24], Unit->wLevel, Units->PlayerClass(Unit->dwClassId, false));
+		Print(0, 4, "[%s] %s(%s) [Level %d %s] dropped due to timeout.", TimeStamp(), Unit->szName, (LPSTR)& Packet[24], Unit->wLevel, PlayerClass(Unit->dwClassId, false));
 		return false;
 	}
-		break;
+	break;
 
 	// Player joined game
 	case 0x02:
 	{
-		LPROSTERUNIT Unit = Units->FindPartyByName((LPSTR)&Packet[8]);
+		LPROSTERUNIT Unit = FindPartyByName((LPSTR)& Packet[8]);
 
 		if (!Unit || Unit->dwUnitId == Me->dwUnitId)
 			return true;
 
-		Print(0, 4, "[%s] %s(%s) [Level %d %s] joined our world.", TimeStamp(), Unit->szName, (LPSTR)&Packet[24], Unit->wLevel, Units->PlayerClass(Unit->dwClassId, false));
+		Print(0, 4, "[%s] %s(%s) [Level %d %s] joined our world.", TimeStamp(), Unit->szName, (LPSTR)& Packet[24], Unit->wLevel, PlayerClass(Unit->dwClassId, false));
 		return false;
 	}
-		break;
+	break;
 
 	case 0x03:
 
-		Print(0, 4, "[%s] %s(%s) [Level %s %s] [%s%% Life] left our world.", TimeStamp(), ChatName, (LPSTR)&Packet[24], ChatLevel, ChatClass, ChatLife);
+		Print(0, 4, "[%s] %s(%s) [Level %s %s] [%s%% Life] left our world.", TimeStamp(), ChatName, (LPSTR)& Packet[24], ChatLevel, ChatClass, ChatLife);
 		return false;
 
 		break;
 
 	case 0x06:
-		if (!_stricmp((LPSTR)&Packet[24], Me->pPlayerData->szName))
+		if (!_stricmp((LPSTR)& Packet[24], Me->pPlayerData->szName))
 		{
-			LPROSTERUNIT Unit = Units->FindPartyByName((LPSTR)&Packet[8]);
+			LPROSTERUNIT Unit = FindPartyByName((LPSTR)& Packet[8]);
 
 			if (!Unit)
 				return true;
 
-			Print(0, Red, "[%s] You killed '%s' a level %d %s.", TimeStamp(), Unit->szName, Unit->wLevel, Units->PlayerClass(Unit->dwClassId, false));
-			InputConsole("You killed %s [Level %d %s] total kills: %d, this game: %d", Unit->szName, Unit->wLevel, Units->PlayerClass(Unit->dwClassId, false), ++killCount, ++killCountGame);
+			Print(0, Red, "[%s] You killed '%s' a level %d %s.", TimeStamp(), Unit->szName, Unit->wLevel, PlayerClass(Unit->dwClassId, false));
+			InputConsole("You killed %s [Level %d %s] total kills: %d, this game: %d", Unit->szName, Unit->wLevel, PlayerClass(Unit->dwClassId, false), ++killCount, ++killCountGame);
 
 			if (UseAltScreen)
 				D2CLIENT_SetUIVar(UI_ALTDOWN, 0, 0);
@@ -63,15 +53,15 @@ DWORD EventMessage::EventMessageHandler(LPBYTE Packet, DWORD Length)
 			return false;
 		}
 		return true;
-	break;
+		break;
 	}
 
 	if (Packet[7])
 	{
-		LPROSTERUNIT Unit = Units->FindPartyById(*(LPDWORD)&Packet[3]);
+		LPROSTERUNIT Unit = FindPartyById(*(LPDWORD)& Packet[3]);
 
-		sprintf(ChatClass, "%s", Units->PlayerClass(Unit->dwClassId, false));
-		sprintf(ChatClassShort, "%s", Units->PlayerClass(Unit->dwClassId, true));
+		sprintf(ChatClass, "%s", PlayerClass(Unit->dwClassId, false));
+		sprintf(ChatClassShort, "%s", PlayerClass(Unit->dwClassId, true));
 		sprintf(ChatName, "%s", Unit->szName);
 		sprintf(ChatAccount, "%s", Unit->szName2);
 		sprintf(ChatLevel, "%d", Unit->wLevel);
@@ -156,7 +146,6 @@ DWORD EventMessage::EventMessageHandler(LPBYTE Packet, DWORD Length)
 		return false;
 	}
 	break;
-
 	}
 
 	return true;

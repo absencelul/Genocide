@@ -22,8 +22,6 @@ VAR(CHAR, LocalTime[100])
 VAR(int, colorText)
 VAR(bool, showStatScreen)
 //Classes
-VAR(Unit*, Units)
-VAR(EventMessage*, eMSG)
 //VAR(MoveItems *, Items)
 
 VAR(CRITICAL_SECTION, EX_CRITSECT)

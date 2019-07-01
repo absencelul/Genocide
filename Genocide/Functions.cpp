@@ -145,7 +145,7 @@ WORD GetCurrentSkill(bool Left)
 
 void CastSpell(WORD x, WORD y, bool MySpot)
 {
-	if (!Units->CheckReady(true, true))
+	if (!CheckReady(true, true))
 		return;
 
 	AttackStruct Attack;

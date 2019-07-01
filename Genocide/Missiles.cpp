@@ -30,7 +30,7 @@ void Missiles::RevealMissiles()
 			{
 				int color = 255;
 
-				switch (Units->GetRelation(pUnit)) {
+				switch (GetRelation(pUnit)) {
 				case 0:
 					continue;
 					break;
