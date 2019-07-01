@@ -88,7 +88,6 @@ void Inject::InitializeClass(int Initialize)
 	case 0:
 		Revealz = new Reveal;
 		Units = new Unit;
-		Funcs = new Functions;
 		eMSG = new EventMessage;
 		//Items = new MoveItems;
 		break;
@@ -96,7 +95,6 @@ void Inject::InitializeClass(int Initialize)
 	case 1:
 		delete Revealz;
 		delete Units;
-		delete Funcs;
 		delete eMSG;
 		//delete Items;
 		break;

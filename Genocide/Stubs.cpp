@@ -242,7 +242,7 @@ void __declspec(naked) Stubs::InputSTUB()
 	{
 		PUSHAD;
 		MOV ECX, EBX;
-		CALL Commands::GameInput;
+		CALL GameInput;
 		CMP EAX, 0;
 		POPAD;
 		JE Block;

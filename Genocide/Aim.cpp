@@ -139,7 +139,7 @@ void AttackTarget(bool Left)
 	if (!pTarget) return;
 
 	for (auto& Atk : Attacks)
-		if (Funcs->GetCurSkill(Left, Atk.SkillID))
+		if (GetCurSkill(Left, Atk.SkillID))
 			return Attack(NULL, NULL, Left, Atk.Shift, true, pTarget);
 
 	for (INT i = 0; i < Players.GetSize(); i++)
@@ -158,7 +158,7 @@ void AttackNearest(bool Left)
 		return;
 
 	for (auto& Atk : Attacks)
-		if (Funcs->GetCurSkill(Left, Atk.SkillID))
+		if (GetCurSkill(Left, Atk.SkillID))
 			return Attack(NULL, NULL, Left, Atk.Shift, true, pTarget);
 
 	for (auto i = 0; i < Players.GetSize(); i++)
@@ -175,20 +175,20 @@ void TestKey()
 
 	if (D2MATH_GetDistance(Me, (WORD)ptDist.x, (WORD)ptDist.y) > 0)
 	{
-		if (Funcs->GetCurrentSkill(false) != D2S_TELEPORT)
+		if (GetCurrentSkill(false) != D2S_TELEPORT)
 			SetSkill(D2S_TELEPORT, false);
 
 		AttackNearest(false);
 	}
 	else
 	{
-		if (Funcs->GetCurrentSkill(true) != D2S_BLESSEDHAMMER)
+		if (GetCurrentSkill(true) != D2S_BLESSEDHAMMER)
 			SetSkill(D2S_BLESSEDHAMMER, true);
 
-		if (Funcs->GetCurrentSkill(false) != D2S_CONCENTRATION)
+		if (GetCurrentSkill(false) != D2S_CONCENTRATION)
 			SetSkill(D2S_CONCENTRATION, false);
 
-		Funcs->CastSpell(-3, 0, true);
+		CastSpell(-3, 0, true);
 	}
 }
 

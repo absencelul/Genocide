@@ -21,7 +21,7 @@ void DrawScreen()
 		TextHook(30, 598, White, None, 4, "ÿc8%s ÿc7%s", Chickens[0] >= 1 ? Settings::to_string(Chickens[0]).c_str() : "Off", Chickens[1] >= 1 ? Settings::to_string(Chickens[1]).c_str() : "Off");
 		TextHook(796, 585, White, None, 4, "ÿc3%s ÿc;%s", Potions[2] >= 1 ? Settings::to_string(Potions[2]).c_str() : "Off", Potions[3] >= 1 ? Settings::to_string(Potions[3]).c_str() : "Off");
 		TextHook(795, 598, White, None, 4, "ÿc8%s ÿc7%s", Chickens[2] >= 1 ? Settings::to_string(Chickens[2]).c_str() : "Off", Chickens[3] >= 1 ? Settings::to_string(Chickens[3]).c_str() : "Off");
-		TextHook(375, 15, Gold, None, 4, "%s", Funcs->SysTime());*/
+		TextHook(375, 15, Gold, None, 4, "%s", SysTime());*/
 
 		TakeScreen = false;
 		D2WIN_TakeScreenshot();
@@ -32,13 +32,13 @@ void DrawScreen()
 
 	if (FcTele)
 	{
-		if (!Funcs->GetCurSkill(false, D2S_TELEPORT))
+		if (!GetCurSkill(false, D2S_TELEPORT))
 			SetSkill(D2S_TELEPORT, false);
 
 		AttackStruct Attack;
 		Attack.dwAttackType = 0x46;
 		//Attack.dwAttackType = 0xE5; //shift+left
-		bool SelectedSkill = Funcs->GetCurSkill(false, D2S_TELEPORT);
+		bool SelectedSkill = GetCurSkill(false, D2S_TELEPORT);
 		POINT Target = { (long)(Attack.dwTargetX=0), (long)(Attack.dwTargetY=0) };
 
 		if (!KeyDown(4)) {
@@ -59,18 +59,18 @@ void DrawScreen()
 
 	AuraSwap();
 
-	if (!GetUnitState(Units->FindMercUnit(Me), AFFECT_ENCHANT) && Funcs->FindItem(214, STORAGE_EQUIP))
+	if (!GetUnitState(Units->FindMercUnit(Me), AFFECT_ENCHANT) && FindItem(214, STORAGE_EQUIP))
 		if (!EN)
 			EN = (HANDLE)CreateThread(0, 0, EnchThread, 0, 0, 0);
 }
 
 DWORD WINAPI EnchThread(LPVOID Param)
 {
-	WORD tmpSkill = Funcs->GetCurrentSkill(false);
+	WORD tmpSkill = GetCurrentSkill(false);
 
-	if (Units->FindMercUnit(Me) && !GetUnitState(Units->FindMercUnit(Me), AFFECT_ENCHANT) && Funcs->FindItem(214, STORAGE_EQUIP))
+	if (Units->FindMercUnit(Me) && !GetUnitState(Units->FindMercUnit(Me), AFFECT_ENCHANT) && FindItem(214, STORAGE_EQUIP))
 	{
-		if (Funcs->GetCurrentSkill(false) != D2S_ENCHANT)
+		if (GetCurrentSkill(false) != D2S_ENCHANT)
 			SetChargedSkill(D2S_ENCHANT, false, Me->pInventory->dwLeftItemUid);
 
 		SleepEx(150, true);
@@ -147,7 +147,7 @@ void extraDraw()
 
 	if (p_D2CLIENT_UIMode[UI_INVENTORY]) // Draw text to INVENTORY
 	{
-		TextHook(505, 488, Tan, Center, 1, "Total Gold: %s", Funcs->AddCommas((double)GetUnitStat(Me, STAT_GOLD) + (double)GetUnitStat(Me, STAT_GOLDBANK), 0));
+		TextHook(505, 488, Tan, Center, 1, "Total Gold: %s", AddCommas((double)GetUnitStat(Me, STAT_GOLD) + (double)GetUnitStat(Me, STAT_GOLDBANK), 0));
 	}
 }
 
@@ -179,7 +179,7 @@ void TimerBo()
 			BoTimer--;
 			BoTime = GetTickCount64();
 			if (BoTimer == 10)
-				Funcs->Print(0, 4, ":: Warning : BO will run out in 10 seconds.");
+				Print(0, 4, ":: Warning : BO will run out in 10 seconds.");
 		}
 }
 
@@ -203,10 +203,10 @@ void AuraSwap()
 		return;
 
 	PrecastSkills swap[] = {
-				{ D2S_BLESSEDAIM, Funcs->GetSkill(D2S_BLESSEDAIM) },
-				{ D2S_MIGHT, Funcs->GetSkill(D2S_MIGHT) },
-				{ D2S_FANATICISM, Funcs->GetSkill(D2S_FANATICISM) },
-				{ D2S_CONCENTRATION, Funcs->GetSkill(D2S_CONCENTRATION) },
+				{ D2S_BLESSEDAIM, GetSkill(D2S_BLESSEDAIM) },
+				{ D2S_MIGHT, GetSkill(D2S_MIGHT) },
+				{ D2S_FANATICISM, GetSkill(D2S_FANATICISM) },
+				{ D2S_CONCENTRATION, GetSkill(D2S_CONCENTRATION) },
 	};
 
 	if (AllowSwap)
@@ -369,7 +369,7 @@ void TextHook(int x, int y, TextColor color, Alignment align, unsigned int font,
 //
 //	MyMultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, szText, (INT)strlen(szText), wText, (INT)strlen(szText));
 //
-//	Funcs->RemoveColorSpecs(wText);
+//	RemoveColorSpecs(wText);
 //
 //	return D2WIN_GetTextWidth(wText);
 //}
@@ -437,5 +437,5 @@ VOID ScreenToAutomapRelative(POINT* pos, INT x, INT y)
 {
 	x += D2CLIENT_GetMouseXOffset();
 	y += D2CLIENT_GetMouseYOffset();
-	Funcs->ScreenToAutomap(pos, (y * 2 + x) / 32, (y * 2 - x) / 32);
+	ScreenToAutomap(pos, (y * 2 + x) / 32, (y * 2 - x) / 32);
 }

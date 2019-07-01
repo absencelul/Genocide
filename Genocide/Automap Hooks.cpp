@@ -19,8 +19,8 @@ void GameInfo()
 		AddStringToList(GameInfoList, "Game: %s", D2CLIENT_GetGameInfo()->szGameName);
 	if (strlen(D2CLIENT_GetGameInfo()->szGamePassword) > 0)
 		AddStringToList(GameInfoList, "Password: %s", D2CLIENT_GetGameInfo()->szGamePassword);
-	if (strcmp(Funcs->Difficulty().c_str(), "Normal") != 0)
-		AddStringToList(GameInfoList, "Difficulty: %s", Funcs->Difficulty().c_str());
+	if (strcmp(Difficulty().c_str(), "Normal") != 0)
+		AddStringToList(GameInfoList, "Difficulty: %s", Difficulty().c_str());
 	if (strlen(D2CLIENT_GetGameInfo()->szGameServerIp) > 0)
 		AddStringToList(GameInfoList, "%s", D2CLIENT_GetGameInfo()->szGameServerIp);
 	AddStringToList(GameInfoList, "%s", UnicodeToAnsi(D2CLIENT_GetLevelName_I(D2CLIENT_GetPlayerUnit()->pPath->pRoom1->pRoom2->pLevel->dwLevelNo)));
@@ -36,7 +36,7 @@ void xVector()
 
 	POINT Player, Position, Last = { 0, 0 };
 
-	Funcs->ScreenToAutomap(&Player, Me->pPath->xPos, Me->pPath->yPos);
+	ScreenToAutomap(&Player, Me->pPath->xPos, Me->pPath->yPos);
 
 	if (!Players.IsEmpty())
 	{
@@ -44,7 +44,7 @@ void xVector()
 
 		if (Unit)
 		{
-			Funcs->ScreenToAutomap(&Position, Unit->pPath->xPos, Unit->pPath->yPos);
+			ScreenToAutomap(&Position, Unit->pPath->xPos, Unit->pPath->yPos);
 			D2GFX_DrawLine(Player.x, Player.y, Position.x, Position.y, DarkGreen, -1);
 			DrawPlayerBlob(Position.x, Position.y, DarkGreen);
 		}
@@ -119,7 +119,7 @@ void DrawCross(INT X, INT Y, DWORD Color, BOOL Automap)
 		if (!p_D2CLIENT_AutomapOn)
 			return;
 
-		Funcs->ScreenToAutomap(&Position, X, Y);
+		ScreenToAutomap(&Position, X, Y);
 	}
 
 	CHAR Lines[][2] = { 0, -2, 4, -4, 8, -2, 4, 0, 8, 2, 4, 4, 0, 2, -4, 4, -8, 2, -4, 0, -8, -2, -4, -4, 0, -2 };
@@ -132,7 +132,7 @@ void DrawCross(INT X, INT Y, DWORD Color, BOOL Automap)
 void FCPointer()
 {
 	POINT Mouse = { *(long*)& p_D2CLIENT_MouseX, *(long*)& p_D2CLIENT_MouseY };
-	Funcs->ScreenToAutoMap(&Mouse);
+	ScreenToAutoMap(&Mouse);
 
 	POINT Player = { Me->pPath->xPos, Me->pPath->yPos };
 
@@ -148,12 +148,12 @@ void FCPointer()
 				break;
 	}
 
-	if (Funcs->GetCurrentSkill(true) == D2S_TELEPORT) {
+	if (GetCurrentSkill(true) == D2S_TELEPORT) {
 		POINT Start = { 0, 0 };
 		POINT End = { 0, 0 };
 
-		Funcs->ScreenToAutomap(&Start, Player.x, Player.y);
-		Funcs->ScreenToAutomap(&End, Cast.x, Cast.y);
+		ScreenToAutomap(&Start, Player.x, Player.y);
+		ScreenToAutomap(&End, Cast.x, Cast.y);
 		D2GFX_DrawLine(Start.x, Start.y, End.x, End.y, 168, 0);
 		TextHook(End.x + 1, End.y + 3, Yellow, None, 4, "x");
 	}

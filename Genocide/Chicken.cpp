@@ -52,13 +52,13 @@ bool Portal()
 
 	LPUNITANY _Book = NULL;
 
-	_Book = Funcs->FindItem(518, STORAGE_STASH);
+	_Book = FindItem(518, STORAGE_STASH);
 
 	if (!_Book || GetUnitStat(_Book, STAT_AMMOQUANTITY) == 0)
-		_Book = Funcs->FindItem(518, STORAGE_CUBE);
+		_Book = FindItem(518, STORAGE_CUBE);
 
 	if (!_Book || GetUnitStat(_Book, STAT_AMMOQUANTITY) == 0)
-		_Book = Funcs->FindItem(518, STORAGE_INVENTORY);
+		_Book = FindItem(518, STORAGE_INVENTORY);
 
 	if (_Book)
 		UseItem(_Book);
@@ -67,7 +67,7 @@ bool Portal()
 
 	if (_Book)
 		if (GetUnitStat(_Book, STAT_AMMOQUANTITY) <= 5)
-			Funcs->Print(0, 4, (GetUnitStat(_Book, STAT_AMMOQUANTITY) - 1) >= 1 ? "%d Town portals left." : "Out of portals.", GetUnitStat(_Book, STAT_AMMOQUANTITY) - 1);
+			Print(0, 4, (GetUnitStat(_Book, STAT_AMMOQUANTITY) - 1) >= 1 ? "%d Town portals left." : "Out of portals.", GetUnitStat(_Book, STAT_AMMOQUANTITY) - 1);
 
 	LastTP = GetTickCount64();
 

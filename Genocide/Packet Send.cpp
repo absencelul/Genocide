@@ -7,10 +7,10 @@ bool STDCALL OnGamePacketSent(DWORD Length, DWORD _1, BYTE *Packet)
 		//left attack packets
 	case 0x05:
 		//only set conc in this packet
-		if (Funcs->GetCurrentSkill(true) == D2S_BLESSEDHAMMER)
+		if (GetCurrentSkill(true) == D2S_BLESSEDHAMMER)
 			SetSkill(D2S_CONCENTRATION, false);
 
-		if (Funcs->GetCurrentSkill(false) == D2S_CONCENTRATION && Units->FindMercUnit(Me) && !GetUnitState(Units->FindMercUnit(Me), AFFECT_FANATICISM))
+		if (GetCurrentSkill(false) == D2S_CONCENTRATION && Units->FindMercUnit(Me) && !GetUnitState(Units->FindMercUnit(Me), AFFECT_FANATICISM))
 			AllowSwap = true;
 		break;
 
@@ -19,7 +19,7 @@ bool STDCALL OnGamePacketSent(DWORD Length, DWORD _1, BYTE *Packet)
 	case 0x08:
 	case 0x09:
 	case 0x0a:
-		if (Funcs->GetCurrentSkill(false) == D2S_CONCENTRATION && Units->FindMercUnit(Me) && !GetUnitState(Units->FindMercUnit(Me), AFFECT_FANATICISM))
+		if (GetCurrentSkill(false) == D2S_CONCENTRATION && Units->FindMercUnit(Me) && !GetUnitState(Units->FindMercUnit(Me), AFFECT_FANATICISM))
 			AllowSwap = true;
 		break;
 
@@ -27,7 +27,7 @@ bool STDCALL OnGamePacketSent(DWORD Length, DWORD _1, BYTE *Packet)
 
 	case 0x0c:
 	case 0x0d:
-		if (Funcs->GetCurrentSkill(false) == D2S_TELEPORT && Units->FindMercUnit(Me) && !GetUnitState(Units->FindMercUnit(Me), AFFECT_FANATICISM))
+		if (GetCurrentSkill(false) == D2S_TELEPORT && Units->FindMercUnit(Me) && !GetUnitState(Units->FindMercUnit(Me), AFFECT_FANATICISM))
 		{
 			TeleSwap = true;
 			AllowSwap = true;

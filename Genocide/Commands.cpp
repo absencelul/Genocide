@@ -1,20 +1,12 @@
 #include "Hack.h"
 
-Commands::Commands()
-{
-}
-
-Commands::~Commands()
-{
-}
-
 bool is_number(const std::string& s)
 {
 	return !s.empty() && std::find_if(s.begin(),
 		s.end(), [](char c) { return !std::isdigit(c); }) == s.end();
 }
 
-BOOL FASTCALL Commands::GameInput(WCHAR* Text)
+bool __fastcall GameInput(WCHAR* Text)
 {
 	char szBuffer[255];
 	char* Argument[32];
@@ -33,21 +25,21 @@ BOOL FASTCALL Commands::GameInput(WCHAR* Text)
 		if (!_stricmp(Argument[0], "hc"))
 		{
 			HideCommands = !HideCommands;
-			Funcs->InputConsole(HideCommands ? "Commands are Off!" : "Commands are On!");
+			InputConsole(HideCommands ? "Commands are Off!" : "Commands are On!");
 			return false;
 		}
 
 		if (!_stricmp(Argument[0], "aa"))
 		{
 			//HideCommands = !HideCommands;
-			Funcs->InputConsole("this is a freaking test brew, wassup bor.. yo hey brew. brew");
+			InputConsole("this is a freaking test brew, wassup bor.. yo hey brew. brew");
 			return false;
 		}
 
 		if (!_stricmp(Argument[0], "ab"))
 		{
 			//HideCommands = !HideCommands;
-			Funcs->InputConsole("this is a freaking test brew, wassup bor.");
+			InputConsole("this is a freaking test brew, wassup bor.");
 			return false;
 		}
 	}
@@ -58,7 +50,7 @@ BOOL FASTCALL Commands::GameInput(WCHAR* Text)
 		if (!_stricmp(Argument[0], "reload"))
 		{
 			Settings::LoadConfig();
-			Funcs->InputConsole("Config.ini was reloaded.");
+			InputConsole("Config.ini was reloaded.");
 			return false;
 		}
 
@@ -96,15 +88,15 @@ BOOL FASTCALL Commands::GameInput(WCHAR* Text)
 			switch (hammer[2])
 			{
 			case 0:
-				Funcs->InputConsole("Hammer Angle is Disabled.");
+				InputConsole("Hammer Angle is Disabled.");
 				break;
 
 			case 1:
-				Funcs->InputConsole("Hammer Angle is Enabled.");
+				InputConsole("Hammer Angle is Enabled.");
 				break;
 
 			case 2:
-				Funcs->InputConsole("Hammer Angle is angling at Mouse.");
+				InputConsole("Hammer Angle is angling at Mouse.");
 				break;
 			}
 			return false;
@@ -121,7 +113,7 @@ BOOL FASTCALL Commands::GameInput(WCHAR* Text)
 		if (!_stricmp(Argument[0], "as"))
 		{
 			Auras = !Auras;
-			Funcs->InputConsole(Auras ? "Aura Swap is Enabled." : "Aura Swap is Disabled.");
+			InputConsole(Auras ? "Aura Swap is Enabled." : "Aura Swap is Disabled.");
 			return false;
 		}
 
@@ -133,12 +125,12 @@ BOOL FASTCALL Commands::GameInput(WCHAR* Text)
 				Chickens[0] = atoi(Argument[1]);
 
 				if (Chickens[0] >= 0)
-					Funcs->InputConsole("Rescueÿc0: ÿc4Escaping to town if health drops below ÿc1%s%%.", Argument[1]);
+					InputConsole("Rescueÿc0: ÿc4Escaping to town if health drops below ÿc1%s%%.", Argument[1]);
 			}
 			else if (Argument[1] && !_stricmp(Argument[1], "off"))
 			{
 				Chickens[0] = -1;
-				Funcs->InputConsole("Rescueÿc0: ÿc4Escaping to town for health is Disabled");
+				InputConsole("Rescueÿc0: ÿc4Escaping to town for health is Disabled");
 			}
 			return false;
 		}
@@ -151,12 +143,12 @@ BOOL FASTCALL Commands::GameInput(WCHAR* Text)
 				Chickens[2] = atoi(Argument[1]);
 
 				if (Chickens[2] >= 0)
-					Funcs->InputConsole("Rescueÿc0: ÿc4Escaping to town if mana drops below ÿc3%s%%.", Argument[1]);
+					InputConsole("Rescueÿc0: ÿc4Escaping to town if mana drops below ÿc3%s%%.", Argument[1]);
 			}
 			else if (Argument[1] && !_stricmp(Argument[1], "off"))
 			{
 				Chickens[2] = -1;
-				Funcs->InputConsole("Rescueÿc0: ÿc4Escaping to town for mana is Disabled");
+				InputConsole("Rescueÿc0: ÿc4Escaping to town for mana is Disabled");
 			}
 			return false;
 		}
@@ -169,12 +161,12 @@ BOOL FASTCALL Commands::GameInput(WCHAR* Text)
 				Chickens[1] = atoi(Argument[1]);
 
 				if (Chickens[1] >= 0)
-					Funcs->InputConsole("Rescueÿc0: ÿc4Escaping out of game if health drops below ÿc1%s%%.", Argument[1]);
+					InputConsole("Rescueÿc0: ÿc4Escaping out of game if health drops below ÿc1%s%%.", Argument[1]);
 			}
 			else if (Argument[1] && !_stricmp(Argument[1], "off"))
 			{
 				Chickens[1] = -1;
-				Funcs->InputConsole("Rescueÿc0: ÿc4Escaping out of game for health is Disabled");
+				InputConsole("Rescueÿc0: ÿc4Escaping out of game for health is Disabled");
 			}
 			return false;
 		}
@@ -187,12 +179,12 @@ BOOL FASTCALL Commands::GameInput(WCHAR* Text)
 				Chickens[3] = atoi(Argument[1]);
 
 				if (Chickens[3] >= 0)
-					Funcs->InputConsole("Rescueÿc0: ÿc4Escaping out of game if mana drops below ÿc3%s%%.", Argument[1]);
+					InputConsole("Rescueÿc0: ÿc4Escaping out of game if mana drops below ÿc3%s%%.", Argument[1]);
 			}
 			else if (Argument[1] && !_stricmp(Argument[1], "off"))
 			{
 				Chickens[3] = -1;
-				Funcs->InputConsole("Rescueÿc0: ÿc4Escaping out of game for mana Disabled");
+				InputConsole("Rescueÿc0: ÿc4Escaping out of game for mana Disabled");
 			}
 			return false;
 		}
@@ -205,12 +197,12 @@ BOOL FASTCALL Commands::GameInput(WCHAR* Text)
 				Potions[0] = atoi(Argument[1]);
 
 				if (Potions[0] >= 0)
-					Funcs->InputConsole("AutoPotÿc0: ÿc4Drinking a health potion if health drops below ÿc1%s%%.", Argument[1]);
+					InputConsole("AutoPotÿc0: ÿc4Drinking a health potion if health drops below ÿc1%s%%.", Argument[1]);
 			}
 			else if (Argument[1] && !_stricmp(Argument[1], "off"))
 			{
 				Potions[0] = -1;
-				Funcs->InputConsole("AutoPotÿc0: ÿc4Drinking health potion is disabled.");
+				InputConsole("AutoPotÿc0: ÿc4Drinking health potion is disabled.");
 			}
 			return false;
 		}
@@ -223,12 +215,12 @@ BOOL FASTCALL Commands::GameInput(WCHAR* Text)
 				Potions[2] = atoi(Argument[1]);
 
 				if (Potions[2] >= 0)
-					Funcs->InputConsole("AutoPotÿc0: ÿc4Drinking a mana potion if mana drops below ÿc3%s%%.", Argument[1]);
+					InputConsole("AutoPotÿc0: ÿc4Drinking a mana potion if mana drops below ÿc3%s%%.", Argument[1]);
 			}
 			else if (Argument[1] && !_stricmp(Argument[1], "off"))
 			{
 				Potions[2] = -1;
-				Funcs->InputConsole("AutoPotÿc0: ÿc4Drinking mana potion is disabled.");
+				InputConsole("AutoPotÿc0: ÿc4Drinking mana potion is disabled.");
 			}
 			return false;
 		}
@@ -241,12 +233,12 @@ BOOL FASTCALL Commands::GameInput(WCHAR* Text)
 				Potions[1] = atoi(Argument[1]);
 
 				if (Potions[1] >= 0)
-					Funcs->InputConsole("AutoPotÿc0: ÿc4Drinking a rejuvenation potion if health drops below ÿc1%s%%.", Argument[1]);
+					InputConsole("AutoPotÿc0: ÿc4Drinking a rejuvenation potion if health drops below ÿc1%s%%.", Argument[1]);
 			}
 			else if (Argument[1] && !_stricmp(Argument[1], "off"))
 			{
 				Potions[2] = -1;
-				Funcs->InputConsole("AutoPotÿc0: ÿc4Drinking rejuventation potion for life is disabled.");
+				InputConsole("AutoPotÿc0: ÿc4Drinking rejuventation potion for life is disabled.");
 			}
 			return false;
 		}
@@ -259,11 +251,11 @@ BOOL FASTCALL Commands::GameInput(WCHAR* Text)
 				Potions[3] = atoi(Argument[1]);
 
 				if (Potions[3] >= 0)
-					Funcs->InputConsole("AutoPotÿc0: ÿc4Drinking a rejuvenation potion if mana drops below ÿc3%s%%.", Argument[1]);
+					InputConsole("AutoPotÿc0: ÿc4Drinking a rejuvenation potion if mana drops below ÿc3%s%%.", Argument[1]);
 				else if (Argument[1] && !_stricmp(Argument[1], "off"))
 				{
 					Potions[3] = -1;
-					Funcs->InputConsole("AutoPotÿc0: ÿc4Drinking rejuvenation potions for mana is disabled.");
+					InputConsole("AutoPotÿc0: ÿc4Drinking rejuvenation potions for mana is disabled.");
 				}
 				return false;
 			}
@@ -275,7 +267,7 @@ BOOL FASTCALL Commands::GameInput(WCHAR* Text)
 	return true;
 }
 
-int Commands::StringTokenize(char* input, char separator, char** tokenbuf, int maxtokens)
+int StringTokenize(char* input, char separator, char** tokenbuf, int maxtokens)
 {
 	char* p = input;
 	int i = 0;
@@ -288,7 +280,7 @@ int Commands::StringTokenize(char* input, char separator, char** tokenbuf, int m
 	return ++i;
 }
 
-//void Commands::StringFix(char* szString)
+//void StringFix(char* szString)
 //{
 //	char szBuffer[1024] = { 0 };
 //
@@ -303,7 +295,7 @@ int Commands::StringTokenize(char* input, char separator, char** tokenbuf, int m
 //	strcpy(szString, szBuffer);
 //}
 
-//void Commands::ReplaceString(std::string & String, std::string Find, std::string Replace)
+//void ReplaceString(std::string & String, std::string Find, std::string Replace)
 //{
 //	for (auto i = String.find(Find); i != std::string::npos; i = String.find(Find))
 //	{
@@ -312,7 +304,7 @@ int Commands::StringTokenize(char* input, char separator, char** tokenbuf, int m
 //	}
 //}
 
-bool Commands::Speak(LPSTR lpMessage, ...)
+bool Speak(LPSTR lpMessage, ...)
 {
 	if (!Me)
 		return false;

@@ -24,7 +24,7 @@ void Missiles::RevealMissiles()
 		for (UnitAny* pUnit = room1->pUnitFirst; pUnit; pUnit = pUnit->pListNext)
 		{
 			POINT automapLoc;
-			Funcs->ScreenToAutomap(&automapLoc, pUnit->pPath->xPos, pUnit->pPath->yPos);
+			ScreenToAutomap(&automapLoc, pUnit->pPath->xPos, pUnit->pPath->yPos);
 
 			if (pUnit->dwType == UNIT_TYPE_MISSILE)
 			{

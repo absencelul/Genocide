@@ -1,15 +1,6 @@
 #include "Hack.h"
 
-Functions::Functions()
-{
-}
-
-
-Functions::~Functions()
-{
-}
-
-/*void Functions::Testing()
+/*void Testing()
 {
 	UnitAny* Ring1 = 0;
 	UnitAny* Ring2 = 0;
@@ -43,7 +34,7 @@ Functions::~Functions()
 }*/
 
 //add commas
-LPSTR Functions::AddCommas(DOUBLE f, INT places)
+LPSTR AddCommas(DOUBLE f, INT places)
 {
 	static CHAR tmp[40];
 	LPSTR s;
@@ -58,7 +49,7 @@ LPSTR Functions::AddCommas(DOUBLE f, INT places)
 	sprintf_s(tmp, "%#.*f", places, f);
 	s = strchr(tmp, '.');
 	if (!places)
-		*s = '\0';
+		* s = '\0';
 
 	while (--s > tmp)
 	{
@@ -75,7 +66,7 @@ LPSTR Functions::AddCommas(DOUBLE f, INT places)
 }
 
 //Searches and returns Item as unit.
-LPUNITANY FASTCALL Functions::FindItem(DWORD dwCode, INT nLoc)
+LPUNITANY FASTCALL FindItem(DWORD dwCode, INT nLoc)
 {
 	LPUNITANY Item = Me->pInventory->pFirstItem;
 
@@ -101,7 +92,7 @@ LPUNITANY FASTCALL Functions::FindItem(DWORD dwCode, INT nLoc)
 }
 
 //Searches for item and returns location. i.e Stash Cube etc.
-int Functions::GetItemLocation(LPUNITANY pItem)
+int GetItemLocation(LPUNITANY pItem)
 {
 	if (!pItem || !pItem->pItemData)
 		return -1;
@@ -135,7 +126,7 @@ int Functions::GetItemLocation(LPUNITANY pItem)
 	return STORAGE_NULL;
 }
 
-bool Functions::GetCurSkill(bool left, WORD wSkillId)
+bool GetCurSkill(bool left, WORD wSkillId)
 {
 	if (left)
 		return (Me->pInfo->pLeftSkill->pSkillInfo->wSkillId == wSkillId);
@@ -144,7 +135,7 @@ bool Functions::GetCurSkill(bool left, WORD wSkillId)
 }
 
 //Get current selected skill left/right
-WORD Functions::GetCurrentSkill(bool Left)
+WORD GetCurrentSkill(bool Left)
 {
 	if (Left)
 		return Me->pInfo->pLeftSkill->pSkillInfo->wSkillId;
@@ -152,7 +143,7 @@ WORD Functions::GetCurrentSkill(bool Left)
 		return Me->pInfo->pRightSkill->pSkillInfo->wSkillId;
 }
 
-void Functions::CastSpell(WORD x, WORD y, bool MySpot)
+void CastSpell(WORD x, WORD y, bool MySpot)
 {
 	if (!Units->CheckReady(true, true))
 		return;
@@ -171,7 +162,7 @@ void Functions::CastSpell(WORD x, WORD y, bool MySpot)
 	Stubs::D2CLIENT_Attack(&Attack, false);
 }
 
-std::string Functions::Difficulty()
+std::string Difficulty()
 {
 	switch (D2CLIENT_GetDifficulty())
 	{
@@ -189,7 +180,7 @@ std::string Functions::Difficulty()
 }
 
 //Checks to see if you have skill
-bool Functions::GetSkill(WORD wSkillId)
+bool GetSkill(WORD wSkillId)
 {
 	if (!Me)
 		return 0;
@@ -202,7 +193,7 @@ bool Functions::GetSkill(WORD wSkillId)
 }
 
 //Prints text to screen.
-void Functions::Print(bool bottom, int color, std::string text, ...)
+void Print(bool bottom, int color, std::string text, ...)
 {
 	if (strlen(text.c_str()) <= 0)
 		return;
@@ -217,7 +208,7 @@ void Functions::Print(bool bottom, int color, std::string text, ...)
 	bottom ? D2CLIENT_PrintPartyString(wBuffer, color) : D2CLIENT_PrintGameString(wBuffer, color);
 }
 
-void Functions::InputConsole(std::string msg, ...)
+void InputConsole(std::string msg, ...)
 {
 	if ((int)ConsoleMessages.size() >= 3)
 		ConsoleMessages.erase(ConsoleMessages.begin());
@@ -235,7 +226,7 @@ void Functions::InputConsole(std::string msg, ...)
 }
 
 //remove yc within string
-INT Functions::RemoveColorSpecs(LPWSTR lpwsz)
+INT RemoveColorSpecs(LPWSTR lpwsz)
 {
 	if (lpwsz == NULL)
 		return 0;
@@ -259,7 +250,7 @@ INT Functions::RemoveColorSpecs(LPWSTR lpwsz)
 }
 
 //Casts screen to automap
-void Functions::ScreenToAutoMap(LPPOINT Point)
+void ScreenToAutoMap(LPPOINT Point)
 {
 	POINT Mouse = { (long)(*p_D2CLIENT_MouseX), (long)(*p_D2CLIENT_MouseY) };
 	POINT MouseOffset = { (*p_D2CLIENT_MouseOffsetX), (*p_D2CLIENT_MouseOffsetY) };
@@ -287,7 +278,7 @@ LPUNITANY ViewInventoryPatch1()
 }
 
 //Casts screen to automap
-void Functions::ScreenToAutomap(POINT* ptPos, int x, int y)
+void ScreenToAutomap(POINT* ptPos, int x, int y)
 {
 	x *= 32; y *= 32;
 	ptPos->x = ((x - y) / 2 / (*(INT*)p_D2CLIENT_Divisor)) - (*p_D2CLIENT_Offset).x + 8;
@@ -300,7 +291,7 @@ void Functions::ScreenToAutomap(POINT* ptPos, int x, int y)
 }
 
 //Searches for specified item id and returns it.
-DWORD Functions::UseItemIds(INT nLoc)
+DWORD UseItemIds(INT nLoc)
 {
 	if (Me->pInventory->dwLeftItemUid)
 		return Me->pInventory->dwLeftItemUid;
@@ -323,7 +314,7 @@ DWORD Functions::UseItemIds(INT nLoc)
 	return NULL;
 }
 
-/*string Functions::GetItemCode(UnitAny* ptItem)
+/*string GetItemCode(UnitAny* ptItem)
 {
 	if (!ptItem)
 		return 0;
@@ -333,7 +324,7 @@ DWORD Functions::UseItemIds(INT nLoc)
 }*/
 
 //System Time
-CHAR* Functions::SysTime()
+CHAR* SysTime()
 {
 	SYSTEMTIME Time;
 	GetLocalTime(&Time);
@@ -344,7 +335,7 @@ CHAR* Functions::SysTime()
 }
 
 //Current Time
-CHAR* Functions::TimeStamp()
+CHAR* TimeStamp()
 {
 	SYSTEMTIME Time;
 	GetLocalTime(&Time);

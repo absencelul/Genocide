@@ -23,7 +23,6 @@ VAR(int, colorText)
 VAR(bool, showStatScreen)
 //Classes
 VAR(Unit*, Units)
-VAR(Functions*, Funcs)
 VAR(EventMessage*, eMSG)
 //VAR(MoveItems *, Items)
 

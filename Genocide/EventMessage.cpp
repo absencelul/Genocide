@@ -19,7 +19,7 @@ DWORD EventMessage::EventMessageHandler(LPBYTE Packet, DWORD Length)
 	{
 		LPROSTERUNIT Unit = Units->FindPartyByName((LPSTR)&Packet[8]);
 
-		Funcs->Print(0, 4, "[%s] %s(%s) [Level %d %s] dropped due to timeout.", Funcs->TimeStamp(), Unit->szName, (LPSTR)&Packet[24], Unit->wLevel, Units->PlayerClass(Unit->dwClassId, false));
+		Print(0, 4, "[%s] %s(%s) [Level %d %s] dropped due to timeout.", TimeStamp(), Unit->szName, (LPSTR)&Packet[24], Unit->wLevel, Units->PlayerClass(Unit->dwClassId, false));
 		return false;
 	}
 		break;
@@ -32,14 +32,14 @@ DWORD EventMessage::EventMessageHandler(LPBYTE Packet, DWORD Length)
 		if (!Unit || Unit->dwUnitId == Me->dwUnitId)
 			return true;
 
-		Funcs->Print(0, 4, "[%s] %s(%s) [Level %d %s] joined our world.", Funcs->TimeStamp(), Unit->szName, (LPSTR)&Packet[24], Unit->wLevel, Units->PlayerClass(Unit->dwClassId, false));
+		Print(0, 4, "[%s] %s(%s) [Level %d %s] joined our world.", TimeStamp(), Unit->szName, (LPSTR)&Packet[24], Unit->wLevel, Units->PlayerClass(Unit->dwClassId, false));
 		return false;
 	}
 		break;
 
 	case 0x03:
 
-		Funcs->Print(0, 4, "[%s] %s(%s) [Level %s %s] [%s%% Life] left our world.", Funcs->TimeStamp(), ChatName, (LPSTR)&Packet[24], ChatLevel, ChatClass, ChatLife);
+		Print(0, 4, "[%s] %s(%s) [Level %s %s] [%s%% Life] left our world.", TimeStamp(), ChatName, (LPSTR)&Packet[24], ChatLevel, ChatClass, ChatLife);
 		return false;
 
 		break;
@@ -52,8 +52,8 @@ DWORD EventMessage::EventMessageHandler(LPBYTE Packet, DWORD Length)
 			if (!Unit)
 				return true;
 
-			Funcs->Print(0, Red, "[%s] You killed '%s' a level %d %s.", Funcs->TimeStamp(), Unit->szName, Unit->wLevel, Units->PlayerClass(Unit->dwClassId, false));
-			Funcs->InputConsole("You killed %s [Level %d %s] total kills: %d, this game: %d", Unit->szName, Unit->wLevel, Units->PlayerClass(Unit->dwClassId, false), ++killCount, ++killCountGame);
+			Print(0, Red, "[%s] You killed '%s' a level %d %s.", TimeStamp(), Unit->szName, Unit->wLevel, Units->PlayerClass(Unit->dwClassId, false));
+			InputConsole("You killed %s [Level %d %s] total kills: %d, this game: %d", Unit->szName, Unit->wLevel, Units->PlayerClass(Unit->dwClassId, false), ++killCount, ++killCountGame);
 
 			if (UseAltScreen)
 				D2CLIENT_SetUIVar(UI_ALTDOWN, 0, 0);
@@ -82,77 +82,77 @@ DWORD EventMessage::EventMessageHandler(LPBYTE Packet, DWORD Length)
 	{
 	case 0x01:
 	{
-		Funcs->Print(1, 4, "[%s] %s permits you to loot his corpse.", Funcs->TimeStamp(), ChatName);
+		Print(1, 4, "[%s] %s permits you to loot his corpse.", TimeStamp(), ChatName);
 		return false;
 	}
 	break;
 
 	case 0x02:
 	{
-		Funcs->Print(1, 4, "[%s] %s permits you to loot her corpse.", Funcs->TimeStamp(), ChatName);
+		Print(1, 4, "[%s] %s permits you to loot her corpse.", TimeStamp(), ChatName);
 		return false;
 	}
 	break;
 
 	case 0x03:
 	{
-		Funcs->Print(1, 1, "[%s] %s has declared hostility towards you.", Funcs->TimeStamp(), ChatName);
+		Print(1, 1, "[%s] %s has declared hostility towards you.", TimeStamp(), ChatName);
 		return false;
 	}
 	break;
 
 	case 0x04:
 	{
-		Funcs->Print(1, 3, "[%s] %s is no longer hostile towards you.", Funcs->TimeStamp(), ChatName);
+		Print(1, 3, "[%s] %s is no longer hostile towards you.", TimeStamp(), ChatName);
 		return false;
 	}
 	break;
 
 	case 0x05:
 	{
-		Funcs->Print(1, 2, "[%s] %s invites you to ally against the forces of evil.", Funcs->TimeStamp(), ChatName);
+		Print(1, 2, "[%s] %s invites you to ally against the forces of evil.", TimeStamp(), ChatName);
 		return false;
 	}
 	break;
 
 	case 0x06:
 	{
-		Funcs->Print(1, 9, "[%s] %s has canceled party invite.", Funcs->TimeStamp(), ChatName);
+		Print(1, 9, "[%s] %s has canceled party invite.", TimeStamp(), ChatName);
 		return false;
 	}
 	break;
 
 	case 0x07:
 	{
-		Funcs->Print(1, 2, "[%s] %s has joined your party to fight the forces of evil.", Funcs->TimeStamp(), ChatName);
+		Print(1, 2, "[%s] %s has joined your party to fight the forces of evil.", TimeStamp(), ChatName);
 		return false;
 	}
 	break;
 
 	case 0x08:
 	{
-		Funcs->Print(1, 2, "[%s] You are now allied with %s.", Funcs->TimeStamp(), ChatName);
+		Print(1, 2, "[%s] You are now allied with %s.", TimeStamp(), ChatName);
 		return false;
 	}
 	break;
 
 	case 0x09:
 	{
-		Funcs->Print(1, 9, "[%s] %s has left your party.", Funcs->TimeStamp(), ChatName);
+		Print(1, 9, "[%s] %s has left your party.", TimeStamp(), ChatName);
 		return false;
 	}
 	break;
 
 	case 0x0a:
 	{
-		Funcs->Print(1, 4, "[%s] %s no longer allows you to access his corpse.", Funcs->TimeStamp(), ChatName);
+		Print(1, 4, "[%s] %s no longer allows you to access his corpse.", TimeStamp(), ChatName);
 		return false;
 	}
 	break;
 
 	case 0x0b:
 	{
-		Funcs->Print(1, 4, "[%s] %s no longer allows you to access her corpse.", Funcs->TimeStamp(), ChatName);
+		Print(1, 4, "[%s] %s no longer allows you to access her corpse.", TimeStamp(), ChatName);
 		return false;
 	}
 	break;

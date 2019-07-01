@@ -33,7 +33,7 @@ void Helpers::InviteAction(BYTE button, DWORD dwPlayerId)
 	Packet[1] = button;
 	*(LPDWORD)&Packet[2] = dwPlayerId;
 	D2NET_SendPacket(6, 1, Packet);
-	Funcs->InputConsole("ÿc8Auto-Invited IHPK Member");
+	InputConsole("ÿc8Auto-Invited IHPK Member");
 	ButtonAction(LOOT_BUTTON, TOGGLE_ON, dwPlayerId);
 }
 
@@ -86,7 +86,7 @@ bool Spam(string Msg, string pName)
 
 		if (Msg.find(SFMsg.c_str(), 0) != std::string::npos)
 		{
-			Funcs->Print(0, 4, "%s was added to spam filter message (%s) filtered phrase (%s).", pName.c_str(), Msg.c_str(), SpamMsg.at(i).c_str());
+			Print(0, 4, "%s was added to spam filter message (%s) filtered phrase (%s).", pName.c_str(), Msg.c_str(), SpamMsg.at(i).c_str());
 			SpamPlayers.push_back(pName);
 			PushConfig("Spam Players.txt", pName);
 			return true;

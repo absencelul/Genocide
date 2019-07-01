@@ -38,7 +38,7 @@ BYTE Math::CalcPercent(DWORD dwVal, DWORD dwMaxVal, BYTE iMin) {
 POINT Math::PickFarcastLocation(POINT Target)
 {
 	POINT Origin = { (Me->pPath->xPos), (Me->pPath->yPos) };
-	Funcs->ScreenToAutoMap(&Target);
+	ScreenToAutoMap(&Target);
 
 	INT Angle = CalculateAngle(Origin, Target);
 	INT Radius = FcDistance * 2;

@@ -130,7 +130,7 @@ bool SetChargedSkill(WORD wSkillId, bool bLeft, DWORD dwItemId)
 	if (!ClientReady)
 		return false;
 
-	if (!Funcs->GetSkill(wSkillId))
+	if (!GetSkill(wSkillId))
 		return false;
 
 	BYTE Packet[9];
@@ -151,7 +151,7 @@ void UseItem(LPUNITANY Unit)
 	if (!Unit)
 		return;
 
-	INT Location = Funcs->GetItemLocation(Unit);
+	INT Location = GetItemLocation(Unit);
 
 	if (Location == STORAGE_INVENTORY || Location == STORAGE_BELT) {
 		LPBYTE Packet = new BYTE[13];
@@ -166,7 +166,7 @@ void UseItem(LPUNITANY Unit)
 	if (Location == STORAGE_STASH || Location == STORAGE_CUBE) {
 		LPBYTE Packet = new BYTE[9];
 		Packet[0] = 0x27;
-		*(LPDWORD)&Packet[1] = Funcs->UseItemIds(Location);
+		*(LPDWORD)&Packet[1] = UseItemIds(Location);
 		*(LPDWORD)&Packet[5] = Unit->dwUnitId;
 		D2NET_SendPacket(9, 1, Packet);
 		delete[] Packet;
@@ -179,7 +179,7 @@ void UseSkillOnUnit(LPUNITANY Unit, WORD Skill, bool Left, bool Shift, bool Anim
 	if (!Units->CheckReady(false, true))
 		return;
 
-	if (!Funcs->GetSkill(Skill))
+	if (!GetSkill(Skill))
 		return;
 
 	LPBYTE Packet = new BYTE[9];

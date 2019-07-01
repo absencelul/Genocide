@@ -50,11 +50,11 @@ void Potion::UsePot(int Type) {
 	LPUNITANY _Pot = NULL;
 
 	for (unsigned int i = 0; i < PotCodes.size(); i++) {
-		_Pot = Funcs->FindItem(PotCodes[i], STORAGE_STASH);
+		_Pot = FindItem(PotCodes[i], STORAGE_STASH);
 
-		if (!_Pot) _Pot = Funcs->FindItem(PotCodes[i], STORAGE_BELT);
-		if (!_Pot) _Pot = Funcs->FindItem(PotCodes[i], STORAGE_INVENTORY);
-		if (!_Pot) _Pot = Funcs->FindItem(PotCodes[i], STORAGE_CUBE);
+		if (!_Pot) _Pot = FindItem(PotCodes[i], STORAGE_BELT);
+		if (!_Pot) _Pot = FindItem(PotCodes[i], STORAGE_INVENTORY);
+		if (!_Pot) _Pot = FindItem(PotCodes[i], STORAGE_CUBE);
 		if (!_Pot) continue;
 
 		UseItem(_Pot);
