@@ -79,6 +79,9 @@ void KeyHooks::KeyHook()
 {
 	if (KeyDown(hammer[0]))
 	{
+		if (KeyDown(AutoAim[0]) || KeyDown(AutoAim[1]))
+			return;
+
 		if (GetCurrentSkill(false) != D2S_CONCENTRATION)
 			SetSkill(D2S_CONCENTRATION, false);
 
