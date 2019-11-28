@@ -36,7 +36,6 @@ void Settings::LoadConfig()
 		{ "POTION", "Potions", INTEGER, &Potions },
 
 		{ "MISC", "Reload", INTEGER, &Reload },
-		{ "MISC", "OpenBuffers", INTEGER, &StashCube },
 		{ "MISC", "Portal States", BOOLEAN, &PortalStates },
 		{ "MISC", "Town Hotkeys", INTEGER, &TownKeys },
 		{ "MISC", "Prebuff", INTEGER, &Prebuff },
@@ -49,7 +48,6 @@ void Settings::LoadConfig()
 		{ "MISC", "FC Teleport Distance", INTEGER, &FcDistance },
 		{ "MISC", "Chat Color", INTEGER, &colorText },
 		{ "MISC", "Show Extra Stats", BOOLEAN, &showStatScreen },
-		{ "MISC", "Enchant Key", INTEGER, &Ench },
 
 		{ "REVEAL", "MapHack", BOOLEAN, &AutoRevealAutomap },
 		{ "REVEAL", "Shrine Images", BOOLEAN, &ShrineImages },
@@ -58,7 +56,13 @@ void Settings::LoadConfig()
 		{ "REVEAL", "My Missile Color", INTEGER, &MyMissile },
 		{ "REVEAL", "Neutral Missile Color", INTEGER, &NeutralMissile },
 		{ "REVEAL", "Friend Missile Color", INTEGER, &FriendMissile },
-		{ "REVEAL", "Enemy Missile Color", INTEGER, &EnemyMissile }
+		{ "REVEAL", "Enemy Missile Color", INTEGER, &EnemyMissile },
+
+		{ "REVEAL", "Show Monsters", BOOLEAN, &show_monsters },
+		{ "REVEAL", "Normal Monster Color", INTEGER, &normal_monster },
+		{ "REVEAL", "Boss Monster Color", INTEGER, &boss_monster },
+		{ "REVEAL", "Champion Monster Color", INTEGER, &champion_monster },
+		{ "REVEAL", "Minion Monster Color", INTEGER, &minion_monster }
 	};
 
 	for (INT i = 0; i < ArraySize(C); i++)

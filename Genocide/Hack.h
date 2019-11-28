@@ -67,6 +67,7 @@ using namespace std;
 #include "KeyHooks.h"
 #include "Math.h"
 #include "Missiles.h"
+#include "Monsters.h"
 #include "Packet Functions.h"
 #include "Packet Received.h"
 #include "Packet Send.h"

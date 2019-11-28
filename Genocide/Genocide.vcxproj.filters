@@ -88,6 +88,9 @@
     <Filter Include="[Vital]">
       <UniqueIdentifier>{a9741eb8-b7ca-44c3-8a7d-ba7865bc7b11}</UniqueIdentifier>
     </Filter>
+    <Filter Include="[Reveal]\[Monsters]">
+      <UniqueIdentifier>{eac9b5e4-23d7-4209-83e2-8b8ba3093647}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Potion.h">
@@ -189,6 +192,9 @@
     <ClInclude Include="MoveItems.h">
       <Filter>[Diablo II]</Filter>
     </ClInclude>
+    <ClInclude Include="Monsters.h">
+      <Filter>[Reveal]\[Monsters]</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Potion.cpp">
@@ -268,6 +274,9 @@
     </ClCompile>
     <ClCompile Include="MoveItems.cpp">
       <Filter>[Diablo II]</Filter>
+    </ClCompile>
+    <ClCompile Include="Monsters.cpp">
+      <Filter>[Reveal]\[Monsters]</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

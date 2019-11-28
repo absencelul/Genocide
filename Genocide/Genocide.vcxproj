@@ -162,6 +162,7 @@
     <ClInclude Include="KeyHooks.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Missiles.h" />
+    <ClInclude Include="Monsters.h" />
     <ClInclude Include="MoveItems.h" />
     <ClInclude Include="Packet Functions.h" />
     <ClInclude Include="Packet Received.h" />
@@ -194,6 +195,7 @@
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="Missiles.cpp" />
     <ClCompile Include="DllMain.cpp" />
+    <ClCompile Include="Monsters.cpp" />
     <ClCompile Include="MoveItems.cpp" />
     <ClCompile Include="Packet Functions.cpp" />
     <ClCompile Include="Packet Received.cpp" />

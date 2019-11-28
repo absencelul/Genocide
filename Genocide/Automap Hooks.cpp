@@ -7,6 +7,7 @@ void DrawAutomap()
 	PlayerInfo();
 	FCPointer();
 	Missiles::RevealMissiles();
+	RevealMonsters();
 }
 
 void GameInfo()

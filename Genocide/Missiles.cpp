@@ -28,7 +28,7 @@ void Missiles::RevealMissiles()
 
 			if (pUnit->dwType == UNIT_TYPE_MISSILE)
 			{
-				int color = 255;
+				auto color = 255;
 
 				switch (GetRelation(pUnit)) {
 				case 0:

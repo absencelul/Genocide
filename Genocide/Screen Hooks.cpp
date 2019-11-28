@@ -179,7 +179,7 @@ void TimerBo()
 			BoTimer--;
 			BoTime = GetTickCount64();
 			if (BoTimer == 10)
-				Print(0, 4, ":: Warning : BO will run out in 10 seconds.");
+				InputConsole("[Battle Orders] will run out in 10 seconds.");
 		}
 }
 
@@ -203,10 +203,10 @@ void AuraSwap()
 		return;
 
 	PrecastSkills swap[] = {
-				{ D2S_BLESSEDAIM, GetSkill(D2S_BLESSEDAIM) },
-				{ D2S_MIGHT, GetSkill(D2S_MIGHT) },
-				{ D2S_FANATICISM, GetSkill(D2S_FANATICISM) },
-				{ D2S_CONCENTRATION, GetSkill(D2S_CONCENTRATION) },
+		{ D2S_BLESSEDAIM, GetSkill(D2S_BLESSEDAIM) },
+		{ D2S_MIGHT, GetSkill(D2S_MIGHT) },
+		{ D2S_FANATICISM, GetSkill(D2S_FANATICISM) },
+		{ D2S_CONCENTRATION, GetSkill(D2S_CONCENTRATION) },
 	};
 
 	if (AllowSwap)

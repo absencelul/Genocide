@@ -158,9 +158,6 @@ void KeyHooks::KeyHook()
 void __fastcall KeyHooks::OnGameKeyDown(byte Key, byte Repeat)
 {
 	//MoveItems* Items = new MoveItems();
-	//qw32r4k3nn0zhej // 0803 // Paladin
-	//pKtvdUmK0HYU6ik // 0803 // Amazon
-	//y5t4u3yCJnEngJD // 0803 // Necro
 	if (Key == Blindz[1])
 	{
 		if ((unsigned)Blindz[0] < Blinds[0].size() - 1)
@@ -182,32 +179,6 @@ void __fastcall KeyHooks::OnGameKeyDown(byte Key, byte Repeat)
 	{
 		Items->MoveBufferToBuffer(STORAGE_INVENTORY, 255);
 	}*/
-
-	if (Key == StashCube[0])
-	{
-		if (p_D2CLIENT_UIMode[UI_CUBE])
-			D2CLIENT_SetUIVar(UI_CUBE, 1, 0);
-		if (p_D2CLIENT_UIMode[UI_STASH])
-			D2CLIENT_SetUIVar(UI_STASH, 1, 0);
-		else
-		{
-			BYTE data[2] = { 0x77, 0x10 };
-			D2NET_ReceivePacket(data, 2);
-		}
-	}
-
-	if (Key == StashCube[1])
-	{
-		if (p_D2CLIENT_UIMode[UI_STASH])
-			D2CLIENT_SetUIVar(UI_STASH, 1, 0);
-		if (p_D2CLIENT_UIMode[UI_CUBE])
-			D2CLIENT_SetUIVar(UI_CUBE, 1, 0);
-		else
-		{
-			BYTE data[2] = { 0x77, 0x15 };
-			D2NET_ReceivePacket(data, 2);
-		}
-	}
 
 	//town
 	if (Key == TownKeys[1])

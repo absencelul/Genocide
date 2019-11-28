@@ -95,6 +95,13 @@ VAR(INT, FriendMissile)
 VAR(INT, NeutralMissile)
 VAR(INT, EnemyMissile)
 
+//Monsters
+VAR(bool, show_monsters)
+VAR(int, normal_monster)
+VAR(int, boss_monster)
+VAR(int, champion_monster)
+VAR(int, minion_monster)
+
 //MISC
 /*Open TP/FastTown*/
 VAR(int, TownKeys[2])
@@ -110,10 +117,8 @@ VAR(bool, TakeScreen)
 VAR(DWORD, SSDelay)
 VAR(ULONGLONG, SStime)
 VAR(int, Reload)
-VAR(int, StashCube[2])
 VAR(int, killCount)
 VAR(int, killCountGame)
-VAR(int, Ench)
 
 //Target List
 VAR(ULONGLONG, Input)
