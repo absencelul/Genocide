@@ -28,16 +28,15 @@ void Settings::LoadConfig()
 
 		{ "CONSOLE", "Console Delay", INTEGER, &ConsoleDelay },
 
+		{ "CHICKEN", "Portal States", BOOLEAN, &PortalStates },
 		{ "CHICKEN", "Chickens", INTEGER, &Chickens },
 		{ "CHICKEN", "RescueWhen", CURSE, &RescueWhen },
 		{ "CHICKEN", "RescueWhenCursed", CURSE, &RescueWhenCursed },
 		{ "CHICKEN", "RescueWhenOut", CURSE, &RescueWhenOut },
-
-		{ "POTION", "Potions", INTEGER, &Potions },
+		{ "CHICKEN", "Potions", INTEGER, &Potions },
+		{ "CHICKEN", "Town Hotkeys", INTEGER, &TownKeys },
 
 		{ "MISC", "Reload", INTEGER, &Reload },
-		{ "MISC", "Portal States", BOOLEAN, &PortalStates },
-		{ "MISC", "Town Hotkeys", INTEGER, &TownKeys },
 		{ "MISC", "Prebuff", INTEGER, &Prebuff },
 		{ "MISC", "ScreenShot", BOOLEAN, &ScreenShot },
 		{ "MISC", "ScreenShot Delay", INTEGER, &SSDelay },

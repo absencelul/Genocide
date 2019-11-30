@@ -6,7 +6,7 @@ void DrawAutomap()
 	xVector();
 	PlayerInfo();
 	FCPointer();
-	Missiles::RevealMissiles();
+	RevealMissiles();
 	RevealMonsters();
 }
 
@@ -15,19 +15,21 @@ void GameInfo()
 	int y = 0;
 	std::list<std::string> GameInfoList;
 
-	AddStringToList(GameInfoList, "FPS: %d, Skip: %d, Ping: %d", FPS, Skip, Ping);
+	//AddStringToList(GameInfoList, "FPS: %d, Skip: %d, Ping: %d", FPS, Skip, Ping);
 	if (strlen(D2CLIENT_GetGameInfo()->szGameName) > 0)
 		AddStringToList(GameInfoList, "Game: %s", D2CLIENT_GetGameInfo()->szGameName);
 	if (strlen(D2CLIENT_GetGameInfo()->szGamePassword) > 0)
 		AddStringToList(GameInfoList, "Password: %s", D2CLIENT_GetGameInfo()->szGamePassword);
+	AddStringToList(GameInfoList, "%s", UnicodeToAnsi(D2CLIENT_GetLevelName_I(D2CLIENT_GetPlayerUnit()->pPath->pRoom1->pRoom2->pLevel->dwLevelNo)));
+	AddStringToList(GameInfoList, "v 1.14d", Difficulty().c_str());
 	if (strcmp(Difficulty().c_str(), "Normal") != 0)
 		AddStringToList(GameInfoList, "Difficulty: %s", Difficulty().c_str());
-	if (strlen(D2CLIENT_GetGameInfo()->szGameServerIp) > 0)
-		AddStringToList(GameInfoList, "%s", D2CLIENT_GetGameInfo()->szGameServerIp);
-	AddStringToList(GameInfoList, "%s", UnicodeToAnsi(D2CLIENT_GetLevelName_I(D2CLIENT_GetPlayerUnit()->pPath->pRoom1->pRoom2->pLevel->dwLevelNo)));
+	AddStringToList(GameInfoList, "EXPANSION", Difficulty().c_str());
+	/*if (strlen(D2CLIENT_GetGameInfo()->szGameServerIp) > 0)
+		AddStringToList(GameInfoList, "%s", D2CLIENT_GetGameInfo()->szGameServerIp);*/
 
 	for (auto& it : GameInfoList)
-		TextHook(790, y += 16, Gold, Right, 0, "%s", it.c_str());
+		TextHook(*p_D2CLIENT_ScreenSizeX - 18, y += 16, Gold, Right, 1, "%s", it.c_str());
 }
 
 void xVector()

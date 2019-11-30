@@ -4,7 +4,6 @@ TMC::TMC()
 {
 }
 
-
 TMC::~TMC()
 {
 }
@@ -18,10 +17,10 @@ void __fastcall TMC::GameAfterAttack(LPUNITANY Unit, DWORD SkillID, DWORD SkillL
 
 	if (Me && Unit->dwType == UNIT_TYPE_PLAYER && Unit->dwUnitId == Me->dwUnitId)
 	{
-		int skillsToRet[7] = { 49, 53, 107, 132, 151 };
+		auto skillsToRet = { D2S_LIGHTNING, D2S_CHAINLIGHTNING, D2S_CHARGE, D2S_LEAP, D2S_WHIRLWIND };
 
-		for (int i = 0; i < ArraySize(skillsToRet); i++)
-			if (SkillID == skillsToRet[i])
+		for (auto i : skillsToRet)
+			if (SkillID == i)
 				return;
 
 		Me->dwFrameRemain = 0;

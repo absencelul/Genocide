@@ -2,7 +2,9 @@
 #define VARS
 #include "Hack.h"
 #include "Pointer.h"
+
 #define LeftClickAllSkills    0xEB
+
 Patch * patches[] = {
 	new Patch(Call, 0x96DED, (int)Stubs::ChickenSTUB, 5),
 	new Patch(Jmp, 0x5ADB3, (int)Stubs::DrawAutomapSTUB, 5),

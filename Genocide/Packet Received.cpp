@@ -1,6 +1,6 @@
 #include "Hack.h"
 
-bool Portal(LPBYTE Packet, DWORD Length)
+/*bool Portal(LPBYTE Packet, DWORD Length)
 {
 	if (Packet[0] == 0x60)
 	{
@@ -16,25 +16,28 @@ bool Portal(LPBYTE Packet, DWORD Length)
 		}
 	}
 	return true;
-}
+}*/
 
-/*HANDLE portalThread = NULL;
+HANDLE portalThread = NULL;
 DWORD ATPID = NULL;
 bool Portal(LPBYTE Packet, DWORD Length)
 {
 	if (Town && !IsTown(Me))
 	{
-		LPUNITANY Unit = (LPUNITANY)GetUnit(*(LPDWORD)&Packet[3], UNIT_TYPE_OBJECT);
+		LPUNITANY Unit = (LPUNITANY)GetUnit(*(LPDWORD)& Packet[3], UNIT_TYPE_OBJECT);
 		if (!_stricmp(Me->pPlayerData->szName, Unit->pObjectData->szOwner))
 		{
-			ATPID = *(LPDWORD)&Packet[3];
-
-			if (portalThread != NULL)
+			if (D2MATH_GetDistance(D2CLIENT_GetPlayerUnit(), Unit->pObjectPath->dwPosX, Unit->pObjectPath->dwPosY) < 25)
 			{
-				TerminateThread(portalThread, 0);
-				portalThread = NULL;
+				ATPID = *(LPDWORD)& Packet[3];
+
+				if (portalThread != NULL)
+				{
+					TerminateThread(portalThread, 0);
+					portalThread = NULL;
+				}
+				portalThread = CreateThread(0, 0, EnterPortal, 0, 0, 0);
 			}
-			portalThread = CreateThread(0, 0, EnterPortal, 0, 0, 0);
 		}
 	}
 	return true;
@@ -44,15 +47,15 @@ DWORD WINAPI EnterPortal(LPVOID dwTimer)
 {
 	int count = 0;
 	while (!IsTown(Me) && ATPID != NULL) {
-		Interact(ATPID, UNIT_TYPE_OBJECT);
-		Sleep(Ping+50);
+		Interact(UNIT_TYPE_OBJECT, ATPID);
+		Sleep(Ping + 50);
 		count++;
 	}
 	Print(false, 4, "%i", count);
 	ATPID = NULL, Town = false;
 	portalThread = 0;
 	return 0;
-}*/
+}
 
 /*#pragma pack(push, 1)
 struct ChatPacket // max size(0x11A)
@@ -134,8 +137,8 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 		{
 			Packet[10] = NULL;
 
-			/*if (D2CLIENT_GetPlayerUnit()->dwMode == PLAYER_MODE_CAST)
-				D2CLIENT_GetPlayerUnit()->dwFrameRemain = 0;*/
+			if (D2CLIENT_GetPlayerUnit()->dwMode == PLAYER_MODE_CAST)
+				D2CLIENT_GetPlayerUnit()->dwFrameRemain = 1;
 
 			if (D2CLIENT_GetPlayerUnit()->pPath->xPos == *(LPWORD)& Packet[6] && D2CLIENT_GetPlayerUnit()->pPath->yPos == *(LPWORD)& Packet[8])
 				return true;

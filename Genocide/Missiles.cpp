@@ -1,15 +1,6 @@
 #include "Hack.h"
 
-Missiles::Missiles()
-{
-}
-
-
-Missiles::~Missiles()
-{
-}
-
-void Missiles::RevealMissiles()
+void RevealMissiles()
 {
 	if (!ShowMissiles)
 		return;
