@@ -139,12 +139,12 @@ void FCPointer()
 
 	POINT Player = { Me->pPath->xPos, Me->pPath->yPos };
 
-	INT Angle = Math::CalculateAngle(Player, Mouse);
+	INT Angle = CalculateAngle(Player, Mouse);
 	INT Radius = FcDistance;
 	POINT Cast = { NULL };
 
 	while (TRUE) {
-		Cast = Math::CalculatePointOnTrack(Player, Radius--, Angle);
+		Cast = CalculatePointOnTrack(Player, Radius--, Angle);
 
 		if (!D2COMMON_CheckCollision(Me->pPath->pRoom1, Cast.x, Cast.y, 2))
 			if (::abs(Me->pPath->xPos - Cast.x) <= FcDistance && ::abs(Me->pPath->yPos - Cast.y) <= FcDistance)

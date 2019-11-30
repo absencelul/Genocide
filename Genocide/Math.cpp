@@ -1,29 +1,19 @@
 #include "Hack.h"
 
-Math::Math()
-{
-}
-
-
-Math::~Math()
-{
-}
-
 //Calculates distance
-long Math::CalculateDistance(const POINT& pt1, const POINT& pt2)
+long CalculateDistance(const POINT& pt1, const POINT& pt2)
 {
 	return CalculateDistance(pt1.x, pt1.y, pt2.x, pt2.y);
 }
 
 //Calculates distance
-long Math::CalculateDistance(long x1, long y1, long x2, long y2)
+long CalculateDistance(long x1, long y1, long x2, long y2)
 {
 	return (long)::sqrt((double)((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)));
 }
 
 //Get Percentage
-BYTE Math::CalcPercent(DWORD dwVal, DWORD dwMaxVal, BYTE iMin) {
-
+BYTE CalcPercent(DWORD dwVal, DWORD dwMaxVal, BYTE iMin) {
 	if (dwVal == 0 || dwMaxVal == 0)
 		return NULL;
 
@@ -35,7 +25,7 @@ BYTE Math::CalcPercent(DWORD dwVal, DWORD dwMaxVal, BYTE iMin) {
 	return max(iRes, iMin);
 }
 
-POINT Math::PickFarcastLocation(POINT Target)
+POINT PickFarcastLocation(POINT Target)
 {
 	POINT Origin = { (Me->pPath->xPos), (Me->pPath->yPos) };
 	ScreenToAutoMap(&Target);
@@ -56,7 +46,7 @@ POINT Math::PickFarcastLocation(POINT Target)
 	return Cast;
 }
 
-void Math::NormalizeAngle(int& rAngle)
+void NormalizeAngle(int& rAngle)
 {
 	if (::abs(rAngle) >= 360)
 		rAngle %= 360;
@@ -65,7 +55,7 @@ void Math::NormalizeAngle(int& rAngle)
 		rAngle += 360;
 }
 
-POINT Math::CalculatePointOnTrack(const POINT& ptOrigin, int nRadius, int nAngle)
+POINT CalculatePointOnTrack(const POINT& ptOrigin, int nRadius, int nAngle)
 {
 	if (nRadius == 0)
 		return ptOrigin;
@@ -78,12 +68,12 @@ POINT Math::CalculatePointOnTrack(const POINT& ptOrigin, int nRadius, int nAngle
 	return pt;
 }
 
-long Math::CalculateAngle(const POINT& pt1, const POINT& pt2)
+long CalculateAngle(const POINT& pt1, const POINT& pt2)
 {
 	return CalculateAngle(pt1.x, pt1.y, pt2.x, pt2.y);
 }
 
-long Math::CalculateAngle(long x1, long y1, long x2, long y2)
+long CalculateAngle(long x1, long y1, long x2, long y2)
 {
 	// mathematic stuff
 	if (x1 == x2 && y1 == y2)

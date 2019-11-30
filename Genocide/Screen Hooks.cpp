@@ -47,8 +47,7 @@ void DrawScreen()
 
 		if (CheckReady(true, true) && SelectedSkill)
 		{
-
-			POINT Farcast = Math::PickFarcastLocation(Target);
+			POINT Farcast = PickFarcastLocation(Target);
 			Attack.dwTargetX = Farcast.x;
 			Attack.dwTargetY = Farcast.y;
 			Attack.lpPlayerUnit = Me;
@@ -142,7 +141,6 @@ void extraDraw()
 
 		TextHook(217, 425, 8, 0, 1, 2, "%d", GetUnitStat(Me, STAT_MAGICRESIST));
 		TextHook(230, 425, 8, 0, 8, 2, "%d", GetUnitStat(Me, STAT_MAXMAGICRESIST));
-
 	}*/
 
 	if (p_D2CLIENT_UIMode[UI_INVENTORY]) // Draw text to INVENTORY

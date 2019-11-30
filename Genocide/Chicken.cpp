@@ -37,8 +37,8 @@ bool IsTown(UnitAny* pUnit)
 //Grabs Life or Mana.
 DWORD LifeMana(bool Life)
 {
-	DWORD LifePercent = Math::CalcPercent((GetUnitStat(D2CLIENT_GetPlayerUnit(), STAT_HP) >> 8), (GetUnitStat(D2CLIENT_GetPlayerUnit(), STAT_MAXHP) >> 8));
-	DWORD ManaPercent = Math::CalcPercent((GetUnitStat(D2CLIENT_GetPlayerUnit(), STAT_MANA) >> 8), (GetUnitStat(D2CLIENT_GetPlayerUnit(), STAT_MAXMANA) >> 8));
+	DWORD LifePercent = CalcPercent((GetUnitStat(D2CLIENT_GetPlayerUnit(), STAT_HP) >> 8), (GetUnitStat(D2CLIENT_GetPlayerUnit(), STAT_MAXHP) >> 8));
+	DWORD ManaPercent = CalcPercent((GetUnitStat(D2CLIENT_GetPlayerUnit(), STAT_MANA) >> 8), (GetUnitStat(D2CLIENT_GetPlayerUnit(), STAT_MAXMANA) >> 8));
 
 	return Life ? LifePercent : ManaPercent;
 }
