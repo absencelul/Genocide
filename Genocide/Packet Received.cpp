@@ -87,6 +87,26 @@ struct BaseSkill {
 	BYTE Level;
 };
 
+void RescueOnAffect(LPBYTE packet)
+{
+	Affect affects[] = { AFFECT_AMPLIFYDAMAGE, AFFECT_DIMVISION, AFFECT_WEAKEN, AFFECT_IRONMAIDEN, AFFECT_TERROR, AFFECT_CONFUSE, AFFECT_LIFETAP, AFFECT_ATTRACT, AFFECT_DECREPIFY, AFFECT_LOWERRESIST };
+
+	for (auto i = 0; i < sizeof(affects) / sizeof(affects[0]); i++)
+	{
+		if (RescueWhenCursed[i])
+		{
+			if (packet[7] == affects[i])
+			{
+				if (Portal())
+				{
+					InputConsole("RESCUE: Towning due to curse effect.");
+					Town = true;
+				}
+			}
+		}
+	}
+}
+
 DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 {
 	switch (Packet[0])
@@ -157,7 +177,8 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 	case 0x26:
 		if (_stricmp(Me->pPlayerData->szName, (LPSTR)& Packet[10]) && Spam((LPSTR)& Packet[strlen((LPSTR)& Packet[10]) + 11], (LPSTR)& Packet[10]))
 			return false;
-		//return OnMessage(Packet, Length);
+		Print(false, Gold, "[%s] %sÿc0: %s", TimeStamp(), (LPSTR)& Packet[10], (LPSTR)& Packet[strlen((LPSTR)& Packet[10]) + 11]);
+		return false;
 		break;
 
 	case 0x60: return Portal(Packet, Length);  break;
@@ -171,7 +192,6 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 					if (Portal())
 					{
 						Town = true;
-
 						InputConsole("RESCUE: Towned due to Mercenary Death!");
 					}
 
@@ -264,85 +284,7 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 				}
 			}
 
-			if (RescueWhenCursed[0])
-			{
-				if (Packet[7] == AFFECT_AMPLIFYDAMAGE)
-					if (Portal())
-						InputConsole("RESCUE: Towned due to [Amplify Damage]");
-				Town = true;
-			}
-
-			if (RescueWhenCursed[1])
-			{
-				if (Packet[7] == AFFECT_DIMVISION)
-					if (Portal())
-						InputConsole("RESCUE: Towned due to [Dim Vision]");
-				Town = true;
-			}
-
-			if (RescueWhenCursed[2])
-			{
-				if (Packet[7] == AFFECT_WEAKEN)
-					if (Portal())
-						InputConsole("RESCUE: Towned due to [Weaken]");
-				Town = true;
-			}
-
-			if (RescueWhenCursed[3])
-			{
-				if (Packet[7] == AFFECT_IRONMAIDEN)
-					if (Portal())
-						InputConsole("RESCUE: Towned due to [Iron Maiden]");
-				Town = true;
-			}
-
-			if (RescueWhenCursed[4])
-			{
-				if (Packet[7] == AFFECT_TERROR)
-					if (Portal())
-						InputConsole("RESCUE: Towned due to [Terror]");
-				Town = true;
-			}
-
-			if (RescueWhenCursed[5])
-			{
-				if (Packet[7] == AFFECT_CONFUSE)
-					if (Portal())
-						InputConsole("RESCUE: Towned due to [Confuse]");
-				Town = true;
-			}
-
-			if (RescueWhenCursed[6])
-			{
-				if (Packet[7] == AFFECT_LIFETAP)
-					if (Portal())
-						InputConsole("RESCUE: Towned due to [Life Tap]");
-				Town = true;
-			}
-
-			if (RescueWhenCursed[7])
-			{
-				if (Packet[7] == AFFECT_ATTRACT)
-					if (Portal())
-						InputConsole("RESCUE: Towned due to [Attract]");
-				Town = true;
-			}
-
-			if (RescueWhenCursed[8])
-			{
-				if (Packet[7] == AFFECT_DECREPIFY)
-					if (Portal())
-						InputConsole("RESCUE: Towned due to [Decrepify]");
-				Town = true;
-			}
-
-			if (RescueWhenCursed[9])
-			{
-				if (Packet[7] == AFFECT_LOWERRESIST)
-					if (Portal())
-						InputConsole("RESCUE: Towned due to [Lower Resist]");
-				Town = true;
-			}
+			RescueOnAffect(Packet);
 		}
 		break;
 

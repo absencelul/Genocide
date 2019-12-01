@@ -35,7 +35,7 @@ void RevealMonsters()
 						immunityText += szImmunities[n];
 				}
 				if (immunityText.length() > 0)
-					TextHook(automapLoc.x, automapLoc.y - 8, White, Center, 6, immunityText);
+					TextHook(automapLoc.x, automapLoc.y - 8, White, Center, 6, true, immunityText);
 				DrawPlayerBlob(automapLoc.x, automapLoc.y, color);
 			}
 		}

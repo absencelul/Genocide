@@ -203,56 +203,56 @@ enum UICover
 };
 namespace CellFiles
 {
-	char * const PARTY = "data\\D2Ex\\partyboxes";
-	char * const EDITBOX = "data\\GLOBAL\\UI\\FrontEnd\\textbox2";
-	char * const CHECKBOX = "data\\D2Ex\\checkbox";
-	char * const SELECTBOX = "data\\global\\ui\\FrontEnd\\clickbox";
-	char * const SMALLBUTTON = "data\\global\\ui\\FrontEnd\\CancelButtonBlank";
-	char * const MEDIUMBUTTON = "data\\global\\ui\\FrontEnd\\MediumButtonBlank2";
-	char * const WIDEBUTTON = "data\\global\\ui\\FrontEnd\\3WideButtonBlank";
-	char * const NARROWBUTTONUP = "data\\global\\ui\\FrontEnd\\WideButtonBlank02";
-	char * const NARROWBUTTONDOWN = "data\\global\\ui\\FrontEnd\\NarrowButtonBlank02";
-	char * const TALLBUTTON = "data\\global\\ui\\CharSelect\\TallButtonBlank";
+	char* const PARTY = "data\\D2Ex\\partyboxes";
+	char* const EDITBOX = "data\\GLOBAL\\UI\\FrontEnd\\textbox2";
+	char* const CHECKBOX = "data\\D2Ex\\checkbox";
+	char* const SELECTBOX = "data\\global\\ui\\FrontEnd\\clickbox";
+	char* const SMALLBUTTON = "data\\global\\ui\\FrontEnd\\CancelButtonBlank";
+	char* const MEDIUMBUTTON = "data\\global\\ui\\FrontEnd\\MediumButtonBlank2";
+	char* const WIDEBUTTON = "data\\global\\ui\\FrontEnd\\3WideButtonBlank";
+	char* const NARROWBUTTONUP = "data\\global\\ui\\FrontEnd\\WideButtonBlank02";
+	char* const NARROWBUTTONDOWN = "data\\global\\ui\\FrontEnd\\NarrowButtonBlank02";
+	char* const TALLBUTTON = "data\\global\\ui\\CharSelect\\TallButtonBlank";
 
-	char * const PARTYBUTTON = "data\\global\\ui\\MENU\\partybuttons";
-	char * const CHATBUTTON = "data\\global\\ui\\BIGMENU\\chatrightbuttons";
-	char * const BUYSELLBUTTON = "data\\global\\ui\\PANEL\\buysellbtn";
-	char * const SCROLLBAR = "data\\D2Ex\\ScrollBar";
+	char* const PARTYBUTTON = "data\\global\\ui\\MENU\\partybuttons";
+	char* const CHATBUTTON = "data\\global\\ui\\BIGMENU\\chatrightbuttons";
+	char* const BUYSELLBUTTON = "data\\global\\ui\\PANEL\\buysellbtn";
+	char* const SCROLLBAR = "data\\D2Ex\\ScrollBar";
 
-	char * const BLOBS = "data\\D2Ex\\Blobs";
-	char * const SKULLWIDGET = "data\\global\\ui\\WIDGETS\\optskull";
-	char * const MINIMAPICONS = "data\\global\\ui\\MINIMAP\\mapicons";
-	char * const MONINDICATOR = "data\\global\\ui\\FONT\\MonsterIndicators";
+	char* const BLOBS = "data\\D2Ex\\Blobs";
+	char* const SKULLWIDGET = "data\\global\\ui\\WIDGETS\\optskull";
+	char* const MINIMAPICONS = "data\\global\\ui\\MINIMAP\\mapicons";
+	char* const MONINDICATOR = "data\\global\\ui\\FONT\\MonsterIndicators";
 
-	char * const GUILDSCREEN = "data\\global\\ui\\PANEL\\steegstonebckg";
-	char * const PATCHBALL = "data\\global\\ui\\FrontEnd\\DownloadPatchBall2";
-	char * const PATCHBCKG = "data\\global\\ui\\FrontEnd\\DownloadPatchBckg";
-	char * const POPUP = "data\\global\\ui\\FrontEnd\\PopUpOKCancel2";
-	char * const MULTIRES = "data\\D2MultiRes";
-	char * const CONTROLPANEL = "data\\global\\ui\\PANEL\\CtrlPnl7";
-	char * const CONTROLPANEL800 = "data\\global\\ui\\PANEL\\800CtrlPnl7";
-	char * const BORDERFRAME800 = "data\\global\\ui\\PANEL\\800BorderFrame";
+	char* const GUILDSCREEN = "data\\global\\ui\\PANEL\\steegstonebckg";
+	char* const PATCHBALL = "data\\global\\ui\\FrontEnd\\DownloadPatchBall2";
+	char* const PATCHBCKG = "data\\global\\ui\\FrontEnd\\DownloadPatchBckg";
+	char* const POPUP = "data\\global\\ui\\FrontEnd\\PopUpOKCancel2";
+	char* const MULTIRES = "data\\D2MultiRes";
+	char* const CONTROLPANEL = "data\\global\\ui\\PANEL\\CtrlPnl7";
+	char* const CONTROLPANEL800 = "data\\global\\ui\\PANEL\\800CtrlPnl7";
+	char* const BORDERFRAME800 = "data\\global\\ui\\PANEL\\800BorderFrame";
 }
 namespace ResImages
 {
-	char * const  D2MRChooseResolutionBack = "data\\D2MultiRes\\D2MRChooseResolutionBack";
-	char * const  D2MRFancyBorderBottom = "data\\D2MultiRes\\D2MRFancyBorderBottom";
-	char * const  D2MRFancyBorderCorner = "data\\D2MultiRes\\D2MRFancyBorderCorner";
-	char * const  D2MRFancyBorderInterfaceLeft = "data\\D2MultiRes\\D2MRFancyBorderInterfaceLeft";
-	char * const  D2MRFancyBorderInterfaceRight = "data\\D2MultiRes\\D2MRFancyBorderInterfaceRight";
-	char * const  D2MRFancyBorderLeft = "data\\D2MultiRes\\D2MRFancyBorderLeft";
-	char * const  D2MRFancyBorderRight = "data\\D2MultiRes\\D2MRFancyBorderRight";
-	char * const  D2MRFancyBorderTop = "data\\D2MultiRes\\D2MRFancyBorderTop";
-	char * const  D2MRFancyHorizontalBar = "data\\D2MultiRes\\D2MRFancyHorizontalBar";
-	char * const  D2MRFancyPanelBar = "data\\D2MultiRes\\D2MRFancyPanelBar";
-	char * const  D2MRFancyPanelLeft = "data\\D2MultiRes\\D2MRFancyPanelLeft";
-	char * const  D2MRFancyPanelRight = "data\\D2MultiRes\\D2MRFancyPanelRight";
-	char * const  D2MRFancyVerticalBar = "data\\D2MultiRes\\D2MRFancyVerticalBar";
-	char * const  D2MRHorizontalBlackBar = "data\\D2MultiRes\\D2MRHorizontalBlackBar";
-	char * const  D2MRHorizontalBorder = "data\\D2MultiRes\\D2MRHorizontalBorder";
-	char * const  D2MRStoneBack = "data\\D2MultiRes\\D2MRStoneBack";
-	char * const  D2MRVerticalBlackBar = "data\\D2MultiRes\\D2MRVerticalBlackBar";
-	char * const  D2MRVerticalBorder = "data\\D2MultiRes\\D2MRVerticalBorder";
+	char* const  D2MRChooseResolutionBack = "data\\D2MultiRes\\D2MRChooseResolutionBack";
+	char* const  D2MRFancyBorderBottom = "data\\D2MultiRes\\D2MRFancyBorderBottom";
+	char* const  D2MRFancyBorderCorner = "data\\D2MultiRes\\D2MRFancyBorderCorner";
+	char* const  D2MRFancyBorderInterfaceLeft = "data\\D2MultiRes\\D2MRFancyBorderInterfaceLeft";
+	char* const  D2MRFancyBorderInterfaceRight = "data\\D2MultiRes\\D2MRFancyBorderInterfaceRight";
+	char* const  D2MRFancyBorderLeft = "data\\D2MultiRes\\D2MRFancyBorderLeft";
+	char* const  D2MRFancyBorderRight = "data\\D2MultiRes\\D2MRFancyBorderRight";
+	char* const  D2MRFancyBorderTop = "data\\D2MultiRes\\D2MRFancyBorderTop";
+	char* const  D2MRFancyHorizontalBar = "data\\D2MultiRes\\D2MRFancyHorizontalBar";
+	char* const  D2MRFancyPanelBar = "data\\D2MultiRes\\D2MRFancyPanelBar";
+	char* const  D2MRFancyPanelLeft = "data\\D2MultiRes\\D2MRFancyPanelLeft";
+	char* const  D2MRFancyPanelRight = "data\\D2MultiRes\\D2MRFancyPanelRight";
+	char* const  D2MRFancyVerticalBar = "data\\D2MultiRes\\D2MRFancyVerticalBar";
+	char* const  D2MRHorizontalBlackBar = "data\\D2MultiRes\\D2MRHorizontalBlackBar";
+	char* const  D2MRHorizontalBorder = "data\\D2MultiRes\\D2MRHorizontalBorder";
+	char* const  D2MRStoneBack = "data\\D2MultiRes\\D2MRStoneBack";
+	char* const  D2MRVerticalBlackBar = "data\\D2MultiRes\\D2MRVerticalBlackBar";
+	char* const  D2MRVerticalBorder = "data\\D2MultiRes\\D2MRVerticalBorder";
 }
 ///////////////////////////////////////////////////
 // Storage Buffers
@@ -276,7 +276,7 @@ namespace ResImages
 #define	ITEM_QUALITY_RARE				0x06
 #define	ITEM_QUALITY_UNIQUE				0x07
 #define	ITEM_QUALITY_CRAFT				0x08
-#define ITEM_QUALITY_RUNECAT			0x40000 
+#define ITEM_QUALITY_RUNECAT			0x40000
 
 ///////////////////////////////////////////////////
 // Player Mode Definition
@@ -304,7 +304,6 @@ enum
 	PLAYER_MODE_SEQUENCE,				// sequence
 	PLAYER_MODE_BEING_KNOCKBACK			// being knocked back
 };
-
 
 ///////////////////////////////////////////////////
 // NPC Mode Definition
@@ -465,7 +464,6 @@ enum
 #define D2S_EXPLODINGARROW		0x0010
 #define D2S_IMMOLATIONARROW		0x001b
 
-
 ///////////////////////////////////////////////////////////////
 // Assassin Spells
 ///////////////////////////////////////////////////////////////
@@ -505,7 +503,6 @@ enum
 #define D2S_BLADESENTINEL		0x0101
 #define D2S_BLADEFURY			0x010a
 #define D2S_BLADESHIELD			0x0115
-
 
 ///////////////////////////////////////////////////////////////
 // Barbarian Spells
@@ -547,7 +544,6 @@ enum
 #define D2S_DOUBLETHROW			0x008c
 #define D2S_FRENZY				0x0093
 
-
 ///////////////////////////////////////////////////////////////
 // Druid Spells
 ///////////////////////////////////////////////////////////////
@@ -587,7 +583,6 @@ enum
 #define D2S_POISONCREEPER		0x00de
 #define D2S_CARRIONVINE			0x00e7
 #define D2S_SOLARCREEPER		0x00f1
-
 
 ///////////////////////////////////////////////////////////////
 // Necromancer Spells
@@ -629,7 +624,6 @@ enum
 #define D2S_TERROR				0x004d
 #define D2S_DECREPIFY			0x0057
 
-
 ///////////////////////////////////////////////////////////////
 // Paladin Spells
 ///////////////////////////////////////////////////////////////
@@ -669,7 +663,6 @@ enum
 #define D2S_SMITE				0x0061
 #define D2S_CHARGE				0x006b
 #define D2S_HOLYSHIELD			0x0075
-
 
 ///////////////////////////////////////////////////////////////
 // Sorceress Spells
@@ -759,7 +752,6 @@ enum
 #define MAP_A1_TRISTRAM							0x26
 #define MAP_A1_THE_SECRET_COW_LEVEL				0x27
 
-
 ///////////////////////////////////////////////////
 // Act 2 Maps
 ///////////////////////////////////////////////////
@@ -798,7 +790,6 @@ enum
 #define MAP_A2_TAL_RASHAS_TOMB_7				0x48
 #define MAP_A2_TAL_RASHAS_CHAMBER				0x49
 #define MAP_A2_ARCANE_SANCTUARY					0x4a
-
 
 ///////////////////////////////////////////////////
 // Act 3 Maps
@@ -892,168 +883,170 @@ enum
 //////////////////////////////////////////////////////////////////////
 // Unit Affection ID Definition
 //////////////////////////////////////////////////////////////////////
-#define AFFECT_NONE                                                  0
-#define AFFECT_FREEZE                                                1
-#define AFFECT_POISON                                                2
-#define AFFECT_RESISTFIRE                                            3
-#define AFFECT_RESISTCOLD                                            4
-#define AFFECT_RESISTLIGHT                                           5
-#define AFFECT_RESISTMAGIC                                           6
-#define AFFECT_PLAYERBODY                                            7
-#define AFFECT_MONSTERSET											 176
-#define AFFECT_RESISTALL                                             8
-#define AFFECT_AMPLIFYDAMAGE                                         9
-#define AFFECT_FROZENARMOR                                           10
-#define AFFECT_COLD                                                  11
-#define AFFECT_INFERNO                                               12
-#define AFFECT_BLAZE                                                 13
-#define AFFECT_BONEARMOR                                             14
-#define AFFECT_CONCENTRATE                                           15
-#define AFFECT_ENCHANT                                               16
-#define AFFECT_INNERSIGHT                                            17
-#define AFFECT_SKILL_MOVE                                            18
-#define AFFECT_WEAKEN                                                19
-#define AFFECT_CHILLINGARMOR                                         20
-#define AFFECT_STUNNED                                               21
-#define AFFECT_SPIDERLAY                                             22
-#define AFFECT_DIMVISION                                             23
-#define AFFECT_SLOWED                                                24
-#define AFFECT_FETISHAURA                                            25
-#define AFFECT_SHOUT                                                 26
-#define AFFECT_TAUNT                                                 27
-#define AFFECT_CONVICTION                                            28
-#define AFFECT_CONVICTED                                             29
-#define AFFECT_ENERGYSHIELD                                          30
-#define AFFECT_VENOMCLAWS                                            31
-#define AFFECT_BATTLEORDERS                                          32
-#define AFFECT_MIGHT                                                 33
-#define AFFECT_PRAYER                                                34
-#define AFFECT_HOLYFIRE                                              35
-#define AFFECT_THORNS                                                36
-#define AFFECT_DEFIANCE                                              37
-#define AFFECT_THUNDERSTORM                                          38
-#define AFFECT_LIGHTNINGBOLT                                         39
-#define AFFECT_BLESSEDAIM                                            40
-#define AFFECT_VIGOR	                                             41
-#define AFFECT_CONCENTRATION                                         42
-#define AFFECT_HOLYFREEZE                                            43
-#define AFFECT_HOLYFREEZECHILL                                       44
-#define AFFECT_CLEANSING                                             45
-#define AFFECT_HOLYSHOCK                                             46
-#define AFFECT_SANCTUARY                                             47
-#define AFFECT_MEDITATION                                            48
-#define AFFECT_FANATICISM                                            49
-#define AFFECT_REDEMPTION                                            50
-#define AFFECT_BATTLECOMMAND                                         51
-#define AFFECT_PREVENTHEAL                                           52
-#define AFFECT_CONVERSION                                            53
-#define AFFECT_UNINTERRUPTABLE                                       54
-#define AFFECT_IRONMAIDEN                                            55
-#define AFFECT_TERROR                                                56
-#define AFFECT_ATTRACT                                               57
-#define AFFECT_LIFETAP                                               58
-#define AFFECT_CONFUSE                                               59
-#define AFFECT_DECREPIFY                                             60
-#define AFFECT_LOWERRESIST                                           61
-#define AFFECT_OPENWOUNDS                                            62
-#define AFFECT_DOPPLEZON                                             63
-#define AFFECT_CRITICALSTRIKE                                        64
-#define AFFECT_DODGE                                                 65
-#define AFFECT_Avoid                                                 66
-#define AFFECT_PENETRATE                                             67
-#define AFFECT_EVADE                                                 68
-#define AFFECT_PIERCE                                                69
-#define AFFECT_WARMTH                                                70
-#define AFFECT_FIREMASTERY                                           71
-#define AFFECT_LIGHTNINGMASTERY                                      72
-#define AFFECT_COLDMASTERY                                           73
-#define AFFECT_SWORDMASTERY                                          74
-#define AFFECT_AXEMASTERY                                            75
-#define AFFECT_MACEMASTERY                                           76
-#define AFFECT_POLEARMMASTERY                                        77
-#define AFFECT_THROWINGMASTERY                                       78
-#define AFFECT_SPEARMASTERY                                          79
-#define AFFECT_INCREASEDSTAMINA                                      80
-#define AFFECT_IRONSKIN                                              81
-#define AFFECT_INCREASEDSPEED                                        82
-#define AFFECT_NATURALRESISTANCE                                     83
-#define AFFECT_FINGERMAGECURSE                                       84
-#define AFFECT_NOMANAREGEN                                           85
-#define AFFECT_JUSTHIT                                               86
-#define AFFECT_SLOWMISSILES                                          87
-#define AFFECT_SHIVERARMOR                                           88
-#define AFFECT_BATTLECRY                                             89
-#define AFFECT_BLUE                                                  90
-#define AFFECT_RED                                                   91
-#define AFFECT_DEATH_DELAY                                           92
-#define AFFECT_VALKYRIE                                              93
-#define AFFECT_FRENZY                                                94
-#define AFFECT_BERSERK                                               95
-#define AFFECT_REVIVE                                                96
-#define AFFECT_ITEMFULLSET                                           175
-#define AFFECT_SOURCEUNIT                                            98
-#define AFFECT_REDEEMED                                              99
-#define AFFECT_HEALTHPOT                                             100
-#define AFFECT_HOLYSHIELD                                            101
-#define AFFECT_JUST_PORTALED                                         102
-#define AFFECT_MONFRENZY                                             103
-#define AFFECT_CORPSE_NODRAW                                         104
-#define AFFECT_ALIGNMENT                                             105
-#define AFFECT_MANAPOT                                               106
-#define AFFECT_SHATTER                                               107
-#define AFFECT_SYNC_WARPED                                           108
-#define AFFECT_CONVERSION_SAVE                                       109
-#define AFFECT_PREGNANT                                              110
-#define AFFECT_111                                                   111
-#define AFFECT_RABIES                                                112
-#define AFFECT_DEFENSE_CURSE                                         113
-#define AFFECT_BLOOD_MANA                                            114
-#define AFFECT_BURNING                                               115
-#define AFFECT_DRAGONFLIGHT                                          116
-#define AFFECT_MAUL                                                  117
-#define AFFECT_CORPSE_NOSELECT                                       118
-#define AFFECT_SHADOWWARRIOR                                         119
-#define AFFECT_FERALRAGE                                             120
-#define AFFECT_SKILLDELAY                                            121
-#define AFFECT_PROGRESSIVE_DAMAGE                                    122
-#define AFFECT_PROGRESSIVE_STEAL                                     123
-#define AFFECT_PROGRESSIVE_OTHER                                     124
-#define AFFECT_PROGRESSIVE_FIRE                                      125
-#define AFFECT_PROGRESSIVE_COLD                                      126
-#define AFFECT_PROGRESSIVE_LIGHTNING                                 127
-#define AFFECT_SHRINE_ARMOR                                          128
-#define AFFECT_SHRINE_COMBAT                                         129
-#define AFFECT_SHRINE_RESIST_LIGHTNING                               130
-#define AFFECT_SHRINE_RESIST_FIRE                                    131
-#define AFFECT_SHRINE_RESIST_COLD                                    132
-#define AFFECT_SHRINE_RESIST_POISON                                  133
-#define AFFECT_SHRINE_SKILL                                          134
-#define AFFECT_SHRINE_MANA_REGEN                                     135
-#define AFFECT_SHRINE_STAMINA                                        136
-#define AFFECT_SHRINE_EXPERIENCE                                     137
-#define AFFECT_FENRIS_RAGE                                           138
-#define AFFECT_WOLF                                                  139
-#define AFFECT_BEAR                                                  140
-#define AFFECT_BLOODLUST                                             141
-#define AFFECT_CHANGECLASS                                           142
-#define AFFECT_ATTACHED                                              143
-#define AFFECT_HURRICANE                                             144
-#define AFFECT_ARMAGEDDON                                            145
-#define AFFECT_INVIS                                                 146
-#define AFFECT_BARBS                                                 147
-#define AFFECT_WOLVERINE                                             148
-#define AFFECT_OAKSAGE                                               149
-#define AFFECT_VINE_BEAST                                            150
-#define AFFECT_CYCLONEARMOR                                          151
-#define AFFECT_CLAWMASTERY                                           152
-#define AFFECT_CLOAK_OF_SHADOWS                                      153
-#define AFFECT_RECYCLED                                              154
-#define AFFECT_WEAPONBLOCK                                           155
-#define AFFECT_CLOAKED                                               156
-#define AFFECT_BURSTOFSPEED                                          157
-#define AFFECT_BLADESHIELD                                           158
-#define AFFECT_FADE                                                  159
-#define AFFECT_WHIRLWIND                                             174
-#define AFFECT_DELIRIUM												 177
+enum Affect {
+	AFFECT_NONE = 0,
+	AFFECT_FREEZE = 1,
+	AFFECT_POISON = 2,
+	AFFECT_RESISTFIRE = 3,
+	AFFECT_RESISTCOLD = 4,
+	AFFECT_RESISTLIGHT = 5,
+	AFFECT_RESISTMAGIC = 6,
+	AFFECT_PLAYERBODY = 7,
+	AFFECT_MONSTERSET = 176,
+	AFFECT_RESISTALL = 8,
+	AFFECT_AMPLIFYDAMAGE = 9,
+	AFFECT_FROZENARMOR = 10,
+	AFFECT_COLD = 11,
+	AFFECT_INFERNO = 12,
+	AFFECT_BLAZE = 13,
+	AFFECT_BONEARMOR = 14,
+	AFFECT_CONCENTRATE = 15,
+	AFFECT_ENCHANT = 16,
+	AFFECT_INNERSIGHT = 17,
+	AFFECT_SKILL_MOVE = 18,
+	AFFECT_WEAKEN = 19,
+	AFFECT_CHILLINGARMOR = 20,
+	AFFECT_STUNNED = 21,
+	AFFECT_SPIDERLAY = 22,
+	AFFECT_DIMVISION = 23,
+	AFFECT_SLOWED = 24,
+	AFFECT_FETISHAURA = 25,
+	AFFECT_SHOUT = 26,
+	AFFECT_TAUNT = 27,
+	AFFECT_CONVICTION = 28,
+	AFFECT_CONVICTED = 29,
+	AFFECT_ENERGYSHIELD = 30,
+	AFFECT_VENOMCLAWS = 31,
+	AFFECT_BATTLEORDERS = 32,
+	AFFECT_MIGHT = 33,
+	AFFECT_PRAYER = 34,
+	AFFECT_HOLYFIRE = 35,
+	AFFECT_THORNS = 36,
+	AFFECT_DEFIANCE = 37,
+	AFFECT_THUNDERSTORM = 38,
+	AFFECT_LIGHTNINGBOLT = 39,
+	AFFECT_BLESSEDAIM = 40,
+	AFFECT_VIGOR = 41,
+	AFFECT_CONCENTRATION = 42,
+	AFFECT_HOLYFREEZE = 43,
+	AFFECT_HOLYFREEZECHILL = 44,
+	AFFECT_CLEANSING = 45,
+	AFFECT_HOLYSHOCK = 46,
+	AFFECT_SANCTUARY = 47,
+	AFFECT_MEDITATION = 48,
+	AFFECT_FANATICISM = 49,
+	AFFECT_REDEMPTION = 50,
+	AFFECT_BATTLECOMMAND = 51,
+	AFFECT_PREVENTHEAL = 52,
+	AFFECT_CONVERSION = 53,
+	AFFECT_UNINTERRUPTABLE = 54,
+	AFFECT_IRONMAIDEN = 55,
+	AFFECT_TERROR = 56,
+	AFFECT_ATTRACT = 57,
+	AFFECT_LIFETAP = 58,
+	AFFECT_CONFUSE = 59,
+	AFFECT_DECREPIFY = 60,
+	AFFECT_LOWERRESIST = 61,
+	AFFECT_OPENWOUNDS = 62,
+	AFFECT_DOPPLEZON = 63,
+	AFFECT_CRITICALSTRIKE = 64,
+	AFFECT_DODGE = 65,
+	AFFECT_Avoid = 66,
+	AFFECT_PENETRATE = 67,
+	AFFECT_EVADE = 68,
+	AFFECT_PIERCE = 69,
+	AFFECT_WARMTH = 70,
+	AFFECT_FIREMASTERY = 71,
+	AFFECT_LIGHTNINGMASTERY = 72,
+	AFFECT_COLDMASTERY = 73,
+	AFFECT_SWORDMASTERY = 74,
+	AFFECT_AXEMASTERY = 75,
+	AFFECT_MACEMASTERY = 76,
+	AFFECT_POLEARMMASTERY = 77,
+	AFFECT_THROWINGMASTERY = 78,
+	AFFECT_SPEARMASTERY = 79,
+	AFFECT_INCREASEDSTAMINA = 80,
+	AFFECT_IRONSKIN = 81,
+	AFFECT_INCREASEDSPEED = 82,
+	AFFECT_NATURALRESISTANCE = 83,
+	AFFECT_FINGERMAGECURSE = 84,
+	AFFECT_NOMANAREGEN = 85,
+	AFFECT_JUSTHIT = 86,
+	AFFECT_SLOWMISSILES = 87,
+	AFFECT_SHIVERARMOR = 88,
+	AFFECT_BATTLECRY = 89,
+	AFFECT_BLUE = 90,
+	AFFECT_RED = 91,
+	AFFECT_DEATH_DELAY = 92,
+	AFFECT_VALKYRIE = 93,
+	AFFECT_FRENZY = 94,
+	AFFECT_BERSERK = 95,
+	AFFECT_REVIVE = 96,
+	AFFECT_ITEMFULLSET = 175,
+	AFFECT_SOURCEUNIT = 98,
+	AFFECT_REDEEMED = 99,
+	AFFECT_HEALTHPOT = 100,
+	AFFECT_HOLYSHIELD = 101,
+	AFFECT_JUST_PORTALED = 102,
+	AFFECT_MONFRENZY = 103,
+	AFFECT_CORPSE_NODRAW = 104,
+	AFFECT_ALIGNMENT = 105,
+	AFFECT_MANAPOT = 106,
+	AFFECT_SHATTER = 107,
+	AFFECT_SYNC_WARPED = 108,
+	AFFECT_CONVERSION_SAVE = 109,
+	AFFECT_PREGNANT = 110,
+	AFFECT_111 = 111,
+	AFFECT_RABIES = 112,
+	AFFECT_DEFENSE_CURSE = 113,
+	AFFECT_BLOOD_MANA = 114,
+	AFFECT_BURNING = 115,
+	AFFECT_DRAGONFLIGHT = 116,
+	AFFECT_MAUL = 117,
+	AFFECT_CORPSE_NOSELECT = 118,
+	AFFECT_SHADOWWARRIOR = 119,
+	AFFECT_FERALRAGE = 120,
+	AFFECT_SKILLDELAY = 121,
+	AFFECT_PROGRESSIVE_DAMAGE = 122,
+	AFFECT_PROGRESSIVE_STEAL = 123,
+	AFFECT_PROGRESSIVE_OTHER = 124,
+	AFFECT_PROGRESSIVE_FIRE = 125,
+	AFFECT_PROGRESSIVE_COLD = 126,
+	AFFECT_PROGRESSIVE_LIGHTNING = 127,
+	AFFECT_SHRINE_ARMOR = 128,
+	AFFECT_SHRINE_COMBAT = 129,
+	AFFECT_SHRINE_RESIST_LIGHTNING = 130,
+	AFFECT_SHRINE_RESIST_FIRE = 131,
+	AFFECT_SHRINE_RESIST_COLD = 132,
+	AFFECT_SHRINE_RESIST_POISON = 133,
+	AFFECT_SHRINE_SKILL = 134,
+	AFFECT_SHRINE_MANA_REGEN = 135,
+	AFFECT_SHRINE_STAMINA = 136,
+	AFFECT_SHRINE_EXPERIENCE = 137,
+	AFFECT_FENRIS_RAGE = 138,
+	AFFECT_WOLF = 139,
+	AFFECT_BEAR = 140,
+	AFFECT_BLOODLUST = 141,
+	AFFECT_CHANGECLASS = 142,
+	AFFECT_ATTACHED = 143,
+	AFFECT_HURRICANE = 144,
+	AFFECT_ARMAGEDDON = 145,
+	AFFECT_INVIS = 146,
+	AFFECT_BARBS = 147,
+	AFFECT_WOLVERINE = 148,
+	AFFECT_OAKSAGE = 149,
+	AFFECT_VINE_BEAST = 150,
+	AFFECT_CYCLONEARMOR = 151,
+	AFFECT_CLAWMASTERY = 152,
+	AFFECT_CLOAK_OF_SHADOWS = 153,
+	AFFECT_RECYCLED = 154,
+	AFFECT_WEAPONBLOC = 155,
+	AFFECT_CLOAKED = 156,
+	AFFECT_BURSTOFSPEED = 157,
+	AFFECT_BLADESHIELD = 158,
+	AFFECT_FADE = 159,
+	AFFECT_WHIRLWIND = 174,
+	AFFECT_DELIRIUM = 177
+};
 
 #endif

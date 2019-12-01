@@ -39,7 +39,7 @@ void DrawScreen()
 		Attack.dwAttackType = 0x46;
 		//Attack.dwAttackType = 0xE5; //shift+left
 		bool SelectedSkill = GetCurSkill(false, D2S_TELEPORT);
-		POINT Target = { (long)(Attack.dwTargetX=0), (long)(Attack.dwTargetY=0) };
+		POINT Target = { (long)(Attack.dwTargetX = 0), (long)(Attack.dwTargetY = 0) };
 
 		if (!KeyDown(4)) {
 			FcTele = false;
@@ -145,7 +145,7 @@ void extraDraw()
 
 	if (p_D2CLIENT_UIMode[UI_INVENTORY]) // Draw text to INVENTORY
 	{
-		TextHook(505, 488, Tan, Center, 1, "Total Gold: %s", AddCommas((double)GetUnitStat(Me, STAT_GOLD) + (double)GetUnitStat(Me, STAT_GOLDBANK), 0));
+		TextHook(505, 488, Tan, Center, 1, false, "Total Gold: %s", AddCommas((double)GetUnitStat(Me, STAT_GOLD) + (double)GetUnitStat(Me, STAT_GOLDBANK), 0));
 	}
 }
 
@@ -172,13 +172,13 @@ void TimerBo()
 	if (!ClientReady)
 		return;
 
-		if (BoTimer > 0 && (GetTickCount64() - BoTime) >= 1000)
-		{
-			BoTimer--;
-			BoTime = GetTickCount64();
-			if (BoTimer == 10)
-				InputConsole("[Battle Orders] will run out in 10 seconds.");
-		}
+	if (BoTimer > 0 && (GetTickCount64() - BoTime) >= 1000)
+	{
+		BoTimer--;
+		BoTime = GetTickCount64();
+		if (BoTimer == 10)
+			InputConsole("[Battle Orders] will run out in 10 seconds.");
+	}
 }
 
 //Changes Orb Colors
@@ -279,8 +279,10 @@ void BoxHook(unsigned int x, unsigned int y, unsigned int xSize, unsigned int yS
 }
 
 // Draws text to screen
-void TextHook(int x, int y, TextColor color, Alignment align, unsigned int font, std::string text, ...)
+void TextHook(int x, int y, TextColor color, Alignment align, unsigned int font, bool automap, std::string text, ...)
 {
+	POINT nPos = { x, y };
+
 	char szBuffer[4096];
 	va_list args;
 	va_start(args, text);
@@ -294,17 +296,17 @@ void TextHook(int x, int y, TextColor color, Alignment align, unsigned int font,
 	switch (align)
 	{
 	case Center:
-		x = x - (GetTextSize(szBuffer, font).x / 2);
+		nPos.x = nPos.x - (GetTextSize(szBuffer, font).x / 2);
 		break;
 
 	case Right:
-		x = x - GetTextSize(szBuffer, font).x;
+		nPos.x = nPos.x - GetTextSize(szBuffer, font).x;
 		break;
 	}
 
 	unsigned int height[] = { 10,11,18,24,10,13,7,13,10,12,8,8,7,12 };
 	DWORD size = D2WIN_SetTextSize(font);
-	D2WIN_DrawText(wString, x, y + height[font], color, 0);
+	D2WIN_DrawText(wString, nPos.x, nPos.y + height[font], color, 0);
 	D2WIN_SetTextSize(size);
 
 	delete[] wString;

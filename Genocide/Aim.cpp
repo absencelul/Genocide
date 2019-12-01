@@ -157,8 +157,6 @@ void AttackNearest(bool Left)
 	if (!pTarget)
 		return;
 
-	Print(false, 4, "%d, %d", pTarget->pPath->xPos, pTarget->pPath->yPos);
-
 	for (auto& Atk : Attacks)
 		if (GetCurSkill(Left, Atk.SkillID))
 			return Attack(NULL, NULL, Left, Atk.Shift, true, pTarget);

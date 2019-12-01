@@ -29,7 +29,7 @@ void GameInfo()
 		AddStringToList(GameInfoList, "%s", D2CLIENT_GetGameInfo()->szGameServerIp);*/
 
 	for (auto& it : GameInfoList)
-		TextHook(*p_D2CLIENT_ScreenSizeX - 18, y += 16, Gold, Right, 1, "%s", it.c_str());
+		TextHook(*p_D2CLIENT_ScreenSizeX - 18, y += 16, Gold, Right, 1, false, "%s", it.c_str());
 }
 
 void xVector()
@@ -48,8 +48,8 @@ void xVector()
 		if (Unit)
 		{
 			ScreenToAutomap(&Position, Unit->pPath->xPos, Unit->pPath->yPos);
-			D2GFX_DrawLine(Player.x, Player.y, Position.x, Position.y, DarkGreen, -1);
-			DrawPlayerBlob(Position.x, Position.y, DarkGreen);
+			D2GFX_DrawLine(Player.x, Player.y, Position.x, Position.y, (DWORD)DarkGreen, -1);
+			DrawPlayerBlob(Position.x, Position.y, (DWORD)DarkGreen);
 		}
 	}
 }
@@ -67,9 +67,13 @@ void PlayerInfo()
 		if (!Merc)
 			continue;
 
-		if (Merc) {
-			TextHook(Merc->pPath->xPos - 1, Merc->pPath->yPos - 6, Gold, None, 6, "Merc");
-			DrawCross(Merc->pPath->xPos, Merc->pPath->yPos, DarkGreen, 1);
+		POINT automapLoc;
+		ScreenToAutomap(&automapLoc, Merc->pPath->xPos, Merc->pPath->yPos);
+
+		if (Merc)
+		{
+			TextHook(automapLoc.x, automapLoc.y - 8, Gold, Center, 6, true, "Merc");
+			DrawCross(Merc->pPath->xPos, Merc->pPath->yPos, Yellow, 1);
 		}
 	}
 
@@ -79,33 +83,45 @@ void PlayerInfo()
 		if (!Unit)
 			continue;
 
-		POINT Position = { Unit->pPath->xPos, Unit->pPath->yPos };
+		POINT Position;
+		ScreenToAutomap(&Position, Unit->pPath->xPos, Unit->pPath->yPos);
 		TextColor Color = Green;
 
 		if (Players[i]->Life < 40)
 			Color = Red;
 
 		if (Players[i]->Life < 80 && Players[i]->Life >= 40)
-			Color = Orange;
+			Color = Yellow;
 
 		if (Unit && Players[i]->Life >= 1)
-			TextHook(Position.x + 4, Position.y - 5, Color, None, 6, "<%d%%>", Players[i]->Life);
+			TextHook(Position.x, Position.y - 10, Color, Center, 6, true, "[%d%%]", Players[i]->Life);
 		if (Unit && !GetUnitState(Unit, AFFECT_BATTLEORDERS))
-			TextHook(Position.x + 11, Position.y + 4, Orange, None, 6, "NO BO");
-		else if (Unit && GetUnitState(Unit, AFFECT_BATTLEORDERS) && GetUnitState(Unit, AFFECT_SHOUT))
-			TextHook(Position.x + 11, Position.y + 4, Orange, None, 6, "BARB BO");
+			TextHook(Position.x, Position.y + 9, Green, Center, 6, true, "[OUT]");
+		else if (Unit && GetUnitState(Unit, AFFECT_BATTLEORDERS))
+			TextHook(Position.x, Position.y + 9, GetUnitState(Unit, AFFECT_SHOUT) ? Red : Yellow, Center, 6, true, GetUnitState(Unit, AFFECT_SHOUT) ? "[BARB]" : "[BO]");
+
+		if (Unit && Unit->dwMode == PLAYER_MODE_STAND_OUTTOWN)
+			TextHook(Position.x, Position.y + 17, Green, Center, 6, true, "[STAND]");
+		else if (Unit && Unit->dwMode == PLAYER_MODE_RUN)
+			TextHook(Position.x, Position.y + 17, Yellow, Center, 6, true, "[RUN]");
+		else if (Unit && Unit->dwMode == PLAYER_MODE_WALK_OUTTOWN)
+			TextHook(Position.x, Position.y + 17, Red, Center, 6, true, "[WALK]");
+		else if (Unit && Unit->dwMode == PLAYER_MODE_CAST)
+			TextHook(Position.x, Position.y + 17, Yellow, Center, 6, true, "[CAST]");
 	}
 
 	for (LPROOM1 pRoom1 = Me->pAct->pRoom1; pRoom1; pRoom1 = pRoom1->pRoomNext)
 	{
 		for (LPUNITANY pUnit = pRoom1->pUnitFirst; pUnit; pUnit = pUnit->pListNext)
 		{
+			POINT Position;
+			ScreenToAutomap(&Position, pUnit->pObjectPath->dwPosX, pUnit->pObjectPath->dwPosY);
 			if (pUnit->dwType == UNIT_TYPE_OBJECT && pUnit->dwTxtFileNo == 59)
 			{
-				TextHook(pUnit->pObjectPath->dwPosX - 4, pUnit->pObjectPath->dwPosY - 2, Green, Center, 6, "%s", pUnit->pObjectData->szOwner);
+				TextHook(pUnit->pObjectPath->dwPosX - 4, pUnit->pObjectPath->dwPosY - 2, Blue, Center, 6, "%s", pUnit->pObjectData->szOwner);
 				for (int i = 0; i < Players.GetSize(); i++) {
 					if (!_stricmp(Players[i]->PlayerName, pUnit->pObjectData->szOwner)) {
-						TextHook(pUnit->pObjectPath->dwPosX + 6, pUnit->pObjectPath->dwPosY + 9, Green, Center, 6, "%d%%", Players[i]->Life);
+						TextHook(Position.x + 1, Position.y + 5, Green, Center, 6, true, "%d%%", Players[i]->Life);
 					}
 				}
 			}
@@ -134,6 +150,9 @@ void DrawCross(INT X, INT Y, DWORD Color, BOOL Automap)
 
 void FCPointer()
 {
+	if (IsTown(Me))
+		return;
+
 	POINT Mouse = { *(long*)& p_D2CLIENT_MouseX, *(long*)& p_D2CLIENT_MouseY };
 	ScreenToAutoMap(&Mouse);
 
@@ -151,14 +170,14 @@ void FCPointer()
 				break;
 	}
 
-	if (GetCurrentSkill(true) == D2S_TELEPORT) {
+	if (GetCurrentSkill(false) == D2S_TELEPORT) {
 		POINT Start = { 0, 0 };
 		POINT End = { 0, 0 };
 
 		ScreenToAutomap(&Start, Player.x, Player.y);
 		ScreenToAutomap(&End, Cast.x, Cast.y);
 		D2GFX_DrawLine(Start.x, Start.y, End.x, End.y, 168, 0);
-		TextHook(End.x + 1, End.y + 3, Yellow, None, 4, "x");
+		TextHook(End.x + 1, End.y + 3, Yellow, None, 4, true, "x");
 	}
 }
 
