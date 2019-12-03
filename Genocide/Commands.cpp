@@ -49,7 +49,7 @@ bool __fastcall GameInput(WCHAR* Text)
 		// Reload Configuration
 		if (!_stricmp(Argument[0], "reload"))
 		{
-			Settings::LoadConfig();
+			LoadConfig();
 			InputConsole("Config.ini was reloaded.");
 			return false;
 		}

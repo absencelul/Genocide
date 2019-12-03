@@ -284,7 +284,7 @@ void __fastcall KeyHooks::OnGameKeyDown(byte Key, byte Repeat)
 
 	if (Key == Reload)
 	{
-		Settings::LoadConfig();
+		LoadConfig();
 		InputConsole("Configuration - [Reloaded]");
 	}
 

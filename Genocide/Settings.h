@@ -11,21 +11,15 @@ struct CONFIGURATION
 	DOUBLE Type;
 	LPVOID Variable;
 };
-class Settings
-{
-public:
-	Settings();
-	~Settings();
-	static bool Bool(LPSTR Value);
-	static void LoadConfig();
-	static void Config();
-	static void GetModuleDirectory();
-	static int Integer(LPSTR Value);
-	static void ParseBlind(string Value);
-	static void SetBoolValues(LPSTR Value, bool Variable[]);
-	static void SetKeyValues(LPSTR Value, INT Variable[]);
-	static bool CheckString(LPSTR Value);
-	static string to_string(INT t);
-	static void SetCurseValues(LPSTR Value, bool Variable[]);
-	static bool Curses(LPSTR Value);
-};
+bool Bool(LPSTR Value);
+void LoadConfig();
+void Config();
+void GetModuleDirectory();
+int Integer(LPSTR Value);
+void ParseBlind(string Value);
+void SetBoolValues(LPSTR Value, bool Variable[]);
+void SetKeyValues(LPSTR Value, int Variable[]);
+bool CheckString(LPSTR Value);
+std::string int_to_string(int t);
+void SetCurseValues(LPSTR Value, bool Variable[]);
+bool Curses(LPSTR Value);

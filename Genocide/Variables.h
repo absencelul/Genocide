@@ -79,7 +79,7 @@ VAR(LPUNITANY, ViewingUnit)
 VAR(std::list<LevelList*>, automapLevels);
 VAR(bool, revealedGame)
 VAR(bool, revealedAct[6])
-VAR(bool, revealedLevel[255])
+VAR(bool, revealedLevel[464])
 VAR(bool, AutoRevealAutomap)
 
 VAR(BOOL, ShrineImages)

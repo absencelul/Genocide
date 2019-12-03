@@ -53,8 +53,8 @@ Patch * patches[] = {
 bool Inject::Inject(HMODULE hMod, LPVOID lpReserved)
 {
 	_dll = hMod;
-	Settings::LoadConfig();
-	Settings::Config();
+	LoadConfig();
+	Config();
 	ReadConfig("Spam Filter.txt", &SpamMsg);
 	ReadConfig("Spam Players.txt", &SpamPlayers);
 

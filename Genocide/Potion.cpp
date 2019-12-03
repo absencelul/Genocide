@@ -1,16 +1,7 @@
 #include "Hack.h"
 
-Potion::Potion()
-{
-}
-
-
-Potion::~Potion()
-{
-}
-
 //Uses potions. (Health: 0 Mana: 1 Rejuv: 2)
-void Potion::UsePot(int Type) {
+void UsePot(int Type) {
 
 	if (!ClientReady || Me->pInventory->pCursorItem)
 		return;

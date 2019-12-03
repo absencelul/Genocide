@@ -17,13 +17,13 @@ void Rescue()
 				Town = true;
 
 	if (Life <= (DWORD)Potions[1] && Potions[1] > -1 || Mana <= (DWORD)Potions[3] && Potions[3] > -1)
-		Potion::UsePot(2);
+		UsePot(2);
 
 	if (Life <= (DWORD)Potions[0] && Potions[0] > -1)
-		Potion::UsePot(0);
+		UsePot(0);
 
 	if (Mana <= (DWORD)Potions[2] && Potions[2] > -1)
-		Potion::UsePot(1);
+		UsePot(1);
 }
 
 //Checks if player is in town.

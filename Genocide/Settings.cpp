@@ -1,14 +1,6 @@
 #include "Hack.h"
 
-Settings::Settings()
-{
-}
-
-Settings::~Settings()
-{
-}
-
-void Settings::LoadConfig()
+void LoadConfig()
 {
 	CHAR File[MAX_PATH], Returned[100000];
 	GetModuleDirectory();
@@ -82,7 +74,7 @@ void Settings::LoadConfig()
 	}
 }
 
-void Settings::Config()
+void Config()
 {
 	CHAR File[MAX_PATH], Returned[100000];
 	GetModuleDirectory();
@@ -112,7 +104,7 @@ void Settings::Config()
 	}
 }
 
-void Settings::GetModuleDirectory()
+void GetModuleDirectory()
 {
 	GetModuleFileNameA(_dll, FilePath, MAX_PATH);
 
@@ -121,7 +113,7 @@ void Settings::GetModuleDirectory()
 	strcat_s(FilePath, sizeof(FilePath), "\\");
 }
 
-bool Settings::Bool(LPSTR Value)
+bool Bool(LPSTR Value)
 {
 	CharLower(Value);
 
@@ -134,7 +126,7 @@ bool Settings::Bool(LPSTR Value)
 	return false;
 }
 
-int Settings::Integer(LPSTR Value)
+int Integer(LPSTR Value)
 {
 	if (!_stricmp("Nearest", Value)) return 0;
 	if (!_stricmp("Target", Value)) return 1;
@@ -517,7 +509,7 @@ int Settings::Integer(LPSTR Value)
 	return atoi(Value);
 }
 
-void Settings::ParseBlind(string Value)
+void ParseBlind(string Value)
 {
 	std::stringstream stringStream(Value);
 	std::string line;
@@ -550,7 +542,7 @@ void Settings::ParseBlind(string Value)
 	}
 }
 
-void Settings::SetBoolValues(LPSTR Value, bool Variable[])
+void SetBoolValues(LPSTR Value, bool Variable[])
 {
 	stringstream ss(Value);
 
@@ -561,7 +553,7 @@ void Settings::SetBoolValues(LPSTR Value, bool Variable[])
 	while (getline(ss, word, ','))
 	{
 		word.erase(std::remove_if(word.begin(), word.end(), ::isspace), word.end());
-		Variable[i] = Settings::Bool((LPSTR)word.c_str());
+		Variable[i] = Bool((LPSTR)word.c_str());
 		if (ss.peek() == ',')
 			ss.ignore();
 
@@ -569,7 +561,7 @@ void Settings::SetBoolValues(LPSTR Value, bool Variable[])
 	}
 }
 
-void Settings::SetKeyValues(LPSTR Value, INT Variable[])
+void SetKeyValues(LPSTR Value, int Variable[])
 {
 	stringstream ss(Value);
 
@@ -584,7 +576,7 @@ void Settings::SetKeyValues(LPSTR Value, INT Variable[])
 		if (CheckString((LPSTR)word.c_str()))
 			Variable[i] = stoi(word);
 		else
-			Variable[i] = Settings::Integer((LPSTR)word.c_str());
+			Variable[i] = Integer((LPSTR)word.c_str());
 
 		if (ss.peek() == ',')
 			ss.ignore();
@@ -593,11 +585,11 @@ void Settings::SetKeyValues(LPSTR Value, INT Variable[])
 	}
 }
 
-bool Settings::CheckString(LPSTR Value)
+bool CheckString(LPSTR Value)
 {
 	for (int i = 0; i < 255; i++)
 	{
-		if (!_stricmp(Value, to_string(i).c_str()))
+		if (!_stricmp(Value, int_to_string(i).c_str()))
 			return true;
 	}
 
@@ -605,7 +597,7 @@ bool Settings::CheckString(LPSTR Value)
 }
 
 //Converts int to string
-string Settings::to_string(INT t)
+std::string int_to_string(INT t)
 {
 	std::stringstream ss;
 	ss << t;
@@ -613,7 +605,7 @@ string Settings::to_string(INT t)
 }
 
 //SetCurseValue
-void Settings::SetCurseValues(LPSTR Value, bool Variable[])
+void SetCurseValues(LPSTR Value, bool Variable[])
 {
 	stringstream ss(Value);
 
@@ -624,7 +616,7 @@ void Settings::SetCurseValues(LPSTR Value, bool Variable[])
 	while (getline(ss, word, ','))
 	{
 		word.erase(std::remove_if(word.begin(), word.end(), ::isspace), word.end());
-		Settings::Curses((LPSTR)word.c_str());
+		Curses((LPSTR)word.c_str());
 		if (ss.peek() == ',')
 			ss.ignore();
 
@@ -633,7 +625,7 @@ void Settings::SetCurseValues(LPSTR Value, bool Variable[])
 }
 
 //Parses Curses
-bool Settings::Curses(LPSTR Value)
+bool Curses(LPSTR Value)
 {
 	CharLower(Value);
 	//CURSED

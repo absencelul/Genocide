@@ -1,7 +1,2 @@
-class Potion
-{
-public:
-	Potion();
-	~Potion();
-	static void UsePot(int Type);
-};
+#pragma once
+void UsePot(int Type);
