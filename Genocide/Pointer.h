@@ -64,7 +64,7 @@ FUNCPTR(D2CLIENT, GetMouseXOffset, DWORD __fastcall, (VOID), 0x5AFC0)//Updated 1
 FUNCPTR(D2CLIENT, GetMouseYOffset, DWORD __fastcall, (VOID), 0x5AFB0)//Updated 1.14d
 FUNCPTR(D2CLIENT, AddAutomapCell, void __fastcall, (AutomapCell* aCell, AutomapCell** node), 0x57B00) //Updated 1.14d
 FUNCPTR(D2CLIENT, NewAutomapCell, AutomapCell* FASTCALL, (), 0x57C30) //Updated 1.14d
-FUNCPTR(D2CLIENT, RevealAutomapRoom, void STDCALL, (Room1* pRoom1, DWORD dwClipFlag, AutomapLayer* aLayer), 0x58F40) //UPDATED
+FUNCPTR(D2CLIENT, RevealAutomapRoom, void __stdcall, (Room1* pRoom1, DWORD dwClipFlag, AutomapLayer* aLayer), 0x58F40) //UPDATED
 FUNCPTR(D2CLIENT, GetMonsterTxt, MonsterTxt* FASTCALL, (DWORD MonsterNumber), 0x63832) //Updated 1.14d
 FUNCPTR(D2CLIENT, GetDifficulty, BYTE __stdcall, (), 0x4DCD0) //Updated 1.14d
 FUNCPTR(D2CLIENT, GetAutomapSize, DWORD __stdcall, (void), 0x5A710) //Updated 1.14d
@@ -86,6 +86,9 @@ ASMPTR(D2CLIENT, GetUnitFromId_II, 0x63940) // updated 1.14d
 ASMPTR(D2CLIENT, InputCall_I, 0x787B0) // updated 1.14d
 ASMPTR(D2CLIENT, GetUnitName_I, 0x64A60) //updated 1.14D
 ASMPTR(D2CLIENT, AutomapDraw_I, 0x53100) //Updated 1.14d //00453100-BASE
+ASMPTR(D2CLIENT, LoadAct_1, 0x59150) // 1.14d
+ASMPTR(D2CLIENT, LoadAct_2, 0x62D00) // 1.14d
+ASMPTR(D2CLIENT, LoadAct_3, 0x591A0) // 1.14d
 
 //D2CLIENT VARPTRS
 VARPTR(D2CLIENT, PlayerUnit, UnitAny*, 0x3A6A70) //Updated 1.14d
@@ -109,6 +112,7 @@ VARPTR(D2CLIENT, AutomapOn, DWORD, 0x3A27E8) //Updated 1.14d
 VARPTR(D2CLIENT, AutomapLayerList, LPAUTOMAPLAYER, 0x3A5160) //Updated 1.14d
 VARPTR(D2CLIENT, AutomapLayer, LPAUTOMAPLAYER, 0x3A5164) //Updated 1.14d
 VARPTR(D2CLIENT, UIMode, int, 0x3A27C0) //BASE - 007A27C0
+VARPTR(D2CLIENT, ExpCharFlag, DWORD, 0x3A04F4) // Updated 1.14d //007A04F4-BASE
 
 //D2COMMON FUNCPTR
 FUNCPTR(D2COMMON, GetTownLevel, int __stdcall, (DWORD dwActNo), 0x21AB70) //updated 1.14d
@@ -130,6 +134,8 @@ FUNCPTR(D2COMMON, GetLayer, AutomapLayer2* __fastcall, (DWORD dwLevelNo), 0x21E4
 FUNCPTR(D2COMMON, GetTreasureClasses, LPTREASURECLASS STDCALL, (DWORD tcno, DWORD lvlno), 0x221330) // Updated 1.14d
 FUNCPTR(D2COMMON, GetItemText, ItemTxt* __stdcall, (DWORD itemno), 0x2335F0)//Updated 1.14d
 FUNCPTR(D2COMMON, GetLevelText, LevelTxt* __stdcall, (DWORD levelno), 0x21DB70)
+FUNCPTR(D2COMMON, LoadAct, Act* __stdcall, (DWORD ActNumber, DWORD MapId, DWORD Unk, DWORD Unk_2, DWORD Unk_3, DWORD Unk_4, DWORD TownLevelId, DWORD Func_1, DWORD Func_2), 0x2194A0)
+FUNCPTR(D2COMMON, UnloadAct, unsigned __stdcall, (Act* pAct), 0x21AFD0)
 //FUNCPTR(D2COMMON, GetLeftSkill, Skill* __stdcall, (UnitAny* pUnit), 0x220190) //1.14d
 //FUNCPTR(D2COMMON, GetRightSkill, Skill* __stdcall, (UnitAny* pUnit), 0x2201D0) //1.14d
 

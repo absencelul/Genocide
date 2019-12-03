@@ -7,6 +7,8 @@ void OnGameLoop()
 
 	EnumeratePlayers();
 
+	if (ClientReady && AutoRevealAutomap) RevealAutomap();
+
 	if (!p_D2CLIENT_UIMode[UI_INVENTORY] || p_D2CLIENT_UIMode[UI_TRADE])
 	{
 		//RemoveInventoryPatch();
@@ -25,7 +27,8 @@ void OnGameLoop()
 void GameStart()
 {
 	ClientReady = true;
-	Revealz->InitShrines();
+	ResetRevealed();
+	automapLevels.clear();
 }
 
 void OnGameEnd()
@@ -33,8 +36,4 @@ void OnGameEnd()
 	ClientReady = false;
 	BoTimer = 0;
 	killCountGame = 0;
-	Revealz->DestroyLevelExits();
-	Revealz->RemoveMyAutomapCells();
-	Revealz->DestroyMyAutomapCells();
-	Revealz->DeleteShrines();
 }

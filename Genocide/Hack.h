@@ -88,5 +88,4 @@ using namespace std;
 namespace Inject {
 	extern bool Inject(HMODULE hMod, LPVOID lpReserved);
 	extern bool Uninject();
-	extern void InitializeClass(int Initialize);
 }

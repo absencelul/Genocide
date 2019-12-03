@@ -22,8 +22,8 @@ public:
 	static void ViewInventorySTUB3();
 	//VOID ChatPacketReceivedSTUB();
 	static void OnGameEndSTUB();
-	static 	void InputSTUB();
+	static void InputSTUB();
 	//void GameAttack_Intercept();
-	static 	bool FASTCALL ChatText(const wchar_t *Text, int xPos, int yPos, DWORD Color, DWORD dwUnk);
-	static DWORD FASTCALL D2CLIENT_InitAutomapLayer_STUB(DWORD nLayerNo);
+	static bool FASTCALL ChatText(const wchar_t *Text, int xPos, int yPos, DWORD Color, DWORD dwUnk);
+	static AutomapLayer* __fastcall D2CLIENT_InitAutomapLayer_STUB(DWORD nLayerNo);
 };

@@ -146,9 +146,7 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 		break;
 
 	case 0x04:
-
-		Revealz->RevealAutomap();
-
+		//Revealz->RevealAutomap();
 		break;
 
 	case 0x15:

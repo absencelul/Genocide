@@ -76,13 +76,16 @@ VAR(ULONGLONG, ConsoleDelay)
 VAR(LPUNITANY, ViewingUnit)
 
 //MapHack
-VAR(Reveal*, Revealz)
-VAR(BOOL, AutoRevealAutomap)
+VAR(std::list<LevelList*>, automapLevels);
+VAR(bool, revealedGame)
+VAR(bool, revealedAct[6])
+VAR(bool, revealedLevel[255])
+VAR(bool, AutoRevealAutomap)
+
 VAR(BOOL, ShrineImages)
 VAR(BOOL, MiniShrine)
 VAR(BOOL, MonsterLifeBarResists)
 VAR(CHAR, StaffTombIndicator[50])
-VAR(MYAUTOMAPLAYERMAN, MyAutoMapLayer[100])
 
 VAR(LPCELLFILE, MyShrineCells[2][TOTALSHRINES])
 VAR(LPCELLFILE, WaypointCell)

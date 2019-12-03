@@ -286,7 +286,7 @@ bool FASTCALL Stubs::ChatText(const wchar_t *Text, int xPos, int yPos, DWORD Col
 	return D2WIN_DrawText(Text, xPos, yPos, Color, dwUnk);
 }
 
-DWORD NAKED FASTCALL Stubs::D2CLIENT_InitAutomapLayer_STUB(DWORD nLayerNo)
+__declspec(naked) AutomapLayer* __fastcall Stubs::D2CLIENT_InitAutomapLayer_STUB(DWORD nLayerNo)
 {
 	__asm
 	{

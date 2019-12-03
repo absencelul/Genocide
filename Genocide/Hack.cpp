@@ -21,7 +21,7 @@ Patch * patches[] = {
 	//new Patch(Call, 0x61704, (DWORD)GameAttack_Intercept, 5),
 	new Patch(Call, 0x7B8CD, (int)Stubs::ChatText, 5),
 	new Patch(Call, 0x7B472, (int)Stubs::ChatText, 5),
-	new Patch(Call, 0x596d9, (int)AutomapCells, 5),
+	//new Patch(Call, 0x596d9, (int)AutomapCells, 5),
 	new Patch(Call, 0x78525, (int)OnGamePacketSent, 5),
 	new Patch(Fill, 0x08862, (int)INST_NOP, 17),
 	new Patch(Fill, 0x085F7, (int)INST_NOP, 17),
@@ -66,8 +66,6 @@ bool Inject::Inject(HMODULE hMod, LPVOID lpReserved)
 
 	for (int i = 0; i < (sizeof(patches) / sizeof(Patch*)); i++)
 		patches[i]->Install();
-
-	InitializeClass(0);
 	return true;
 }
 
@@ -77,24 +75,6 @@ bool Inject::Uninject()
 		SetWindowLongA(D2GFX_GetHwnd(), GWL_WNDPROC, (LONG)OldWndProc);
 
 	for (int i = 0; i < (sizeof(patches) / sizeof(Patch*)); i++)
-		patches[i]->Uninstall();
-
-	InitializeClass(1);
+		patches[i]->Uninstall();\
 	return true;
-}
-
-void Inject::InitializeClass(int Initialize)
-{
-	switch (Initialize)
-	{
-	case 0:
-		Revealz = new Reveal;
-		//Items = new MoveItems;
-		break;
-
-	case 1:
-		delete Revealz;
-		//delete Items;
-		break;
-	}
 }
