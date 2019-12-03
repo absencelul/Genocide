@@ -8,6 +8,22 @@ void DrawAutomap()
 	FCPointer();
 	RevealMissiles();
 	RevealMonsters();
+
+	UnitAny* player = D2CLIENT_GetPlayerUnit();
+
+	if (!player || !player->pAct || player->pPath->pRoom1->pRoom2->pLevel->dwLevelNo == 0)
+		return;
+
+	for (list<LevelList*>::iterator it = automapLevels.begin(); it != automapLevels.end(); it++) {
+		if (player->pAct->dwAct == (*it)->act) {
+			string tombStar = ((*it)->levelId == player->pAct->pMisc->dwStaffTombLevel) ? "ÿc2*" : "ÿc4";
+			POINT unitLoc;
+			ScreenToAutomap(&unitLoc, (*it)->x, (*it)->y);
+			char* name = UnicodeToAnsi((wchar_t*)D2CLIENT_GetLevelName_STUB((*it)->levelId));
+			TextHook(unitLoc.x, unitLoc.y - 15, Red, Center, 6, "%s%s", name, tombStar.c_str());
+			delete[] name;
+		}
+	}
 }
 
 void GameInfo()

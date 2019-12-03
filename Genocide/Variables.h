@@ -84,8 +84,6 @@ VAR(bool, AutoRevealAutomap)
 
 VAR(BOOL, ShrineImages)
 VAR(BOOL, MiniShrine)
-VAR(BOOL, MonsterLifeBarResists)
-VAR(CHAR, StaffTombIndicator[50])
 
 VAR(LPCELLFILE, MyShrineCells[2][TOTALSHRINES])
 VAR(LPCELLFILE, WaypointCell)

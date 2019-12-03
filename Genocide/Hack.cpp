@@ -66,6 +66,8 @@ bool Inject::Inject(HMODULE hMod, LPVOID lpReserved)
 
 	for (int i = 0; i < (sizeof(patches) / sizeof(Patch*)); i++)
 		patches[i]->Install();
+
+	ResetRevealed();
 	return true;
 }
 

@@ -297,3 +297,11 @@ __declspec(naked) AutomapLayer* __fastcall Stubs::D2CLIENT_InitAutomapLayer_STUB
 		ret;
 	}
 }
+
+DWORD __declspec(naked) __fastcall D2CLIENT_GetLevelName_STUB(DWORD levelId)
+{
+	__asm
+	{
+		jmp D2CLIENT_GetLevelName_I
+	}
+}
