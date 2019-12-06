@@ -77,6 +77,6 @@ bool Inject::Uninject()
 		SetWindowLongA(D2GFX_GetHwnd(), GWL_WNDPROC, (LONG)OldWndProc);
 
 	for (int i = 0; i < (sizeof(patches) / sizeof(Patch*)); i++)
-		patches[i]->Uninstall();\
-	return true;
+		patches[i]->Uninstall(); \
+		return true;
 }

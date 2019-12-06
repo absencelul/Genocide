@@ -49,7 +49,7 @@ void Patch::Install()
 		code[0] = (type == Call) ? INST_CALL : INST_JMP;
 
 		//Set address to redirect to
-		*(DWORD*)&code[1] = func - (address + 5);
+		*(DWORD*)& code[1] = func - (address + 5);
 	}
 
 	//Write patch in

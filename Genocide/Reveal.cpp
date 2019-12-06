@@ -26,17 +26,21 @@ void RevealAct(int act)
 	// Make sure we are given a valid act
 	if (act < 1 || act > 5)
 		return;
+
 	// Check if the act is already revealed
 	if (revealedAct[act])
 		return;
-	UnitAny * player = D2CLIENT_GetPlayerUnit();
+
+	UnitAny* player = D2CLIENT_GetPlayerUnit();
 	if (!player || !player->pAct)
 		return;
+
 	// Initalize the act incase it is isn't the act we are in.
 	int actIds[6] = { 1, 40, 75, 103, 109, 137 };
-	Act * pAct = D2COMMON_LoadAct(act - 1, player->pAct->dwMapSeed, *p_D2CLIENT_ExpCharFlag, 0, D2CLIENT_GetDifficulty(), NULL, actIds[act - 1], D2CLIENT_LoadAct_1, D2CLIENT_LoadAct_3);
+	Act* pAct = D2COMMON_LoadAct(act - 1, player->pAct->dwMapSeed, *p_D2CLIENT_ExpCharFlag, 0, D2CLIENT_GetDifficulty(), NULL, actIds[act - 1], D2CLIENT_LoadAct_1, D2CLIENT_LoadAct_3);
 	if (!pAct || !pAct->pMisc)
 		return;
+
 	// Iterate every level for the given act.
 	for (int level = actIds[act - 1]; level < actIds[act]; level++) {
 		Level* pLevel = GetLevels(pAct, level);
@@ -56,39 +60,46 @@ void RevealLevel(Level* pLevel)
 	// Basic sanity checks to ensure valid level
 	if (!pLevel || pLevel->dwLevelNo < 0 || pLevel->dwLevelNo > 255)
 		return;
+
 	// Check if the level has been previous revealed.
 	if (revealedLevel[pLevel->dwLevelNo])
 		return;
+
 	InitAutomapLayer(pLevel->dwLevelNo);
+
 	// Iterate every room in the level.
 	for (Room2* room = pLevel->pRoom2First; room; room = room->pRoom2Next) {
 		bool roomData = false;
+
 		//Add Room1 Data if it is not already there.
 		if (!room->pRoom1) {
 			D2COMMON_AddRoomData(pLevel->pMisc->pAct, pLevel->dwLevelNo, room->dwPosX, room->dwPosY, room->pRoom1);
 			roomData = true;
 		}
+
 		//Make sure we have Room1
 		if (!room->pRoom1)
 			continue;
+
 		//Reveal the room
 		D2CLIENT_RevealAutomapRoom(room->pRoom1, TRUE, *p_D2CLIENT_AutomapLayer);
+
 		//Reveal the presets
 		RevealRoom(room);
+
 		//Remove Data if Added
 		if (roomData)
 			D2COMMON_RemoveRoomData(pLevel->pMisc->pAct, pLevel->dwLevelNo, room->dwPosX, room->dwPosY, room->pRoom1);
 	}
+
 	revealedLevel[pLevel->dwLevelNo] = true;
 }
 
 void RevealRoom(Room2* pRoom)
 {
-	D2CLIENT_RevealAutomapRoom(pRoom->pRoom1, 1, *p_D2CLIENT_AutomapLayer);
-
 	for (PresetUnit* pUnit = pRoom->pPreset; pUnit; pUnit = pUnit->pPresetNext)
 	{
-		int nCell = 0;
+		int nCell = -1;
 
 		if (pUnit->dwType == UNIT_TYPE_NPC)
 		{
@@ -152,6 +163,7 @@ void RevealRoom(Room2* pRoom)
 			D2CLIENT_AddAutomapCell(cell, &((*p_D2CLIENT_AutomapLayer)->pObjects));
 		}
 	}
+	return;
 }
 
 VOID DeleteShrines()
@@ -228,32 +240,36 @@ VOID InitShrines()
 	}
 }*/
 
-Level* GetLevels(Act* pMisc, DWORD dwLevelNo)
+Level* GetLevels(Act* pAct, DWORD dwLevelNo)
 {
 	//Insure that the shit we are getting is good.
-	if (dwLevelNo < 0 || !pMisc)
+	if (dwLevelNo < 0 || !pAct)
 		return NULL;
 
 	//Loop all the levels in this act
-	for (Level* pLevel = pMisc->pMisc->pLevelFirst; pLevel; pLevel = pLevel->pNextLevel)
+	for (Level* pLevel = pAct->pMisc->pLevelFirst; pLevel; pLevel = pLevel->pNextLevel)
 	{
 		//Check if we have reached a bad level.
 		if (!pLevel)
 			break;
+
 		//If we have found the level, return it!
 		if (pLevel->dwLevelNo == dwLevelNo && pLevel->dwPosX > 0)
 			return pLevel;
 	}
-	return D2COMMON_GetLevel(pMisc->pMisc, dwLevelNo);
+
+	return D2COMMON_GetLevel(pAct->pMisc, dwLevelNo);
 }
 
 AutomapLayer* InitAutomapLayer(DWORD levelno)
 {
 	//Get the layer for the level.
 	AutomapLayer2* pLayer = D2COMMON_GetLayer(levelno);
+
 	//Ensure we have found the Layer.
 	if (!pLayer)
 		return false;
+
 	//Initalize the layer!
 	return (AutomapLayer*)Stubs::D2CLIENT_InitAutomapLayer_STUB(pLayer->nLayerNo);
 }

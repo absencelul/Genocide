@@ -145,9 +145,14 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 
 		break;
 
-	case 0x04:
+	case 0x03:
 		//Revealz->RevealAutomap();
-		break;
+	{
+		// Get the player unit for area information.
+		UnitAny* unit = D2CLIENT_GetPlayerUnit();
+		if (unit && ClientReady && AutoRevealAutomap) RevealAct(unit->pAct->dwAct + 1);
+	}
+	break;
 
 	case 0x15:
 
@@ -173,11 +178,32 @@ DWORD FASTCALL OnGamePacketReceived(LPBYTE Packet, DWORD Length)
 			break;*/
 
 	case 0x26:
+	{
 		if (_stricmp(Me->pPlayerData->szName, (LPSTR)& Packet[10]) && Spam((LPSTR)& Packet[strlen((LPSTR)& Packet[10]) + 11], (LPSTR)& Packet[10]))
 			return false;
-		Print(false, Gold, "[%s] %sÿc0: %s", TimeStamp(), (LPSTR)& Packet[10], (LPSTR)& Packet[strlen((LPSTR)& Packet[10]) + 11]);
+		RosterUnit* pPlayer = FindPartyByName((LPSTR)& Packet[10]);
+		UnitAny* pUnit = (UnitAny*)GetUnit(pPlayer->dwUnitId, UNIT_TYPE_PLAYER);
+		switch (GetRelation(pUnit))
+		{
+		case 0:
+			//This should never happen..
+			break;
+		case 1://Me
+			Print(false, White, "[%s] ÿc4%sÿc0: %s", TimeStamp(), (LPSTR)& Packet[10], (LPSTR)& Packet[strlen((LPSTR)& Packet[10]) + 11]);
+			break;
+		case 2://Neutral
+			Print(false, White, "[%s] ÿc3%sÿc0: %s", TimeStamp(), (LPSTR)& Packet[10], (LPSTR)& Packet[strlen((LPSTR)& Packet[10]) + 11]);
+			break;
+		case 3://Partied
+			Print(false, White, "[%s] ÿc2%sÿc0: %s", TimeStamp(), (LPSTR)& Packet[10], (LPSTR)& Packet[strlen((LPSTR)& Packet[10]) + 11]);
+			break;
+		case 4://Hostile
+			Print(false, White, "[%s] ÿc1%sÿc0: %s", TimeStamp(), (LPSTR)& Packet[10], (LPSTR)& Packet[strlen((LPSTR)& Packet[10]) + 11]);
+			break;
+		}
 		return false;
-		break;
+	}
+	break;
 
 	case 0x60: return Portal(Packet, Length);  break;
 

@@ -10,7 +10,7 @@ void RevealAutomap();
 void RevealAct(int act);
 void RevealLevel(Level* pLevel);
 void RevealRoom(Room2* pRoom);
-Level* GetLevels(Act* pMisc, DWORD dwLevelNo);
+Level* GetLevels(Act* pAct, DWORD dwLevelNo);
 AutomapLayer* InitAutomapLayer(DWORD dwLayer);
 
 VOID DeleteShrines();

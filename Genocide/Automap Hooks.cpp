@@ -89,7 +89,7 @@ void PlayerInfo()
 		if (Merc)
 		{
 			TextHook(automapLoc.x, automapLoc.y - 8, Gold, Center, 6, true, "Merc");
-			DrawCross(Merc->pPath->xPos, Merc->pPath->yPos, Yellow, 1);
+			DrawCross(Merc->pPath->xPos, Merc->pPath->yPos, 0x14B, 1);
 		}
 	}
 
@@ -116,14 +116,21 @@ void PlayerInfo()
 		else if (Unit && GetUnitState(Unit, AFFECT_BATTLEORDERS))
 			TextHook(Position.x, Position.y + 9, GetUnitState(Unit, AFFECT_SHOUT) ? Red : Yellow, Center, 6, true, GetUnitState(Unit, AFFECT_SHOUT) ? "[BARB]" : "[BO]");
 
-		if (Unit && Unit->dwMode == PLAYER_MODE_STAND_OUTTOWN)
+		switch (Unit->dwMode)
+		{
+		case PLAYER_MODE_STAND_OUTTOWN:
 			TextHook(Position.x, Position.y + 17, Green, Center, 6, true, "[STAND]");
-		else if (Unit && Unit->dwMode == PLAYER_MODE_RUN)
+			break;
+		case PLAYER_MODE_RUN:
 			TextHook(Position.x, Position.y + 17, Yellow, Center, 6, true, "[RUN]");
-		else if (Unit && Unit->dwMode == PLAYER_MODE_WALK_OUTTOWN)
+			break;
+		case PLAYER_MODE_WALK_OUTTOWN:
 			TextHook(Position.x, Position.y + 17, Red, Center, 6, true, "[WALK]");
-		else if (Unit && Unit->dwMode == PLAYER_MODE_CAST)
+			break;
+		case PLAYER_MODE_CAST:
 			TextHook(Position.x, Position.y + 17, Yellow, Center, 6, true, "[CAST]");
+			break;
+		}
 	}
 
 	for (LPROOM1 pRoom1 = Me->pAct->pRoom1; pRoom1; pRoom1 = pRoom1->pRoomNext)
@@ -138,6 +145,7 @@ void PlayerInfo()
 				for (int i = 0; i < Players.GetSize(); i++) {
 					if (!_stricmp(Players[i]->PlayerName, pUnit->pObjectData->szOwner)) {
 						TextHook(Position.x + 1, Position.y + 5, Green, Center, 6, true, "%d%%", Players[i]->Life);
+						//DrawCircle(Position.x + 1, Position.y + 5, 20, 0x14B);
 					}
 				}
 			}
@@ -162,6 +170,35 @@ void DrawCross(INT X, INT Y, DWORD Color, BOOL Automap)
 		//D2GFX_DrawLine(Position.x + i[0], Position.y + i[1], Position.x + (i+1)[0], Position.y + (i+1)[1], Color, -1);
 	for (INT i = 0; i < ArraySize(Lines) - 1; i++)
 		D2GFX_DrawLine(Position.x + Lines[i][0], Position.y + Lines[i][1], Position.x + Lines[i + 1][0], Position.y + Lines[i + 1][1], Color, -1);
+}
+
+void DrawCircle(int x, int y, int radius, int color)
+{
+	int f = 1 - radius;
+	int ddF_x = 1;
+	int ddF_y = -2 * radius;
+	int x1 = 0;
+	int y1 = radius;
+
+	D2GFX_DrawLine(x, y + radius, x, y - radius, color, -1);
+	D2GFX_DrawLine(x + radius, y, x - radius, y, color, -1);
+
+	while (x1 < y1)
+	{
+		if (f >= 0)
+		{
+			y1--;
+			ddF_y += 2;
+			f += ddF_y;
+		}
+		x1++;
+		ddF_x += 2;
+		f += ddF_x;
+		D2GFX_DrawLine(x + x1, y + y1, x - x1, y + y1, color, -1);
+		D2GFX_DrawLine(x + x1, y - y1, x - x1, y - y1, color, -1);
+		D2GFX_DrawLine(x + y1, y + x1, x - y1, y + x1, color, -1);
+		D2GFX_DrawLine(x + y1, y - x1, x - y1, y - x1, color, -1);
+	}
 }
 
 void FCPointer()
@@ -193,7 +230,7 @@ void FCPointer()
 		ScreenToAutomap(&Start, Player.x, Player.y);
 		ScreenToAutomap(&End, Cast.x, Cast.y);
 		D2GFX_DrawLine(Start.x, Start.y, End.x, End.y, 168, 0);
-		TextHook(End.x + 1, End.y + 3, Yellow, None, 4, true, "x");
+		TextHook(End.x + 1, End.y + 1, Yellow, None, 4, true, "x");
 	}
 }
 
